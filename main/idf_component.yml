@@ -1,0 +1,10 @@
+dependencies:
+  lvgl/lvgl: "^9.2.0"
+  espressif/esp_lvgl_port: "^2.0.0"
+  
+  # Local components (relative paths)
+  gdem102f91-epaper-driver:
+    path: ../../gdem102f91-epaper-driver
+    
+  esp-lvgl-epaper-port:
+    path: ../../esp-lvgl-epaper-port

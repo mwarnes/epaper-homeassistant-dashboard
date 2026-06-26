@@ -1,0 +1,97 @@
+menu "Home Assistant Dashboard Configuration"
+
+    menu "WiFi Configuration"
+        config HA_DASHBOARD_WIFI_SSID
+            string "WiFi SSID"
+            default "myssid"
+            help
+                WiFi SSID for the dashboard.
+                Can be overridden at runtime via NVS.
+
+        config HA_DASHBOARD_WIFI_PASSWORD
+            string "WiFi Password"
+            default "mypassword"
+            help
+                WiFi password for the network.
+                Can be overridden at runtime via NVS.
+    endmenu
+
+    menu "Home Assistant Configuration"
+        config HA_DASHBOARD_HA_URL
+            string "Home Assistant URL"
+            default "http://homeassistant.local:8123"
+            help
+                Full URL to your Home Assistant instance.
+                Example: http://192.168.1.100:8123
+                Can be overridden at runtime via NVS.
+
+        config HA_DASHBOARD_HA_TOKEN
+            string "Home Assistant Long-Lived Access Token"
+            default ""
+            help
+                Long-lived access token from Home Assistant.
+                Generate one in your HA profile settings.
+                Can be overridden at runtime via NVS.
+
+        config HA_DASHBOARD_UPDATE_INTERVAL
+            int "Update interval (seconds)"
+            default 600
+            range 60 3600
+            help
+                How often to fetch data from Home Assistant.
+                Default: 600 seconds (10 minutes)
+
+        config HA_DASHBOARD_ERROR_GRACE_PERIOD
+            int "Error grace period (seconds)"
+            default 1800
+            range 300 7200
+            help
+                Time before showing error screen when HA unreachable.
+                Default: 1800 seconds (30 minutes)
+    endmenu
+
+    menu "Time Configuration"
+        config HA_DASHBOARD_TIMEZONE
+            string "Timezone"
+            default "UTC"
+            help
+                POSIX timezone string for localtime display.
+                Examples:
+                  UTC: "UTC"
+                  CET: "CET-1CEST,M3.5.0,M10.5.0/3"
+                  EST: "EST5EDT,M3.2.0/2,M11.1.0"
+                  PST: "PST8PDT,M3.2.0,M11.1.0"
+                Can be overridden at runtime via NVS.
+    endmenu
+
+    menu "Power Management"
+        choice HA_DASHBOARD_POWER_MODE
+            prompt "Power Mode"
+            default HA_DASHBOARD_POWER_MODE_ALWAYS_ON
+            help
+                Select the power management mode.
+
+            config HA_DASHBOARD_POWER_MODE_ALWAYS_ON
+                bool "Always On"
+                help
+                    Device stays powered on continuously (Phase 1 default).
+
+            config HA_DASHBOARD_POWER_MODE_DEEP_SLEEP
+                bool "Deep Sleep"
+                help
+                    Device enters deep sleep between updates (not implemented in Phase 1).
+
+            config HA_DASHBOARD_POWER_MODE_LIGHT_SLEEP
+                bool "Light Sleep"
+                help
+                    Device enters light sleep when idle (not implemented in Phase 1).
+        endchoice
+
+        config HA_DASHBOARD_POWER_MODE_VALUE
+            int
+            default 0 if HA_DASHBOARD_POWER_MODE_ALWAYS_ON
+            default 1 if HA_DASHBOARD_POWER_MODE_DEEP_SLEEP
+            default 2 if HA_DASHBOARD_POWER_MODE_LIGHT_SLEEP
+    endmenu
+
+endmenu

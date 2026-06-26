@@ -1,0 +1,15 @@
+# Build directories
+build/
+managed_components/
+dependencies.lock
+
+# ESP-IDF
+sdkconfig.old
+*.pyc
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store

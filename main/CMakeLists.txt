@@ -1,0 +1,34 @@
+idf_component_register(
+    SRCS 
+        "main.c"
+        "Shared/shared_resources.c"
+        "Shared/config_manager.c"
+        "Tasks/wifi_task.c"
+        "Tasks/time_sync_task.c"
+        "Tasks/ha_client_task.c"
+        "Tasks/power_mgmt_task.c"
+        "Tasks/display_task.c"
+        "eez_vars.c"
+        "eez_actions.c"
+        "ui/screens.c"
+        "ui/styles.c"
+        "ui/images.c"
+        "ui/ui.c"
+        
+    INCLUDE_DIRS 
+        "."
+        "Shared"
+        "Tasks"
+        "ui"
+        
+    REQUIRES 
+        nvs_flash
+        esp_wifi
+        esp_http_client
+        esp_netif
+        lwip
+        lvgl
+        espressif__esp_lvgl_port
+        esp-lvgl-epaper-port
+        gdem102f91-epaper-driver
+)
