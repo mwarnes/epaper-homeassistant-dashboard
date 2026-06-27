@@ -1,0 +1,223 @@
+# Home Assistant Template Sensors for Daily Weather Forecast
+# Add this to your Home Assistant configuration.yaml or create a new file
+# in packages/ or templates/ directory depending on your setup
+
+# Weather Forecast Template Sensors
+# These extract daily forecast data from weather.forecast_langebaan
+# Provides: temperature and condition for the next 5 days
+
+template:
+  - sensor:
+      # ============================================
+      # DAY 1 FORECAST (Tomorrow)
+      # ============================================
+      - name: "Forecast Day 1 Temperature"
+        unique_id: forecast_day1_temperature
+        state: >
+          {% set forecast = state_attr('weather.forecast_langebaan', 'forecast') %}
+          {% if forecast and forecast|length > 0 %}
+            {{ forecast[0].temperature }}
+          {% else %}
+            unavailable
+          {% endif %}
+        unit_of_measurement: "°C"
+        device_class: temperature
+        
+      - name: "Forecast Day 1 Condition"
+        unique_id: forecast_day1_condition
+        state: >
+          {% set forecast = state_attr('weather.forecast_langebaan', 'forecast') %}
+          {% if forecast and forecast|length > 0 %}
+            {{ forecast[0].condition }}
+          {% else %}
+            unavailable
+          {% endif %}
+        icon: mdi:weather-partly-cloudy
+        
+      - name: "Forecast Day 1 Name"
+        unique_id: forecast_day1_name
+        state: >
+          {% set forecast = state_attr('weather.forecast_langebaan', 'forecast') %}
+          {% if forecast and forecast|length > 0 %}
+            {{ as_timestamp(forecast[0].datetime) | timestamp_custom('%a') }}
+          {% else %}
+            unavailable
+          {% endif %}
+        icon: mdi:calendar
+      
+      # ============================================
+      # DAY 2 FORECAST
+      # ============================================
+      - name: "Forecast Day 2 Temperature"
+        unique_id: forecast_day2_temperature
+        state: >
+          {% set forecast = state_attr('weather.forecast_langebaan', 'forecast') %}
+          {% if forecast and forecast|length > 1 %}
+            {{ forecast[1].temperature }}
+          {% else %}
+            unavailable
+          {% endif %}
+        unit_of_measurement: "°C"
+        device_class: temperature
+        
+      - name: "Forecast Day 2 Condition"
+        unique_id: forecast_day2_condition
+        state: >
+          {% set forecast = state_attr('weather.forecast_langebaan', 'forecast') %}
+          {% if forecast and forecast|length > 1 %}
+            {{ forecast[1].condition }}
+          {% else %}
+            unavailable
+          {% endif %}
+        icon: mdi:weather-partly-cloudy
+        
+      - name: "Forecast Day 2 Name"
+        unique_id: forecast_day2_name
+        state: >
+          {% set forecast = state_attr('weather.forecast_langebaan', 'forecast') %}
+          {% if forecast and forecast|length > 1 %}
+            {{ as_timestamp(forecast[1].datetime) | timestamp_custom('%a') }}
+          {% else %}
+            unavailable
+          {% endif %}
+        icon: mdi:calendar
+      
+      # ============================================
+      # DAY 3 FORECAST
+      # ============================================
+      - name: "Forecast Day 3 Temperature"
+        unique_id: forecast_day3_temperature
+        state: >
+          {% set forecast = state_attr('weather.forecast_langebaan', 'forecast') %}
+          {% if forecast and forecast|length > 2 %}
+            {{ forecast[2].temperature }}
+          {% else %}
+            unavailable
+          {% endif %}
+        unit_of_measurement: "°C"
+        device_class: temperature
+        
+      - name: "Forecast Day 3 Condition"
+        unique_id: forecast_day3_condition
+        state: >
+          {% set forecast = state_attr('weather.forecast_langebaan', 'forecast') %}
+          {% if forecast and forecast|length > 2 %}
+            {{ forecast[2].condition }}
+          {% else %}
+            unavailable
+          {% endif %}
+        icon: mdi:weather-partly-cloudy
+        
+      - name: "Forecast Day 3 Name"
+        unique_id: forecast_day3_name
+        state: >
+          {% set forecast = state_attr('weather.forecast_langebaan', 'forecast') %}
+          {% if forecast and forecast|length > 2 %}
+            {{ as_timestamp(forecast[2].datetime) | timestamp_custom('%a') }}
+          {% else %}
+            unavailable
+          {% endif %}
+        icon: mdi:calendar
+      
+      # ============================================
+      # DAY 4 FORECAST
+      # ============================================
+      - name: "Forecast Day 4 Temperature"
+        unique_id: forecast_day4_temperature
+        state: >
+          {% set forecast = state_attr('weather.forecast_langebaan', 'forecast') %}
+          {% if forecast and forecast|length > 3 %}
+            {{ forecast[3].temperature }}
+          {% else %}
+            unavailable
+          {% endif %}
+        unit_of_measurement: "°C"
+        device_class: temperature
+        
+      - name: "Forecast Day 4 Condition"
+        unique_id: forecast_day4_condition
+        state: >
+          {% set forecast = state_attr('weather.forecast_langebaan', 'forecast') %}
+          {% if forecast and forecast|length > 3 %}
+            {{ forecast[3].condition }}
+          {% else %}
+            unavailable
+          {% endif %}
+        icon: mdi:weather-partly-cloudy
+        
+      - name: "Forecast Day 4 Name"
+        unique_id: forecast_day4_name
+        state: >
+          {% set forecast = state_attr('weather.forecast_langebaan', 'forecast') %}
+          {% if forecast and forecast|length > 3 %}
+            {{ as_timestamp(forecast[3].datetime) | timestamp_custom('%a') }}
+          {% else %}
+            unavailable
+          {% endif %}
+        icon: mdi:calendar
+      
+      # ============================================
+      # DAY 5 FORECAST
+      # ============================================
+      - name: "Forecast Day 5 Temperature"
+        unique_id: forecast_day5_temperature
+        state: >
+          {% set forecast = state_attr('weather.forecast_langebaan', 'forecast') %}
+          {% if forecast and forecast|length > 4 %}
+            {{ forecast[4].temperature }}
+          {% else %}
+            unavailable
+          {% endif %}
+        unit_of_measurement: "°C"
+        device_class: temperature
+        
+      - name: "Forecast Day 5 Condition"
+        unique_id: forecast_day5_condition
+        state: >
+          {% set forecast = state_attr('weather.forecast_langebaan', 'forecast') %}
+          {% if forecast and forecast|length > 4 %}
+            {{ forecast[4].condition }}
+          {% else %}
+            unavailable
+          {% endif %}
+        icon: mdi:weather-partly-cloudy
+        
+      - name: "Forecast Day 5 Name"
+        unique_id: forecast_day5_name
+        state: >
+          {% set forecast = state_attr('weather.forecast_langebaan', 'forecast') %}
+          {% if forecast and forecast|length > 4 %}
+            {{ as_timestamp(forecast[4].datetime) | timestamp_custom('%a') }}
+          {% else %}
+            unavailable
+          {% endif %}
+        icon: mdi:calendar
+
+# ============================================
+# NOTES:
+# ============================================
+# 1. Add this to your configuration.yaml:
+#    template: !include templates.yaml
+#    (Then save this as templates.yaml)
+#
+# 2. Or add directly to configuration.yaml under "template:" section
+#
+# 3. After adding, restart Home Assistant or reload template entities
+#
+# 4. Verify in Developer Tools > States:
+#    - sensor.forecast_day1_temperature
+#    - sensor.forecast_day1_condition
+#    - sensor.forecast_day1_name
+#    (and so on for days 2-5)
+#
+# 5. Each day provides:
+#    - Temperature (e.g., "22.5")
+#    - Condition (e.g., "partlycloudy")
+#    - Day name (e.g., "Sat", "Sun", "Mon")
+#
+# 6. The forecast array structure from weather.forecast_langebaan:
+#    forecast[0] = Tomorrow
+#    forecast[1] = Day after tomorrow
+#    forecast[2] = 3 days out
+#    forecast[3] = 4 days out
+#    forecast[4] = 5 days out

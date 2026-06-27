@@ -30,60 +30,207 @@ void create_screen_main() {
     {
         lv_obj_t *parent_obj = obj;
         {
+            // HaLblTime
             lv_obj_t *obj = lv_label_create(parent_obj);
-            lv_obj_set_pos(obj, 361, 430);
+            objects.ha_lbl_time = obj;
+            lv_obj_set_pos(obj, 915, 613);
             lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
-            lv_obj_set_style_text_font(obj, &lv_font_montserrat_18, LV_PART_MAIN | LV_STATE_DEFAULT);
-            lv_label_set_text_static(obj, "Hello, world!");
+            lv_obj_set_style_text_font(obj, &ui_font_roboto_med_14, LV_PART_MAIN | LV_STATE_DEFAULT);
+            lv_label_set_text(obj, "");
         }
         {
-            // lblTime
+            // HaLblDate
             lv_obj_t *obj = lv_label_create(parent_obj);
-            objects.lbl_time = obj;
-            lv_obj_set_pos(obj, 386, 78);
+            objects.ha_lbl_date = obj;
+            lv_obj_set_pos(obj, 401, 16);
             lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
-            lv_obj_set_style_text_font(obj, &lv_font_montserrat_16, LV_PART_MAIN | LV_STATE_DEFAULT);
-            lv_label_set_text_static(obj, "Text");
+            lv_obj_set_style_text_font(obj, &ui_font_roboto_med_30, LV_PART_MAIN | LV_STATE_DEFAULT);
+            lv_label_set_text(obj, "");
         }
         {
-            // lblWifiStatus
-            lv_obj_t *obj = lv_label_create(parent_obj);
-            objects.lbl_wifi_status = obj;
-            lv_obj_set_pos(obj, 386, 109);
+            // imgWifiState
+            lv_obj_t *obj = lv_image_create(parent_obj);
+            objects.img_wifi_state = obj;
+            lv_obj_set_pos(obj, 755, 606);
             lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
-            lv_obj_set_style_text_font(obj, &lv_font_montserrat_16, LV_PART_MAIN | LV_STATE_DEFAULT);
-            lv_label_set_text_static(obj, "Text");
+            lv_image_set_src(obj, &img_wifi_off);
+            lv_obj_set_style_bg_color(obj, lv_color_hex(0xffffff), LV_PART_MAIN | LV_STATE_DEFAULT);
         }
         {
-            // lblHaStatus
-            lv_obj_t *obj = lv_label_create(parent_obj);
-            objects.lbl_ha_status = obj;
-            lv_obj_set_pos(obj, 386, 141);
+            // imgHaState
+            lv_obj_t *obj = lv_image_create(parent_obj);
+            objects.img_ha_state = obj;
+            lv_obj_set_pos(obj, 788, 606);
             lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
-            lv_obj_set_style_text_font(obj, &lv_font_montserrat_16, LV_PART_MAIN | LV_STATE_DEFAULT);
-            lv_label_set_text_static(obj, "Text");
+            lv_image_set_src(obj, &img_ha_off);
         }
         {
-            // lblDate
             lv_obj_t *obj = lv_label_create(parent_obj);
-            objects.lbl_date = obj;
-            lv_obj_set_pos(obj, 387, 48);
+            lv_obj_set_pos(obj, 822, 613);
             lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
-            lv_obj_set_style_text_font(obj, &lv_font_montserrat_16, LV_PART_MAIN | LV_STATE_DEFAULT);
-            lv_label_set_text_static(obj, "Text");
+            lv_obj_set_style_text_font(obj, &ui_font_roboto_med_14, LV_PART_MAIN | LV_STATE_DEFAULT);
+            lv_label_set_text_static(obj, "Last updated: ");
         }
         {
-            lv_obj_t *obj = lv_arc_create(parent_obj);
-            objects.obj0 = obj;
-            lv_obj_set_pos(obj, 346, 201);
-            lv_obj_set_size(obj, 150, 150);
-            lv_arc_set_value(obj, 25);
-            lv_obj_set_style_arc_color(obj, lv_color_hex(0xff0000), LV_PART_MAIN | LV_STATE_DEFAULT);
-            lv_obj_set_style_bg_color(obj, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
-            lv_obj_set_style_bg_opa(obj, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
-            lv_obj_set_style_arc_width(obj, 16, LV_PART_INDICATOR | LV_STATE_DEFAULT);
-            lv_obj_set_style_arc_color(obj, lv_color_hex(0xffff00), LV_PART_INDICATOR | LV_STATE_DEFAULT);
-            lv_obj_set_style_arc_color(obj, lv_color_hex(0x000000), LV_PART_KNOB | LV_STATE_DEFAULT);
+            lv_obj_t *obj = lv_image_create(parent_obj);
+            lv_obj_set_pos(obj, 45, 48);
+            lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
+        }
+        {
+            // HaLblHomeConditionToday
+            lv_obj_t *obj = lv_label_create(parent_obj);
+            objects.ha_lbl_home_condition_today = obj;
+            lv_obj_set_pos(obj, 202, 59);
+            lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
+            lv_obj_set_style_text_font(obj, &ui_font_roboto_med_18, LV_PART_MAIN | LV_STATE_DEFAULT);
+            lv_label_set_text(obj, "");
+        }
+        {
+            // HaLblHomeRealfeelTemperature
+            lv_obj_t *obj = lv_label_create(parent_obj);
+            objects.ha_lbl_home_realfeel_temperature = obj;
+            lv_obj_set_pos(obj, 221, 88);
+            lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
+            lv_obj_set_style_text_font(obj, &ui_font_roboto_med_30, LV_PART_MAIN | LV_STATE_DEFAULT);
+            lv_label_set_text(obj, "");
+        }
+        {
+            // img_weather_current
+            lv_obj_t *obj = lv_image_create(parent_obj);
+            objects.img_weather_current = obj;
+            lv_obj_set_pos(obj, 28, 48);
+            lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
+            lv_image_set_src(obj, &img_weather_partly_cloudy_large);
+        }
+        {
+            // lbl_forecast_day1_name
+            lv_obj_t *obj = lv_label_create(parent_obj);
+            objects.lbl_forecast_day1_name = obj;
+            lv_obj_set_pos(obj, 28, 188);
+            lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
+            lv_obj_set_style_text_font(obj, &ui_font_roboto_med_18, LV_PART_MAIN | LV_STATE_DEFAULT);
+            lv_label_set_text(obj, "");
+        }
+        {
+            // img_forecast_day1
+            lv_obj_t *obj = lv_image_create(parent_obj);
+            objects.img_forecast_day1 = obj;
+            lv_obj_set_pos(obj, 23, 209);
+            lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
+            lv_image_set_src(obj, &img_weather_sunny_small);
+        }
+        {
+            // lbl_forecast_day1_temp
+            lv_obj_t *obj = lv_label_create(parent_obj);
+            objects.lbl_forecast_day1_temp = obj;
+            lv_obj_set_pos(obj, 29, 257);
+            lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
+            lv_obj_set_style_text_font(obj, &ui_font_roboto_med_18, LV_PART_MAIN | LV_STATE_DEFAULT);
+            lv_label_set_text(obj, "");
+        }
+        {
+            // lbl_forecast_day2_name
+            lv_obj_t *obj = lv_label_create(parent_obj);
+            objects.lbl_forecast_day2_name = obj;
+            lv_obj_set_pos(obj, 90, 188);
+            lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
+            lv_obj_set_style_text_font(obj, &ui_font_roboto_med_18, LV_PART_MAIN | LV_STATE_DEFAULT);
+            lv_label_set_text(obj, "");
+        }
+        {
+            // img_forecast_day2
+            lv_obj_t *obj = lv_image_create(parent_obj);
+            objects.img_forecast_day2 = obj;
+            lv_obj_set_pos(obj, 84, 209);
+            lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
+            lv_image_set_src(obj, &img_weather_sunny_small);
+        }
+        {
+            // lbl_forecast_day2_temp
+            lv_obj_t *obj = lv_label_create(parent_obj);
+            objects.lbl_forecast_day2_temp = obj;
+            lv_obj_set_pos(obj, 90, 257);
+            lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
+            lv_obj_set_style_text_font(obj, &ui_font_roboto_med_18, LV_PART_MAIN | LV_STATE_DEFAULT);
+            lv_label_set_text(obj, "");
+        }
+        {
+            // lbl_forecast_day3_name
+            lv_obj_t *obj = lv_label_create(parent_obj);
+            objects.lbl_forecast_day3_name = obj;
+            lv_obj_set_pos(obj, 151, 188);
+            lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
+            lv_obj_set_style_text_font(obj, &ui_font_roboto_med_18, LV_PART_MAIN | LV_STATE_DEFAULT);
+            lv_label_set_text(obj, "");
+        }
+        {
+            // lbl_forecast_day3_temp
+            lv_obj_t *obj = lv_label_create(parent_obj);
+            objects.lbl_forecast_day3_temp = obj;
+            lv_obj_set_pos(obj, 150, 257);
+            lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
+            lv_obj_set_style_text_font(obj, &ui_font_roboto_med_18, LV_PART_MAIN | LV_STATE_DEFAULT);
+            lv_label_set_text(obj, "");
+        }
+        {
+            // img_forecast_day3
+            lv_obj_t *obj = lv_image_create(parent_obj);
+            objects.img_forecast_day3 = obj;
+            lv_obj_set_pos(obj, 145, 209);
+            lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
+            lv_image_set_src(obj, &img_weather_sunny_small);
+        }
+        {
+            // lbl_forecast_day4_name
+            lv_obj_t *obj = lv_label_create(parent_obj);
+            objects.lbl_forecast_day4_name = obj;
+            lv_obj_set_pos(obj, 211, 188);
+            lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
+            lv_obj_set_style_text_font(obj, &ui_font_roboto_med_18, LV_PART_MAIN | LV_STATE_DEFAULT);
+            lv_label_set_text(obj, "");
+        }
+        {
+            // lbl_forecast_day4_temp
+            lv_obj_t *obj = lv_label_create(parent_obj);
+            objects.lbl_forecast_day4_temp = obj;
+            lv_obj_set_pos(obj, 210, 257);
+            lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
+            lv_obj_set_style_text_font(obj, &ui_font_roboto_med_18, LV_PART_MAIN | LV_STATE_DEFAULT);
+            lv_label_set_text(obj, "");
+        }
+        {
+            // img_forecast_day4
+            lv_obj_t *obj = lv_image_create(parent_obj);
+            objects.img_forecast_day4 = obj;
+            lv_obj_set_pos(obj, 205, 209);
+            lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
+            lv_image_set_src(obj, &img_weather_sunny_small);
+        }
+        {
+            // lbl_forecast_day5_name
+            lv_obj_t *obj = lv_label_create(parent_obj);
+            objects.lbl_forecast_day5_name = obj;
+            lv_obj_set_pos(obj, 269, 188);
+            lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
+            lv_obj_set_style_text_font(obj, &ui_font_roboto_med_18, LV_PART_MAIN | LV_STATE_DEFAULT);
+            lv_label_set_text(obj, "");
+        }
+        {
+            // lbl_forecast_day1_temp5
+            lv_obj_t *obj = lv_label_create(parent_obj);
+            objects.lbl_forecast_day1_temp5 = obj;
+            lv_obj_set_pos(obj, 269, 257);
+            lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
+            lv_obj_set_style_text_font(obj, &ui_font_roboto_med_18, LV_PART_MAIN | LV_STATE_DEFAULT);
+            lv_label_set_text(obj, "");
+        }
+        {
+            // img_forecast_day5
+            lv_obj_t *obj = lv_image_create(parent_obj);
+            objects.img_forecast_day5 = obj;
+            lv_obj_set_pos(obj, 263, 209);
+            lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
+            lv_image_set_src(obj, &img_weather_sunny_small);
         }
     }
     
@@ -91,6 +238,132 @@ void create_screen_main() {
 }
 
 void tick_screen_main() {
+    {
+        const char *new_val = get_var_ha_time();
+        const char *cur_val = lv_label_get_text(objects.ha_lbl_time);
+        if (strcmp(new_val, cur_val) != 0) {
+            tick_value_change_obj = objects.ha_lbl_time;
+            lv_label_set_text(objects.ha_lbl_time, new_val);
+            tick_value_change_obj = NULL;
+        }
+    }
+    {
+        const char *new_val = get_var_ha_date();
+        const char *cur_val = lv_label_get_text(objects.ha_lbl_date);
+        if (strcmp(new_val, cur_val) != 0) {
+            tick_value_change_obj = objects.ha_lbl_date;
+            lv_label_set_text(objects.ha_lbl_date, new_val);
+            tick_value_change_obj = NULL;
+        }
+    }
+    {
+        const char *new_val = get_var_ha_home_condition_today();
+        const char *cur_val = lv_label_get_text(objects.ha_lbl_home_condition_today);
+        if (strcmp(new_val, cur_val) != 0) {
+            tick_value_change_obj = objects.ha_lbl_home_condition_today;
+            lv_label_set_text(objects.ha_lbl_home_condition_today, new_val);
+            tick_value_change_obj = NULL;
+        }
+    }
+    {
+        const char *new_val = get_var_ha_home_realfeel_temperature();
+        const char *cur_val = lv_label_get_text(objects.ha_lbl_home_realfeel_temperature);
+        if (strcmp(new_val, cur_val) != 0) {
+            tick_value_change_obj = objects.ha_lbl_home_realfeel_temperature;
+            lv_label_set_text(objects.ha_lbl_home_realfeel_temperature, new_val);
+            tick_value_change_obj = NULL;
+        }
+    }
+    {
+        const char *new_val = get_var_ha_forecast_day1_name();
+        const char *cur_val = lv_label_get_text(objects.lbl_forecast_day1_name);
+        if (strcmp(new_val, cur_val) != 0) {
+            tick_value_change_obj = objects.lbl_forecast_day1_name;
+            lv_label_set_text(objects.lbl_forecast_day1_name, new_val);
+            tick_value_change_obj = NULL;
+        }
+    }
+    {
+        const char *new_val = get_var_ha_forecast_day1_temp();
+        const char *cur_val = lv_label_get_text(objects.lbl_forecast_day1_temp);
+        if (strcmp(new_val, cur_val) != 0) {
+            tick_value_change_obj = objects.lbl_forecast_day1_temp;
+            lv_label_set_text(objects.lbl_forecast_day1_temp, new_val);
+            tick_value_change_obj = NULL;
+        }
+    }
+    {
+        const char *new_val = get_var_ha_forecast_day2_name();
+        const char *cur_val = lv_label_get_text(objects.lbl_forecast_day2_name);
+        if (strcmp(new_val, cur_val) != 0) {
+            tick_value_change_obj = objects.lbl_forecast_day2_name;
+            lv_label_set_text(objects.lbl_forecast_day2_name, new_val);
+            tick_value_change_obj = NULL;
+        }
+    }
+    {
+        const char *new_val = get_var_ha_forecast_day2_temp();
+        const char *cur_val = lv_label_get_text(objects.lbl_forecast_day2_temp);
+        if (strcmp(new_val, cur_val) != 0) {
+            tick_value_change_obj = objects.lbl_forecast_day2_temp;
+            lv_label_set_text(objects.lbl_forecast_day2_temp, new_val);
+            tick_value_change_obj = NULL;
+        }
+    }
+    {
+        const char *new_val = get_var_ha_forecast_day3_name();
+        const char *cur_val = lv_label_get_text(objects.lbl_forecast_day3_name);
+        if (strcmp(new_val, cur_val) != 0) {
+            tick_value_change_obj = objects.lbl_forecast_day3_name;
+            lv_label_set_text(objects.lbl_forecast_day3_name, new_val);
+            tick_value_change_obj = NULL;
+        }
+    }
+    {
+        const char *new_val = get_var_ha_forecast_day3_temp();
+        const char *cur_val = lv_label_get_text(objects.lbl_forecast_day3_temp);
+        if (strcmp(new_val, cur_val) != 0) {
+            tick_value_change_obj = objects.lbl_forecast_day3_temp;
+            lv_label_set_text(objects.lbl_forecast_day3_temp, new_val);
+            tick_value_change_obj = NULL;
+        }
+    }
+    {
+        const char *new_val = get_var_ha_forecast_day4_name();
+        const char *cur_val = lv_label_get_text(objects.lbl_forecast_day4_name);
+        if (strcmp(new_val, cur_val) != 0) {
+            tick_value_change_obj = objects.lbl_forecast_day4_name;
+            lv_label_set_text(objects.lbl_forecast_day4_name, new_val);
+            tick_value_change_obj = NULL;
+        }
+    }
+    {
+        const char *new_val = get_var_ha_forecast_day4_temp();
+        const char *cur_val = lv_label_get_text(objects.lbl_forecast_day4_temp);
+        if (strcmp(new_val, cur_val) != 0) {
+            tick_value_change_obj = objects.lbl_forecast_day4_temp;
+            lv_label_set_text(objects.lbl_forecast_day4_temp, new_val);
+            tick_value_change_obj = NULL;
+        }
+    }
+    {
+        const char *new_val = get_var_ha_forecast_day5_name();
+        const char *cur_val = lv_label_get_text(objects.lbl_forecast_day5_name);
+        if (strcmp(new_val, cur_val) != 0) {
+            tick_value_change_obj = objects.lbl_forecast_day5_name;
+            lv_label_set_text(objects.lbl_forecast_day5_name, new_val);
+            tick_value_change_obj = NULL;
+        }
+    }
+    {
+        const char *new_val = get_var_ha_forecast_day5_temp();
+        const char *cur_val = lv_label_get_text(objects.lbl_forecast_day1_temp5);
+        if (strcmp(new_val, cur_val) != 0) {
+            tick_value_change_obj = objects.lbl_forecast_day1_temp5;
+            lv_label_set_text(objects.lbl_forecast_day1_temp5, new_val);
+            tick_value_change_obj = NULL;
+        }
+    }
 }
 
 typedef void (*tick_screen_func_t)();
@@ -111,6 +384,12 @@ void tick_screen_by_id(enum ScreensEnum screenId) {
 //
 
 ext_font_desc_t fonts[] = {
+    { "ROBOTO_MED_14", &ui_font_roboto_med_14 },
+    { "ROBOTO_14", &ui_font_roboto_14 },
+    { "ROBOTO_16", &ui_font_roboto_16 },
+    { "ROBOTO_MED_16", &ui_font_roboto_med_16 },
+    { "ROBOTO_MED_18", &ui_font_roboto_med_18 },
+    { "ROBOTO_MED_30", &ui_font_roboto_med_30 },
 #if LV_FONT_MONTSERRAT_8
     { "MONTSERRAT_8", &lv_font_montserrat_8 },
 #endif

@@ -1,6 +1,8 @@
 #include "ha_client_task.h"
 #include "Shared/shared_resources.h"
 #include "Shared/config_manager.h"
+#include "eez_vars.h"
+#include "ui/vars.h"
 #include "esp_http_client.h"
 #include "esp_log.h"
 #include "esp_heap_caps.h"
@@ -15,6 +17,29 @@ static const char *TAG = "ha_client_task";
 
 static char s_http_response_buffer[HTTP_RESPONSE_BUFFER_SIZE];
 static int s_http_response_len = 0;
+
+// Translate raw weather state to friendly name
+static const char* translate_weather_state(const char *raw_state)
+{
+    if (strcmp(raw_state, "partlycloudy") == 0) return "Partly cloudy";
+    if (strcmp(raw_state, "sunny") == 0) return "Sunny";
+    if (strcmp(raw_state, "cloudy") == 0) return "Cloudy";
+    if (strcmp(raw_state, "rainy") == 0) return "Rainy";
+    if (strcmp(raw_state, "pouring") == 0) return "Pouring";
+    if (strcmp(raw_state, "snowy") == 0) return "Snowy";
+    if (strcmp(raw_state, "lightning") == 0) return "Lightning";
+    if (strcmp(raw_state, "lightning-rainy") == 0) return "Lightning & Rain";
+    if (strcmp(raw_state, "fog") == 0) return "Foggy";
+    if (strcmp(raw_state, "windy") == 0) return "Windy";
+    if (strcmp(raw_state, "clear-night") == 0) return "Clear night";
+    if (strcmp(raw_state, "windy-variant") == 0) return "Windy";
+    if (strcmp(raw_state, "hail") == 0) return "Hail";
+    if (strcmp(raw_state, "snowy-rainy") == 0) return "Snow & Rain";
+    if (strcmp(raw_state, "exceptional") == 0) return "Exceptional";
+    
+    // If unknown, return raw state (fallback)
+    return raw_state;
+}
 
 static esp_err_t http_event_handler(esp_http_client_event_t *evt)
 {
@@ -111,6 +136,14 @@ static esp_err_t ha_fetch_entity(const char *ha_url, const char *ha_token,
                     if (len < state_len) {
                         memcpy(state_out, state_start, len);
                         state_out[len] = '\0';
+                        
+                        // Strip any trailing quotes that might have been included
+                        size_t final_len = strlen(state_out);
+                        if (final_len > 0 && state_out[final_len - 1] == '"') {
+                            state_out[final_len - 1] = '\0';
+                            ESP_LOGD(TAG, "Stripped trailing quote from state value");
+                        }
+                        
                         err = ESP_OK;
                         ESP_LOGI(TAG, "Fetched %s: %s", entity_id, state_out);
                     } else {
@@ -148,16 +181,16 @@ void ha_client_task(void *pvParameters)
 {
     ESP_LOGI(TAG, "HA client task starting on core %d", xPortGetCoreID());
     
-    // Wait for WiFi and time sync
-    ESP_LOGI(TAG, "Waiting for WiFi and time sync...");
+    // Wait for WiFi connection
+    ESP_LOGI(TAG, "Waiting for WiFi connection...");
     xEventGroupWaitBits(s_event_group,
-                        WIFI_CONNECTED_BIT | TIME_SYNCED_BIT,
+                        WIFI_CONNECTED_BIT,
                         pdFALSE,
-                        pdTRUE,
+                        pdFALSE,
                         portMAX_DELAY);
     
-    // Let system settle after time sync
-    ESP_LOGI(TAG, "Waiting 2 seconds for system to stabilize...");
+    // Let WiFi settle before starting HTTP requests
+    ESP_LOGI(TAG, "WiFi connected, waiting 2 seconds before starting HA fetch...");
     vTaskDelay(pdMS_TO_TICKS(2000));
     
     // Get HA credentials
@@ -177,6 +210,10 @@ void ha_client_task(void *pvParameters)
         char date_str[32] = {0};
         char time_str[32] = {0};
         
+        // Additional HA entities
+        char realfeel_temperature[32] = {0};
+        char condition_today[64] = {0};
+        
         esp_err_t datetime_err = ESP_FAIL;
         
         // Log heap before fetch
@@ -190,14 +227,26 @@ void ha_client_task(void *pvParameters)
                 datetime_err = ha_fetch_entity(ha_url, ha_token, "sensor.date_time_iso", datetime_iso, sizeof(datetime_iso));
                 
                 if (datetime_err == ESP_OK) {
-                    // Parse ISO datetime: "2026-06-25T13:01:00" → date="2026-06-25", time="13:01"
+                    // Parse ISO datetime: "2026-06-25T13:01:00" → date="Sunday Jun 27, 2026", time="13:01"
                     char *t_separator = strchr(datetime_iso, 'T');
                     if (t_separator != NULL) {
-                        // Extract date (everything before 'T')
+                        // Extract ISO date (everything before 'T') into temp buffer
+                        char iso_date[16] = {0};
                         size_t date_len = t_separator - datetime_iso;
-                        if (date_len < sizeof(date_str)) {
-                            memcpy(date_str, datetime_iso, date_len);
-                            date_str[date_len] = '\0';
+                        if (date_len < sizeof(iso_date)) {
+                            memcpy(iso_date, datetime_iso, date_len);
+                            iso_date[date_len] = '\0';
+                            
+                            // Parse ISO date "2026-06-25" into struct tm
+                            struct tm timeinfo = {0};
+                            if (strptime(iso_date, "%Y-%m-%d", &timeinfo) != NULL) {
+                                // Format as "Sunday Jun 27, 2026"
+                                strftime(date_str, sizeof(date_str), "%A %b %d, %Y", &timeinfo);
+                            } else {
+                                // Fallback: use ISO date if parsing fails
+                                strncpy(date_str, iso_date, sizeof(date_str) - 1);
+                                ESP_LOGW(TAG, "Failed to parse date, using ISO format");
+                            }
                         }
                         
                         // Extract time (HH:MM from after 'T')
@@ -231,6 +280,136 @@ void ha_client_task(void *pvParameters)
                 vTaskDelay(pdMS_TO_TICKS(5000));
             }
         }
+        
+        // Fetch additional entities (temperature and weather condition)
+        esp_err_t temp_err = ESP_FAIL;
+        esp_err_t condition_err = ESP_FAIL;
+        
+        // Fetch realfeel temperature
+        // TODO: Update entity_id to match your actual HA sensor name
+        // Common patterns: "sensor.home_realfeel_temperature", "sensor.realfeel_temp", etc.
+        temp_err = ha_fetch_entity(ha_url, ha_token, "sensor.home_realfeel_temperature", 
+                                    realfeel_temperature, sizeof(realfeel_temperature));
+        
+        if (temp_err == ESP_OK && strlen(realfeel_temperature) > 0) {
+            // Add °C unit for main/current temperature display (no space)
+            char temp_with_unit[40];
+            snprintf(temp_with_unit, sizeof(temp_with_unit), "%s°C", realfeel_temperature);
+            set_var_ha_home_realfeel_temperature(temp_with_unit);
+            ESP_LOGI(TAG, "Temperature: %s", temp_with_unit);
+        } else {
+            ESP_LOGW(TAG, "Failed to fetch temperature sensor");
+        }
+        
+        // Fetch weather condition from weather entity
+        // Entity: weather.forecast_langebaan
+        // State values: sunny, cloudy, rainy, partlycloudy, etc.
+        condition_err = ha_fetch_entity(ha_url, ha_token, "weather.forecast_langebaan",
+                                        condition_today, sizeof(condition_today));
+        
+        if (condition_err == ESP_OK && strlen(condition_today) > 0) {
+            // Translate raw state (e.g., "partlycloudy" -> "Partly cloudy")
+            const char *translated_condition = translate_weather_state(condition_today);
+            set_var_ha_home_condition_today(translated_condition);
+            ESP_LOGI(TAG, "Weather condition: %s (raw: %s)", translated_condition, condition_today);
+        } else {
+            ESP_LOGW(TAG, "Failed to fetch weather condition sensor");
+        }
+        
+        // ============================================
+        // Fetch 5-Day Forecast Data
+        // ============================================
+        // From HA template sensors created in HA_FORECAST_SENSORS.yaml
+        
+        char forecast_temp[20], forecast_condition[50], forecast_name[10];
+        esp_err_t f_err;
+        
+        // Day 1 Forecast (Note: HA normalizes to day_1, not day1)
+        f_err = ha_fetch_entity(ha_url, ha_token, "sensor.forecast_day_1_temperature", forecast_temp, sizeof(forecast_temp));
+        if (f_err == ESP_OK) {
+            set_var_ha_forecast_day1_temp(forecast_temp);  // Just numeric value
+        }
+        
+        f_err = ha_fetch_entity(ha_url, ha_token, "sensor.forecast_day_1_condition", forecast_condition, sizeof(forecast_condition));
+        if (f_err == ESP_OK) {
+            const char *translated = translate_weather_state(forecast_condition);
+            set_var_ha_forecast_day1_condition(translated);
+        }
+        
+        f_err = ha_fetch_entity(ha_url, ha_token, "sensor.forecast_day_1_name", forecast_name, sizeof(forecast_name));
+        if (f_err == ESP_OK) {
+            set_var_ha_forecast_day1_name(forecast_name);
+        }
+        
+        // Day 2 Forecast
+        f_err = ha_fetch_entity(ha_url, ha_token, "sensor.forecast_day_2_temperature", forecast_temp, sizeof(forecast_temp));
+        if (f_err == ESP_OK) {
+            set_var_ha_forecast_day2_temp(forecast_temp);  // Just numeric value
+        }
+        
+        f_err = ha_fetch_entity(ha_url, ha_token, "sensor.forecast_day_2_condition", forecast_condition, sizeof(forecast_condition));
+        if (f_err == ESP_OK) {
+            const char *translated = translate_weather_state(forecast_condition);
+            set_var_ha_forecast_day2_condition(translated);
+        }
+        
+        f_err = ha_fetch_entity(ha_url, ha_token, "sensor.forecast_day_2_name", forecast_name, sizeof(forecast_name));
+        if (f_err == ESP_OK) {
+            set_var_ha_forecast_day2_name(forecast_name);
+        }
+        
+        // Day 3 Forecast
+        f_err = ha_fetch_entity(ha_url, ha_token, "sensor.forecast_day_3_temperature", forecast_temp, sizeof(forecast_temp));
+        if (f_err == ESP_OK) {
+            set_var_ha_forecast_day3_temp(forecast_temp);  // Just numeric value
+        }
+        
+        f_err = ha_fetch_entity(ha_url, ha_token, "sensor.forecast_day_3_condition", forecast_condition, sizeof(forecast_condition));
+        if (f_err == ESP_OK) {
+            const char *translated = translate_weather_state(forecast_condition);
+            set_var_ha_forecast_day3_condition(translated);
+        }
+        
+        f_err = ha_fetch_entity(ha_url, ha_token, "sensor.forecast_day_3_name", forecast_name, sizeof(forecast_name));
+        if (f_err == ESP_OK) {
+            set_var_ha_forecast_day3_name(forecast_name);
+        }
+        
+        // Day 4 Forecast
+        f_err = ha_fetch_entity(ha_url, ha_token, "sensor.forecast_day_4_temperature", forecast_temp, sizeof(forecast_temp));
+        if (f_err == ESP_OK) {
+            set_var_ha_forecast_day4_temp(forecast_temp);  // Just numeric value
+        }
+        
+        f_err = ha_fetch_entity(ha_url, ha_token, "sensor.forecast_day_4_condition", forecast_condition, sizeof(forecast_condition));
+        if (f_err == ESP_OK) {
+            const char *translated = translate_weather_state(forecast_condition);
+            set_var_ha_forecast_day4_condition(translated);
+        }
+        
+        f_err = ha_fetch_entity(ha_url, ha_token, "sensor.forecast_day_4_name", forecast_name, sizeof(forecast_name));
+        if (f_err == ESP_OK) {
+            set_var_ha_forecast_day4_name(forecast_name);
+        }
+        
+        // Day 5 Forecast
+        f_err = ha_fetch_entity(ha_url, ha_token, "sensor.forecast_day_5_temperature", forecast_temp, sizeof(forecast_temp));
+        if (f_err == ESP_OK) {
+            set_var_ha_forecast_day5_temp(forecast_temp);  // Just numeric value
+        }
+        
+        f_err = ha_fetch_entity(ha_url, ha_token, "sensor.forecast_day_5_condition", forecast_condition, sizeof(forecast_condition));
+        if (f_err == ESP_OK) {
+            const char *translated = translate_weather_state(forecast_condition);
+            set_var_ha_forecast_day5_condition(translated);
+        }
+        
+        f_err = ha_fetch_entity(ha_url, ha_token, "sensor.forecast_day_5_name", forecast_name, sizeof(forecast_name));
+        if (f_err == ESP_OK) {
+            set_var_ha_forecast_day5_name(forecast_name);
+        }
+        
+        ESP_LOGI(TAG, "Forecast data updated");
         
         // Update shared state
         if (xSemaphoreTake(dashboard_state_mutex, portMAX_DELAY) == pdTRUE) {

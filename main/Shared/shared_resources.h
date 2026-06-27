@@ -9,8 +9,7 @@
 
 // Event group bits
 #define WIFI_CONNECTED_BIT  BIT0
-#define TIME_SYNCED_BIT     BIT1
-#define HA_ERROR_BIT        BIT2
+#define HA_ERROR_BIT        BIT1  // Moved from BIT2
 
 // Shared state structure
 typedef struct {
@@ -20,7 +19,7 @@ typedef struct {
     uint32_t failed_update_count;
     
     // HA data (Phase 1: date/time)
-    char date_str[32];      // e.g., "2026-06-24"
+    char date_str[32];      // e.g., "Sunday Jun 27, 2026"
     char time_str[32];      // e.g., "14:35"
     char timezone[64];      // e.g., "Africa/Johannesburg"
 } dashboard_state_t;

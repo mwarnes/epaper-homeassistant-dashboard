@@ -1,5 +1,36 @@
 #include "images.h"
 
-const ext_img_desc_t images[1] = {
-    0
+const ext_img_desc_t images[32] = {
+    { "wifi_off", &img_wifi_off },
+    { "wifi_on", &img_wifi_on },
+    { "ha_on", &img_ha_on },
+    { "ha_off", &img_ha_off },
+    { "weather_partly_cloudy_large", &img_weather_partly_cloudy_large },
+    { "weather_partly_cloudy_small", &img_weather_partly_cloudy_small },
+    { "weather_alert_circle_large", &img_weather_alert_circle_large },
+    { "weather_alert_circle_small", &img_weather_alert_circle_small },
+    { "weather_cloudy_large", &img_weather_cloudy_large },
+    { "weather_cloudy_small", &img_weather_cloudy_small },
+    { "weather_fog_large", &img_weather_fog_large },
+    { "weather_fog_small", &img_weather_fog_small },
+    { "weather_hail_large", &img_weather_hail_large },
+    { "weather_hail_small", &img_weather_hail_small },
+    { "weather_lightning_large", &img_weather_lightning_large },
+    { "weather_lightning_small", &img_weather_lightning_small },
+    { "weather_lightning_rainy_large", &img_weather_lightning_rainy_large },
+    { "weather_lightning_rainy_small", &img_weather_lightning_rainy_small },
+    { "weather_night_large", &img_weather_night_large },
+    { "weather_night_small", &img_weather_night_small },
+    { "weather_pouring_large", &img_weather_pouring_large },
+    { "weather_pouring_small", &img_weather_pouring_small },
+    { "weather_rainy_large", &img_weather_rainy_large },
+    { "weather_rainy_small", &img_weather_rainy_small },
+    { "weather_snowy_large", &img_weather_snowy_large },
+    { "weather_snowy_small", &img_weather_snowy_small },
+    { "weather_snowy_rainy_large", &img_weather_snowy_rainy_large },
+    { "weather_snowy_rainy_small", &img_weather_snowy_rainy_small },
+    { "weather_sunny_large", &img_weather_sunny_large },
+    { "weather_sunny_small", &img_weather_sunny_small },
+    { "weather_windy_large", &img_weather_windy_large },
+    { "weather_windy_small", &img_weather_windy_small },
 };

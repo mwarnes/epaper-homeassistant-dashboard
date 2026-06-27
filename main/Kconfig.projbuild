@@ -35,11 +35,13 @@ menu "Home Assistant Dashboard Configuration"
 
         config HA_DASHBOARD_UPDATE_INTERVAL
             int "Update interval (seconds)"
-            default 600
+            default 60
             range 60 3600
             help
                 How often to fetch data from Home Assistant.
-                Default: 600 seconds (10 minutes)
+                Default: 60 seconds (1 minute)
+                Ensures fresh data even if some fetches fail.
+                Display refresh is independent (every 10 minutes).
 
         config HA_DASHBOARD_ERROR_GRACE_PERIOD
             int "Error grace period (seconds)"

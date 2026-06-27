@@ -18,13 +18,16 @@ static void wifi_event_handler(void *arg, esp_event_base_t event_base,
     if (event_base == WIFI_EVENT && event_id == WIFI_EVENT_STA_START) {
         esp_wifi_connect();
     } else if (event_base == WIFI_EVENT && event_id == WIFI_EVENT_STA_DISCONNECTED) {
+        // Always retry connection (important for long-running dashboard)
+        // Log differently for initial connection vs reconnection attempts
         if (s_retry_num < MAX_RETRY) {
-            esp_wifi_connect();
             s_retry_num++;
-            ESP_LOGI(TAG, "Retry to connect to WiFi... (%d/%d)", s_retry_num, MAX_RETRY);
+            ESP_LOGI(TAG, "Initial connection: retry %d/%d", s_retry_num, MAX_RETRY);
         } else {
-            ESP_LOGI(TAG, "Failed to connect to WiFi");
+            ESP_LOGI(TAG, "Connection lost, retrying... (attempt %d)", s_retry_num + 1);
+            s_retry_num++;  // Keep incrementing to show retry count
         }
+        esp_wifi_connect();
         xEventGroupClearBits(s_event_group, WIFI_CONNECTED_BIT);
         
         // Update state
@@ -93,6 +96,7 @@ void wifi_task(void *pvParameters)
     ESP_LOGI(TAG, "WiFi initialized, connecting to %s...", ssid);
     
     // Wait for connection with exponential backoff
+    bool connected = false;
     for (int i = 0; i < MAX_RETRY; i++) {
         EventBits_t bits = xEventGroupWaitBits(s_event_group,
                                                 WIFI_CONNECTED_BIT,
@@ -102,11 +106,17 @@ void wifi_task(void *pvParameters)
         
         if (bits & WIFI_CONNECTED_BIT) {
             ESP_LOGI(TAG, "Connected to WiFi successfully");
+            connected = true;
             break;
         }
     }
     
     // Task complete - WiFi event handlers will manage reconnection
-    ESP_LOGI(TAG, "WiFi task initialization complete");
+    if (connected) {
+        ESP_LOGI(TAG, "WiFi task initialization complete - connected");
+    } else {
+        ESP_LOGW(TAG, "WiFi task initialization complete - still connecting in background");
+        ESP_LOGW(TAG, "HA dashboard will start when WiFi connects");
+    }
     vTaskDelete(NULL);
 }
