@@ -15,8 +15,8 @@ template:
         unique_id: forecast_day1_temperature
         state: >
           {% set forecast = state_attr('weather.forecast_langebaan', 'forecast') %}
-          {% if forecast and forecast|length > 0 %}
-            {{ forecast[0].temperature }}
+          {% if forecast and forecast|length > 1 %}
+            {{ forecast[1].temperature }}
           {% else %}
             unavailable
           {% endif %}
@@ -27,8 +27,8 @@ template:
         unique_id: forecast_day1_condition
         state: >
           {% set forecast = state_attr('weather.forecast_langebaan', 'forecast') %}
-          {% if forecast and forecast|length > 0 %}
-            {{ forecast[0].condition }}
+          {% if forecast and forecast|length > 1 %}
+            {{ forecast[1].condition }}
           {% else %}
             unavailable
           {% endif %}
@@ -38,8 +38,8 @@ template:
         unique_id: forecast_day1_name
         state: >
           {% set forecast = state_attr('weather.forecast_langebaan', 'forecast') %}
-          {% if forecast and forecast|length > 0 %}
-            {{ as_timestamp(forecast[0].datetime) | timestamp_custom('%a') }}
+          {% if forecast and forecast|length > 1 %}
+            {{ as_timestamp(forecast[1].datetime) | timestamp_custom('%a') }}
           {% else %}
             unavailable
           {% endif %}
@@ -52,8 +52,8 @@ template:
         unique_id: forecast_day2_temperature
         state: >
           {% set forecast = state_attr('weather.forecast_langebaan', 'forecast') %}
-          {% if forecast and forecast|length > 1 %}
-            {{ forecast[1].temperature }}
+          {% if forecast and forecast|length > 2 %}
+            {{ forecast[2].temperature }}
           {% else %}
             unavailable
           {% endif %}
@@ -64,8 +64,8 @@ template:
         unique_id: forecast_day2_condition
         state: >
           {% set forecast = state_attr('weather.forecast_langebaan', 'forecast') %}
-          {% if forecast and forecast|length > 1 %}
-            {{ forecast[1].condition }}
+          {% if forecast and forecast|length > 2 %}
+            {{ forecast[2].condition }}
           {% else %}
             unavailable
           {% endif %}
@@ -75,8 +75,8 @@ template:
         unique_id: forecast_day2_name
         state: >
           {% set forecast = state_attr('weather.forecast_langebaan', 'forecast') %}
-          {% if forecast and forecast|length > 1 %}
-            {{ as_timestamp(forecast[1].datetime) | timestamp_custom('%a') }}
+          {% if forecast and forecast|length > 2 %}
+            {{ as_timestamp(forecast[2].datetime) | timestamp_custom('%a') }}
           {% else %}
             unavailable
           {% endif %}
@@ -89,8 +89,8 @@ template:
         unique_id: forecast_day3_temperature
         state: >
           {% set forecast = state_attr('weather.forecast_langebaan', 'forecast') %}
-          {% if forecast and forecast|length > 2 %}
-            {{ forecast[2].temperature }}
+          {% if forecast and forecast|length > 3 %}
+            {{ forecast[3].temperature }}
           {% else %}
             unavailable
           {% endif %}
@@ -101,8 +101,8 @@ template:
         unique_id: forecast_day3_condition
         state: >
           {% set forecast = state_attr('weather.forecast_langebaan', 'forecast') %}
-          {% if forecast and forecast|length > 2 %}
-            {{ forecast[2].condition }}
+          {% if forecast and forecast|length > 3 %}
+            {{ forecast[3].condition }}
           {% else %}
             unavailable
           {% endif %}
@@ -112,8 +112,8 @@ template:
         unique_id: forecast_day3_name
         state: >
           {% set forecast = state_attr('weather.forecast_langebaan', 'forecast') %}
-          {% if forecast and forecast|length > 2 %}
-            {{ as_timestamp(forecast[2].datetime) | timestamp_custom('%a') }}
+          {% if forecast and forecast|length > 3 %}
+            {{ as_timestamp(forecast[3].datetime) | timestamp_custom('%a') }}
           {% else %}
             unavailable
           {% endif %}
@@ -126,8 +126,8 @@ template:
         unique_id: forecast_day4_temperature
         state: >
           {% set forecast = state_attr('weather.forecast_langebaan', 'forecast') %}
-          {% if forecast and forecast|length > 3 %}
-            {{ forecast[3].temperature }}
+          {% if forecast and forecast|length > 4 %}
+            {{ forecast[4].temperature }}
           {% else %}
             unavailable
           {% endif %}
@@ -138,8 +138,8 @@ template:
         unique_id: forecast_day4_condition
         state: >
           {% set forecast = state_attr('weather.forecast_langebaan', 'forecast') %}
-          {% if forecast and forecast|length > 3 %}
-            {{ forecast[3].condition }}
+          {% if forecast and forecast|length > 4 %}
+            {{ forecast[4].condition }}
           {% else %}
             unavailable
           {% endif %}
@@ -149,8 +149,8 @@ template:
         unique_id: forecast_day4_name
         state: >
           {% set forecast = state_attr('weather.forecast_langebaan', 'forecast') %}
-          {% if forecast and forecast|length > 3 %}
-            {{ as_timestamp(forecast[3].datetime) | timestamp_custom('%a') }}
+          {% if forecast and forecast|length > 4 %}
+            {{ as_timestamp(forecast[4].datetime) | timestamp_custom('%a') }}
           {% else %}
             unavailable
           {% endif %}
@@ -163,8 +163,8 @@ template:
         unique_id: forecast_day5_temperature
         state: >
           {% set forecast = state_attr('weather.forecast_langebaan', 'forecast') %}
-          {% if forecast and forecast|length > 4 %}
-            {{ forecast[4].temperature }}
+          {% if forecast and forecast|length > 5 %}
+            {{ forecast[5].temperature }}
           {% else %}
             unavailable
           {% endif %}
@@ -175,8 +175,8 @@ template:
         unique_id: forecast_day5_condition
         state: >
           {% set forecast = state_attr('weather.forecast_langebaan', 'forecast') %}
-          {% if forecast and forecast|length > 4 %}
-            {{ forecast[4].condition }}
+          {% if forecast and forecast|length > 5 %}
+            {{ forecast[5].condition }}
           {% else %}
             unavailable
           {% endif %}
@@ -186,8 +186,8 @@ template:
         unique_id: forecast_day5_name
         state: >
           {% set forecast = state_attr('weather.forecast_langebaan', 'forecast') %}
-          {% if forecast and forecast|length > 4 %}
-            {{ as_timestamp(forecast[4].datetime) | timestamp_custom('%a') }}
+          {% if forecast and forecast|length > 5 %}
+            {{ as_timestamp(forecast[5].datetime) | timestamp_custom('%a') }}
           {% else %}
             unavailable
           {% endif %}
@@ -216,8 +216,9 @@ template:
 #    - Day name (e.g., "Sat", "Sun", "Mon")
 #
 # 6. The forecast array structure from weather.forecast_langebaan:
-#    forecast[0] = Tomorrow
-#    forecast[1] = Day after tomorrow
-#    forecast[2] = 3 days out
-#    forecast[3] = 4 days out
-#    forecast[4] = 5 days out
+#    forecast[0] = Today (not used - shown in main weather display)
+#    forecast[1] = Tomorrow (Day 1)
+#    forecast[2] = Day 2
+#    forecast[3] = Day 3
+#    forecast[4] = Day 4
+#    forecast[5] = Day 5
