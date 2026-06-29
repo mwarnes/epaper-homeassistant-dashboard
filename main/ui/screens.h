@@ -39,6 +39,9 @@ typedef struct _objects_t {
     lv_obj_t *lbl_forecast_day5_name;
     lv_obj_t *lbl_forecast_day1_temp5;
     lv_obj_t *img_forecast_day5;
+    lv_obj_t *obj0;
+    lv_obj_t *obj1;
+    lv_obj_t *obj2;
 } objects_t;
 
 extern objects_t objects;

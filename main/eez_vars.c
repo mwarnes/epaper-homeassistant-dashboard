@@ -22,6 +22,11 @@ char ha_ha_status[100] = { 0 };
 char ha_home_realfeel_temperature[100] = { 0 };
 char ha_home_condition_today[100] = { 0 };
 
+// Additional current weather variables (names match EEZ Studio variables)
+char ha_wind[50] = { 0 };                  // e.g., "15 km/h NE" or "15 NE"
+char ha_humidity[50] = { 0 };              // e.g., "65%" or "65"
+char ha_air_quality_pm25[50] = { 0 };      // e.g., "12 µg/m³" or "12"
+
 // 5-Day Forecast Variables (15 total: 5 days × 3 variables)
 char ha_forecast_day1_temp[50] = { 0 };
 char ha_forecast_day1_condition[50] = { 0 };
@@ -75,6 +80,21 @@ const char *get_var_ha_home_realfeel_temperature()
 const char *get_var_ha_home_condition_today()
 {
     return ha_home_condition_today;
+}
+
+const char *get_var_ha_wind()
+{
+    return ha_wind;
+}
+
+const char *get_var_ha_humidity()
+{
+    return ha_humidity;
+}
+
+const char *get_var_ha_air_quality_pm25()
+{
+    return ha_air_quality_pm25;
 }
 
 //
@@ -141,6 +161,33 @@ void set_var_ha_home_condition_today(const char *value)
         ESP_LOGI(TAG, "HA variable updated: home_condition_today = '%s' (len=%d)", 
                  ha_home_condition_today, strlen(ha_home_condition_today));
         // Note: EEZ Studio's tick_screen_*() automatically updates label from variable
+    }
+}
+
+void set_var_ha_wind(const char *value)
+{
+    if (value) {
+        strncpy(ha_wind, value, sizeof(ha_wind));
+        ha_wind[sizeof(ha_wind) - 1] = 0;
+        ESP_LOGD(TAG, "HA variable updated: wind = '%s'", ha_wind);
+    }
+}
+
+void set_var_ha_humidity(const char *value)
+{
+    if (value) {
+        strncpy(ha_humidity, value, sizeof(ha_humidity));
+        ha_humidity[sizeof(ha_humidity) - 1] = 0;
+        ESP_LOGD(TAG, "HA variable updated: humidity = '%s'", ha_humidity);
+    }
+}
+
+void set_var_ha_air_quality_pm25(const char *value)
+{
+    if (value) {
+        strncpy(ha_air_quality_pm25, value, sizeof(ha_air_quality_pm25));
+        ha_air_quality_pm25[sizeof(ha_air_quality_pm25) - 1] = 0;
+        ESP_LOGD(TAG, "HA variable updated: air_quality_pm25 = '%s'", ha_air_quality_pm25);
     }
 }
 

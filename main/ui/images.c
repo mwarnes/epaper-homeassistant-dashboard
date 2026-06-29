@@ -1,6 +1,6 @@
 #include "images.h"
 
-const ext_img_desc_t images[32] = {
+const ext_img_desc_t images[35] = {
     { "wifi_off", &img_wifi_off },
     { "wifi_on", &img_wifi_on },
     { "ha_on", &img_ha_on },
@@ -33,4 +33,7 @@ const ext_img_desc_t images[32] = {
     { "weather_sunny_small", &img_weather_sunny_small },
     { "weather_windy_large", &img_weather_windy_large },
     { "weather_windy_small", &img_weather_windy_small },
+    { "weather-air-quality", &img_weather_air_quality },
+    { "weather-humidity", &img_weather_humidity },
+    { "weather-wind", &img_weather_wind },
 };

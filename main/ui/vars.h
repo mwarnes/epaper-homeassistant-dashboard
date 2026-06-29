@@ -31,7 +31,10 @@ enum FlowGlobalVariables {
     FLOW_GLOBAL_VARIABLE_HA_FORECAST_DAY4_NAME = 15,
     FLOW_GLOBAL_VARIABLE_HA_FORECAST_DAY5_TEMP = 16,
     FLOW_GLOBAL_VARIABLE_HA_FORECAST_DAY5_CONDITION = 17,
-    FLOW_GLOBAL_VARIABLE_HA_FORECAST_DAY5_NAME = 18
+    FLOW_GLOBAL_VARIABLE_HA_FORECAST_DAY5_NAME = 18,
+    FLOW_GLOBAL_VARIABLE_HA_WIND = 19,
+    FLOW_GLOBAL_VARIABLE_HA_HUMIDITY = 20,
+    FLOW_GLOBAL_VARIABLE_HA_AIR_QUALITY_PM25 = 21
 };
 
 // Native global variables
@@ -74,6 +77,12 @@ extern const char *get_var_ha_forecast_day5_condition();
 extern void set_var_ha_forecast_day5_condition(const char *value);
 extern const char *get_var_ha_forecast_day5_name();
 extern void set_var_ha_forecast_day5_name(const char *value);
+extern const char *get_var_ha_wind();
+extern void set_var_ha_wind(const char *value);
+extern const char *get_var_ha_humidity();
+extern void set_var_ha_humidity(const char *value);
+extern const char *get_var_ha_air_quality_pm25();
+extern void set_var_ha_air_quality_pm25(const char *value);
 
 #ifdef __cplusplus
 }

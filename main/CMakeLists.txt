@@ -56,6 +56,9 @@ idf_component_register(
         "ui/ui_image_weather_lightning_rainy_small.c"
         "ui/ui_image_weather_windy_small.c"
         "ui/ui_image_weather_alert_circle_small.c"
+        "ui/ui_image_weather_wind.c"
+        "ui/ui_image_weather_humidity.c"
+        "ui/ui_image_weather_air_quality.c"
         
     INCLUDE_DIRS 
         "."

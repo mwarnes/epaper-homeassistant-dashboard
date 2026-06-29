@@ -41,6 +41,34 @@ static const char* translate_weather_state(const char *raw_state)
     return raw_state;
 }
 
+// Convert wind bearing (degrees) to cardinal direction
+static const char* bearing_to_direction(int bearing)
+{
+    // Normalize bearing to 0-359 range
+    bearing = bearing % 360;
+    if (bearing < 0) bearing += 360;
+    
+    // 16-point compass rose
+    if (bearing < 11 || bearing >= 349) return "N";
+    if (bearing < 34) return "NNE";
+    if (bearing < 56) return "NE";
+    if (bearing < 79) return "ENE";
+    if (bearing < 101) return "E";
+    if (bearing < 124) return "ESE";
+    if (bearing < 146) return "SE";
+    if (bearing < 169) return "SSE";
+    if (bearing < 191) return "S";
+    if (bearing < 214) return "SSW";
+    if (bearing < 236) return "SW";
+    if (bearing < 259) return "WSW";
+    if (bearing < 281) return "W";
+    if (bearing < 304) return "WNW";
+    if (bearing < 326) return "NW";
+    if (bearing < 349) return "NNW";
+    
+    return "N";  // Fallback
+}
+
 static esp_err_t http_event_handler(esp_http_client_event_t *evt)
 {
     switch (evt->event_id) {
@@ -68,6 +96,115 @@ static esp_err_t http_event_handler(esp_http_client_event_t *evt)
         break;
     }
     return ESP_OK;
+}
+
+// Fetch an attribute value from an entity (e.g., temperature from weather entity)
+static esp_err_t ha_fetch_entity_attribute(const char *ha_url, const char *ha_token,
+                                            const char *entity_id, const char *attribute_name,
+                                            char *value_out, size_t value_len)
+{
+    esp_err_t err = ESP_FAIL;
+    char url[512];
+    snprintf(url, sizeof(url), "%s/api/states/%s", ha_url, entity_id);
+    
+    s_http_response_len = 0;
+    memset(s_http_response_buffer, 0, sizeof(s_http_response_buffer));
+    
+    char auth_header[512];
+    snprintf(auth_header, sizeof(auth_header), "Bearer %s", ha_token);
+    
+    esp_http_client_config_t config = {
+        .url = url,
+        .event_handler = http_event_handler,
+        .timeout_ms = 10000,
+    };
+    
+    esp_http_client_handle_t client = esp_http_client_init(&config);
+    esp_http_client_set_header(client, "Authorization", auth_header);
+    esp_http_client_set_header(client, "Content-Type", "application/json");
+    
+    err = esp_http_client_perform(client);
+    
+    if (err == ESP_OK) {
+        int status_code = esp_http_client_get_status_code(client);
+        if (status_code == 200) {
+            ESP_LOGD(TAG, "Response (%d bytes): %s", s_http_response_len, s_http_response_buffer);
+            
+            // Find "attributes" object
+            char *attr_start = strstr(s_http_response_buffer, "\"attributes\":");
+            if (attr_start != NULL) {
+                // Find the specific attribute within attributes
+                char search_pattern[128];
+                snprintf(search_pattern, sizeof(search_pattern), "\"%s\":", attribute_name);
+                char *value_start = strstr(attr_start, search_pattern);
+                
+                if (value_start != NULL) {
+                    value_start += strlen(search_pattern);
+                    // Skip whitespace
+                    while (*value_start == ' ') value_start++;
+                    
+                    // Handle both quoted strings and unquoted values (numbers)
+                    char *value_end = NULL;
+                    bool is_quoted = (*value_start == '"');
+                    
+                    if (is_quoted) {
+                        value_start++; // Skip opening quote
+                        value_end = strchr(value_start, '"');
+                    } else {
+                        // Unquoted value - find end (comma, brace, or bracket)
+                        value_end = value_start;
+                        while (*value_end != '\0' && *value_end != ',' &&
+                               *value_end != '}' && *value_end != ']' && *value_end != '\n') {
+                            value_end++;
+                        }
+                    }
+                    
+                    if (value_end != NULL && value_end > value_start) {
+                        size_t len = value_end - value_start;
+                        if (len < value_len) {
+                            memcpy(value_out, value_start, len);
+                            value_out[len] = '\0';
+                            
+                            // Strip any trailing quotes
+                            size_t final_len = strlen(value_out);
+                            if (final_len > 0 && value_out[final_len - 1] == '"') {
+                                value_out[final_len - 1] = '\0';
+                            }
+                            
+                            err = ESP_OK;
+                            ESP_LOGI(TAG, "Fetched %s.%s: %s", entity_id, attribute_name, value_out);
+                        } else {
+                            ESP_LOGW(TAG, "Attribute value too long (%zu bytes)", len);
+                            err = ESP_FAIL;
+                        }
+                    } else {
+                        ESP_LOGW(TAG, "Malformed JSON - cannot find attribute value end");
+                        err = ESP_FAIL;
+                    }
+                } else {
+                    ESP_LOGW(TAG, "Attribute '%s' not found in entity %s", attribute_name, entity_id);
+                    err = ESP_FAIL;
+                }
+            } else {
+                ESP_LOGW(TAG, "No 'attributes' field in response");
+                err = ESP_FAIL;
+            }
+        } else if (status_code == 404) {
+            ESP_LOGE(TAG, "Entity %s not found (404)", entity_id);
+            err = ESP_ERR_NOT_FOUND;
+        } else if (status_code == 401) {
+            ESP_LOGE(TAG, "Unauthorized (401) - check token");
+            err = ESP_ERR_INVALID_STATE;
+        } else {
+            ESP_LOGE(TAG, "HTTP error %d", status_code);
+            err = ESP_FAIL;
+        }
+    } else {
+        ESP_LOGE(TAG, "HTTP request failed: %s", esp_err_to_name(err));
+    }
+    
+    esp_http_client_cleanup(client);
+    return err;
 }
 
 static esp_err_t ha_fetch_entity(const char *ha_url, const char *ha_token, 
@@ -281,29 +418,28 @@ void ha_client_task(void *pvParameters)
             }
         }
         
-        // Fetch additional entities (temperature and weather condition)
+        // Fetch current weather from weather entity
+        // Entity: weather.forecast_langebaan
+        // State = condition (sunny, cloudy, rainy, partlycloudy, etc.)
+        // Attributes include temperature, humidity, etc.
         esp_err_t temp_err = ESP_FAIL;
         esp_err_t condition_err = ESP_FAIL;
         
-        // Fetch realfeel temperature
-        // TODO: Update entity_id to match your actual HA sensor name
-        // Common patterns: "sensor.home_realfeel_temperature", "sensor.realfeel_temp", etc.
-        temp_err = ha_fetch_entity(ha_url, ha_token, "sensor.home_realfeel_temperature", 
-                                    realfeel_temperature, sizeof(realfeel_temperature));
+        // Fetch current temperature from weather entity's temperature attribute
+        temp_err = ha_fetch_entity_attribute(ha_url, ha_token, "weather.forecast_langebaan",
+                                             "temperature", realfeel_temperature, sizeof(realfeel_temperature));
         
         if (temp_err == ESP_OK && strlen(realfeel_temperature) > 0) {
             // Add °C unit for main/current temperature display (no space)
             char temp_with_unit[40];
             snprintf(temp_with_unit, sizeof(temp_with_unit), "%s°C", realfeel_temperature);
             set_var_ha_home_realfeel_temperature(temp_with_unit);
-            ESP_LOGI(TAG, "Temperature: %s", temp_with_unit);
+            ESP_LOGI(TAG, "Current temperature: %s", temp_with_unit);
         } else {
-            ESP_LOGW(TAG, "Failed to fetch temperature sensor");
+            ESP_LOGW(TAG, "Failed to fetch temperature from weather entity");
         }
         
-        // Fetch weather condition from weather entity
-        // Entity: weather.forecast_langebaan
-        // State values: sunny, cloudy, rainy, partlycloudy, etc.
+        // Fetch current weather condition (state of weather entity)
         condition_err = ha_fetch_entity(ha_url, ha_token, "weather.forecast_langebaan",
                                         condition_today, sizeof(condition_today));
         
@@ -311,9 +447,9 @@ void ha_client_task(void *pvParameters)
             // Translate raw state (e.g., "partlycloudy" -> "Partly cloudy")
             const char *translated_condition = translate_weather_state(condition_today);
             set_var_ha_home_condition_today(translated_condition);
-            ESP_LOGI(TAG, "Weather condition: %s (raw: %s)", translated_condition, condition_today);
+            ESP_LOGI(TAG, "Current condition: %s (raw: %s)", translated_condition, condition_today);
         } else {
-            ESP_LOGW(TAG, "Failed to fetch weather condition sensor");
+            ESP_LOGW(TAG, "Failed to fetch weather condition");
         }
         
         // ============================================
@@ -410,6 +546,59 @@ void ha_client_task(void *pvParameters)
         }
         
         ESP_LOGI(TAG, "Forecast data updated");
+        
+        // ============================================
+        // Fetch Additional Weather Data
+        // ============================================
+        
+        // Fetch wind speed and bearing from weather entity
+        char wind_speed[20], wind_bearing[20];
+        esp_err_t wind_speed_err = ha_fetch_entity_attribute(ha_url, ha_token, "weather.forecast_langebaan",
+                                                             "wind_speed", wind_speed, sizeof(wind_speed));
+        esp_err_t wind_bearing_err = ha_fetch_entity_attribute(ha_url, ha_token, "weather.forecast_langebaan",
+                                                               "wind_bearing", wind_bearing, sizeof(wind_bearing));
+        
+        if (wind_speed_err == ESP_OK && wind_bearing_err == ESP_OK) {
+            // Combine speed and direction: "15 km/h NE"
+            int bearing = atoi(wind_bearing);
+            const char *direction = bearing_to_direction(bearing);
+            char wind_combined[50];
+            snprintf(wind_combined, sizeof(wind_combined), "%s km/h %s", wind_speed, direction);
+            set_var_ha_wind(wind_combined);
+            ESP_LOGI(TAG, "Wind: %s", wind_combined);
+        } else if (wind_speed_err == ESP_OK) {
+            // Only speed available - add km/h unit
+            char wind_formatted[30];
+            snprintf(wind_formatted, sizeof(wind_formatted), "%s km/h", wind_speed);
+            set_var_ha_wind(wind_formatted);
+            ESP_LOGI(TAG, "Wind: %s", wind_formatted);
+        }
+        
+        // Fetch humidity from weather entity
+        char humidity[20];
+        esp_err_t humidity_err = ha_fetch_entity_attribute(ha_url, ha_token, "weather.forecast_langebaan",
+                                                           "humidity", humidity, sizeof(humidity));
+        if (humidity_err == ESP_OK) {
+            // Add % symbol: "65%"
+            char humidity_formatted[30];
+            snprintf(humidity_formatted, sizeof(humidity_formatted), "%s%%", humidity);
+            set_var_ha_humidity(humidity_formatted);
+            ESP_LOGI(TAG, "Humidity: %s", humidity_formatted);
+        }
+        
+        // Fetch PM2.5 from air quality sensor
+        char pm25[20];
+        esp_err_t pm25_err = ha_fetch_entity(ha_url, ha_token, "sensor.airquality_office_pms5003_pm2_5",
+                                            pm25, sizeof(pm25));
+        if (pm25_err == ESP_OK) {
+            // Format with unit: "12 µg/m³" (µ = U+00B5, ³ = U+00B3)
+            char pm25_formatted[30];
+            snprintf(pm25_formatted, sizeof(pm25_formatted), "%s µg/m³", pm25);
+            set_var_ha_air_quality_pm25(pm25_formatted);
+            ESP_LOGI(TAG, "PM2.5: %s", pm25_formatted);
+        } else {
+            ESP_LOGW(TAG, "Failed to fetch PM2.5 sensor");
+        }
         
         // Update shared state
         if (xSemaphoreTake(dashboard_state_mutex, portMAX_DELAY) == pdTRUE) {
