@@ -17,6 +17,7 @@
     "ui_font_roboto_med_16.c",
     "ui_font_roboto_med_18.c",
     "ui_font_roboto_med_30.c",
+    "ui_image_grid_on.c",
     "ui_image_ha_off.c",
     "ui_image_ha_on.c",
     "ui_image_weather_air_quality.c",

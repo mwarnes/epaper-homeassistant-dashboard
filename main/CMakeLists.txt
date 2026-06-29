@@ -59,6 +59,7 @@ idf_component_register(
         "ui/ui_image_weather_wind.c"
         "ui/ui_image_weather_humidity.c"
         "ui/ui_image_weather_air_quality.c"
+        "ui/ui_image_grid_on.c"
         
     INCLUDE_DIRS 
         "."
