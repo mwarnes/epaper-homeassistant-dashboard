@@ -651,13 +651,19 @@ void ha_client_task(void *pvParameters)
                      battery_power_val < 0 ? " (charging)" : " (discharging)");
         }
         
-        // Battery state of charge (for icon selection)
+        // Battery state of charge (for icon selection and display)
         esp_err_t battery_soc_err = ha_fetch_entity(ha_url, ha_token, "sensor.deye_sunsynk_sol_ark_x_2_battery_state_of_charge_2",
                                                    battery_soc, sizeof(battery_soc));
         if (battery_soc_err == ESP_OK) {
             int soc = atoi(battery_soc);
             eez_update_battery_icon(soc);
-            ESP_LOGI(TAG, "Battery SOC: %d%%", soc);
+            
+            // Display SOC percentage in the "day" label position
+            char battery_soc_formatted[20];
+            snprintf(battery_soc_formatted, sizeof(battery_soc_formatted), "%d%%", soc);
+            set_var_ha_battery_power_day(battery_soc_formatted);
+            
+            ESP_LOGI(TAG, "Battery SOC: %s", battery_soc_formatted);
         }
         
         // Grid power
@@ -705,15 +711,8 @@ void ha_client_task(void *pvParameters)
             ESP_LOGI(TAG, "PV energy today: %s", pv_energy_formatted);
         }
         
-        // Battery daily energy (using discharge for display)
-        esp_err_t battery_energy_err = ha_fetch_entity(ha_url, ha_token, "sensor.battery_energy_out_daily",
-                                                       battery_energy, sizeof(battery_energy));
-        if (battery_energy_err == ESP_OK) {
-            char battery_energy_formatted[30];
-            snprintf(battery_energy_formatted, sizeof(battery_energy_formatted), "%s kWh", battery_energy);
-            set_var_ha_battery_power_day(battery_energy_formatted);
-            ESP_LOGI(TAG, "Battery energy today: %s", battery_energy_formatted);
-        }
+        // Battery SOC is displayed instead of daily energy (see above where SOC is fetched)
+        // The ha_battery_power_day variable now shows "65%" instead of "5.2 kWh"
         
         // Grid daily energy (using import for display)
         esp_err_t grid_energy_err = ha_fetch_entity(ha_url, ha_token, "sensor.grid_energy_daily",

@@ -30,11 +30,10 @@ The dashboard now displays real-time power usage, solar generation, battery stat
 
 ### 3. **Battery Power** (Dynamic Icon - 10 Levels)
 - **Icons**: `img_battery_power_10` through `img_battery_power_100`
-- **Current Power**: Shows battery charge (+) or discharge (-) in W
-- **Daily Energy**: Shows total battery discharge for the day in kWh
+- **Current Power**: Shows battery charge (-) or discharge (+) in W
+- **State of Charge**: Shows current battery charge level as percentage (e.g., "65%")
 - **Entity Source**:
   - Power: `sensor.deye_sunsynk_sol_ark_x_2_battery_power_2`
-  - Daily: `sensor.battery_energy_out_daily`
   - SOC: `sensor.deye_sunsynk_sol_ark_x_2_battery_state_of_charge_2`
 - **Logic**: Icon selected based on battery state of charge (SOC):
   - 95-100%: `img_battery_power_100`
@@ -66,13 +65,19 @@ The dashboard now displays real-time power usage, solar generation, battery stat
 
 ### Current Power (W)
 All current power values are displayed with "W" unit:
-- Format: `"1234 W"`
+- Format: `"1234 W"` or `"-250 W"` (battery)
+- Battery shows sign: `-` = charging, `+` or no sign = discharging
 - Updated every 60 seconds
 
 ### Daily Energy (kWh)
-All daily energy values are displayed with "kWh" unit:
+House, PV, and Grid daily energy displayed with "kWh" unit:
 - Format: `"12.5 kWh"`
 - Reset at midnight
+- Updated every 60 seconds
+
+### Battery State of Charge (%)
+Battery "day" position shows current charge level:
+- Format: `"65%"`
 - Updated every 60 seconds
 
 ## Variables
@@ -89,7 +94,7 @@ All variables follow the `ha_` prefix naming convention:
 **Daily Energy:**
 - `ha_house_power_day` - House consumption in kWh
 - `ha_pv_power_day` - PV generation in kWh
-- `ha_battery_power_day` - Battery energy in kWh
+- `ha_battery_power_day` - Battery state of charge in % (e.g., "65%")
 - `ha_grid_power_day` - Grid energy in kWh
 
 ### Image Objects
@@ -130,10 +135,10 @@ Every 60 seconds:
   │   ├─ Battery SOC → eez_update_battery_icon()
   │   └─ Grid status → eez_update_grid_icon()
   │
-  ├─ Fetch daily energy (kWh)
+  ├─ Fetch daily energy (kWh) and battery SOC (%)
   │   ├─ House consumption → ha_house_power_day
   │   ├─ PV generation → ha_pv_power_day
-  │   ├─ Battery discharge → ha_battery_power_day
+  │   ├─ Battery SOC → ha_battery_power_day ("65%")
   │   └─ Grid import → ha_grid_power_day
   │
   └─ ui_tick() updates all labels automatically
@@ -151,7 +156,6 @@ Every 60 seconds:
 ### Daily Energy Sensors (Template)
 - `sensor.pv_energy_daily` - Daily PV generation
 - `sensor.load_energy_daily` - Daily house consumption
-- `sensor.battery_energy_out_daily` - Daily battery discharge
 - `sensor.grid_energy_daily` - Daily grid import
 
 ### Status Sensors
@@ -185,15 +189,15 @@ idf.py flash monitor
 I (xxx) ha_client_task: House power: 1234 W
 I (xxx) ha_client_task: PV power: 3500 W
 I (xxx) ha_client_task: PV icon: DAY (3500.0W)
-I (xxx) ha_client_task: Battery power: -250 W
+I (xxx) ha_client_task: Battery power: -250 W (charging)
 I (xxx) ha_client_task: Battery SOC: 85%
 I (xxx) eez_vars: Battery icon updated: SOC=85%
+I (xxx) eez_vars: HA variable updated: battery_power_day = '85%'
 I (xxx) ha_client_task: Grid power: -1500 W
 I (xxx) ha_client_task: Grid connected: YES
 I (xxx) eez_vars: Grid icon: ON (connected)
 I (xxx) ha_client_task: House energy today: 12.5 kWh
 I (xxx) ha_client_task: PV energy today: 28.3 kWh
-I (xxx) ha_client_task: Battery energy today: 5.2 kWh
 I (xxx) ha_client_task: Grid energy today: 2.1 kWh
 I (xxx) ha_client_task: Power & energy data updated
 ```

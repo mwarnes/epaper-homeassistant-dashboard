@@ -2131,9 +2131,9 @@
             {
               "objID": "9b520ea4-586a-4b9c-cb95-0d62cb6c9127",
               "type": "LVGLLabelWidget",
-              "left": 367,
-              "top": 144,
-              "width": 53,
+              "left": 355,
+              "top": 146,
+              "width": 71,
               "height": 18,
               "customInputs": [],
               "customOutputs": [],
@@ -2177,14 +2177,14 @@
               "textType": "expression",
               "longMode": "WRAP",
               "recolor": false,
-              "previewValue": "1.2kWh"
+              "previewValue": "10.02kWh"
             },
             {
               "objID": "050381b8-16f9-4f9c-885c-92ad4c28b712",
               "type": "LVGLLabelWidget",
-              "left": 446,
+              "left": 440,
               "top": 144,
-              "width": 53,
+              "width": 62,
               "height": 18,
               "customInputs": [],
               "customOutputs": [],
@@ -2228,12 +2228,12 @@
               "textType": "expression",
               "longMode": "WRAP",
               "recolor": false,
-              "previewValue": "3.6kWh"
+              "previewValue": "31.6kWh"
             },
             {
               "objID": "c5d31595-4a62-4b45-81c9-cdad01af1a1d",
               "type": "LVGLLabelWidget",
-              "left": 527,
+              "left": 521,
               "top": 144,
               "width": 53,
               "height": 18,
@@ -2284,7 +2284,7 @@
             {
               "objID": "850644fb-416e-4561-8b85-6e1e44ac9a0b",
               "type": "LVGLLabelWidget",
-              "left": 607,
+              "left": 599,
               "top": 144,
               "width": 53,
               "height": 18,
@@ -2335,8 +2335,8 @@
             {
               "objID": "5b235038-0f17-4e30-a2b8-b4d21041b756",
               "type": "LVGLLabelWidget",
-              "left": 367,
-              "top": 167,
+              "left": 369,
+              "top": 168,
               "width": 44,
               "height": 17,
               "customInputs": [],
@@ -2386,7 +2386,7 @@
             {
               "objID": "84bc3aef-7cef-425f-e0c4-63ff51f5b3f6",
               "type": "LVGLLabelWidget",
-              "left": 446,
+              "left": 450,
               "top": 167,
               "width": 44,
               "height": 17,
@@ -2437,7 +2437,7 @@
             {
               "objID": "dbde28d8-d4d2-4ce3-876e-18053e2ba40f",
               "type": "LVGLLabelWidget",
-              "left": 527,
+              "left": 521,
               "top": 167,
               "width": 49,
               "height": 17,
@@ -2488,8 +2488,8 @@
             {
               "objID": "6c8da3a8-4dc8-4057-d9f7-e13f0fc821a8",
               "type": "LVGLLabelWidget",
-              "left": 607,
-              "top": 167,
+              "left": 612,
+              "top": 168,
               "width": 28,
               "height": 17,
               "customInputs": [],

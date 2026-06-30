@@ -54,7 +54,7 @@ char ha_house_power_day[50] = { 0 };      // Daily house consumption in kWh
 char ha_pv_power[50] = { 0 };             // Current PV generation in W
 char ha_pv_power_day[50] = { 0 };         // Daily PV generation in kWh
 char ha_battery_power[50] = { 0 };        // Current battery power in W (+ charging / - discharging)
-char ha_battery_power_day[50] = { 0 };    // Daily battery energy in kWh
+char ha_battery_power_day[50] = { 0 };    // Battery state of charge in % (e.g., "65%")
 char ha_grid_power[50] = { 0 };           // Current grid power in W (+ import / - export)
 char ha_grid_power_day[50] = { 0 };       // Daily grid energy in kWh
 

@@ -311,7 +311,7 @@ void create_screen_main() {
             // ha_lbl_house_power_day
             lv_obj_t *obj = lv_label_create(parent_obj);
             objects.ha_lbl_house_power_day = obj;
-            lv_obj_set_pos(obj, 367, 144);
+            lv_obj_set_pos(obj, 355, 146);
             lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
             lv_obj_set_style_text_font(obj, &ui_font_roboto_med_16, LV_PART_MAIN | LV_STATE_DEFAULT);
             lv_label_set_text(obj, "");
@@ -320,7 +320,7 @@ void create_screen_main() {
             // ha_lbl_pv_power_day
             lv_obj_t *obj = lv_label_create(parent_obj);
             objects.ha_lbl_pv_power_day = obj;
-            lv_obj_set_pos(obj, 446, 144);
+            lv_obj_set_pos(obj, 440, 144);
             lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
             lv_obj_set_style_text_font(obj, &ui_font_roboto_med_16, LV_PART_MAIN | LV_STATE_DEFAULT);
             lv_label_set_text(obj, "");
@@ -329,7 +329,7 @@ void create_screen_main() {
             // ha_lbl_battery_power_day
             lv_obj_t *obj = lv_label_create(parent_obj);
             objects.ha_lbl_battery_power_day = obj;
-            lv_obj_set_pos(obj, 527, 144);
+            lv_obj_set_pos(obj, 521, 144);
             lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
             lv_obj_set_style_text_font(obj, &ui_font_roboto_med_16, LV_PART_MAIN | LV_STATE_DEFAULT);
             lv_label_set_text(obj, "");
@@ -338,7 +338,7 @@ void create_screen_main() {
             // ha_lbl_grid_power_day
             lv_obj_t *obj = lv_label_create(parent_obj);
             objects.ha_lbl_grid_power_day = obj;
-            lv_obj_set_pos(obj, 607, 144);
+            lv_obj_set_pos(obj, 599, 144);
             lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
             lv_obj_set_style_text_font(obj, &ui_font_roboto_med_16, LV_PART_MAIN | LV_STATE_DEFAULT);
             lv_label_set_text(obj, "");
@@ -347,7 +347,7 @@ void create_screen_main() {
             // ha_lbl_house_power
             lv_obj_t *obj = lv_label_create(parent_obj);
             objects.ha_lbl_house_power = obj;
-            lv_obj_set_pos(obj, 367, 167);
+            lv_obj_set_pos(obj, 369, 168);
             lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
             lv_obj_set_style_text_font(obj, &ui_font_roboto_med_14, LV_PART_MAIN | LV_STATE_DEFAULT);
             lv_label_set_text(obj, "");
@@ -356,7 +356,7 @@ void create_screen_main() {
             // ha_lbl_pv_power
             lv_obj_t *obj = lv_label_create(parent_obj);
             objects.ha_lbl_pv_power = obj;
-            lv_obj_set_pos(obj, 446, 167);
+            lv_obj_set_pos(obj, 450, 167);
             lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
             lv_obj_set_style_text_font(obj, &ui_font_roboto_med_14, LV_PART_MAIN | LV_STATE_DEFAULT);
             lv_label_set_text(obj, "");
@@ -365,7 +365,7 @@ void create_screen_main() {
             // ha_lbl_battery_power
             lv_obj_t *obj = lv_label_create(parent_obj);
             objects.ha_lbl_battery_power = obj;
-            lv_obj_set_pos(obj, 527, 167);
+            lv_obj_set_pos(obj, 521, 167);
             lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
             lv_obj_set_style_text_font(obj, &ui_font_roboto_med_14, LV_PART_MAIN | LV_STATE_DEFAULT);
             lv_label_set_text(obj, "");
@@ -374,7 +374,7 @@ void create_screen_main() {
             // ha_lbl_grid_power
             lv_obj_t *obj = lv_label_create(parent_obj);
             objects.ha_lbl_grid_power = obj;
-            lv_obj_set_pos(obj, 607, 167);
+            lv_obj_set_pos(obj, 612, 168);
             lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
             lv_obj_set_style_text_font(obj, &ui_font_roboto_med_14, LV_PART_MAIN | LV_STATE_DEFAULT);
             lv_label_set_text(obj, "");
