@@ -606,7 +606,7 @@ void ha_client_task(void *pvParameters)
         
         // Fetch current power values (W)
         char house_power[20], pv_power[20], battery_power[20], grid_power[20];
-        char battery_soc[10], grid_connected[10];
+        char battery_soc[20], grid_connected[20];  // Increased size to handle "unavailable"
         
         // House load power
         esp_err_t house_power_err = ha_fetch_entity(ha_url, ha_token, "sensor.deye_sunsynk_sol_ark_x_2_load_power_2",

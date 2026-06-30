@@ -2233,9 +2233,9 @@
             {
               "objID": "c5d31595-4a62-4b45-81c9-cdad01af1a1d",
               "type": "LVGLLabelWidget",
-              "left": 521,
-              "top": 144,
-              "width": 53,
+              "left": 531,
+              "top": 140,
+              "width": 30,
               "height": 18,
               "customInputs": [],
               "customOutputs": [],
@@ -2279,7 +2279,7 @@
               "textType": "expression",
               "longMode": "WRAP",
               "recolor": false,
-              "previewValue": "2.2kWh"
+              "previewValue": "60%"
             },
             {
               "objID": "850644fb-416e-4561-8b85-6e1e44ac9a0b",

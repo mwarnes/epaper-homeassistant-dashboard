@@ -329,7 +329,7 @@ void create_screen_main() {
             // ha_lbl_battery_power_day
             lv_obj_t *obj = lv_label_create(parent_obj);
             objects.ha_lbl_battery_power_day = obj;
-            lv_obj_set_pos(obj, 521, 144);
+            lv_obj_set_pos(obj, 531, 140);
             lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
             lv_obj_set_style_text_font(obj, &ui_font_roboto_med_16, LV_PART_MAIN | LV_STATE_DEFAULT);
             lv_label_set_text(obj, "");
