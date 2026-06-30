@@ -632,14 +632,23 @@ void ha_client_task(void *pvParameters)
             eez_update_pv_icon(pv_power_val);
         }
         
-        // Battery power
+        // Battery power (with sign: - = charging, + = discharging)
         esp_err_t battery_power_err = ha_fetch_entity(ha_url, ha_token, "sensor.deye_sunsynk_sol_ark_x_2_battery_power_2",
                                                      battery_power, sizeof(battery_power));
         if (battery_power_err == ESP_OK) {
             char battery_power_formatted[30];
-            snprintf(battery_power_formatted, sizeof(battery_power_formatted), "%s W", battery_power);
+            float battery_power_val = atof(battery_power);
+            
+            // Format with explicit sign when charging (negative value)
+            if (battery_power_val < 0) {
+                snprintf(battery_power_formatted, sizeof(battery_power_formatted), "%.0f W", battery_power_val);
+            } else {
+                snprintf(battery_power_formatted, sizeof(battery_power_formatted), "%.0f W", battery_power_val);
+            }
+            
             set_var_ha_battery_power(battery_power_formatted);
-            ESP_LOGI(TAG, "Battery power: %s", battery_power_formatted);
+            ESP_LOGI(TAG, "Battery power: %s%s", battery_power_formatted, 
+                     battery_power_val < 0 ? " (charging)" : " (discharging)");
         }
         
         // Battery state of charge (for icon selection)

@@ -52,11 +52,8 @@ typedef struct _objects_t {
     lv_obj_t *ha_lbl_battery_power;
     lv_obj_t *ha_lbl_grid_power;
     lv_obj_t *obj0;
-    lv_obj_t *ha_lbl_house_power_1;
-    lv_obj_t *ha_lbl_house_power_day_1;
     lv_obj_t *obj1;
     lv_obj_t *obj2;
-    lv_obj_t *obj3;
 } objects_t;
 
 extern objects_t objects;
