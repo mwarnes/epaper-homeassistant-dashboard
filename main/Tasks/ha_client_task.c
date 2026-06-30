@@ -676,20 +676,24 @@ void ha_client_task(void *pvParameters)
             ESP_LOGI(TAG, "Grid power: %s", grid_power_formatted);
         }
         
-        // Grid connected status
-        esp_err_t grid_connected_err = ha_fetch_entity(ha_url, ha_token, "binary_sensor.grid_connected",
-                                                      grid_connected, sizeof(grid_connected));
-        if (grid_connected_err == ESP_OK) {
-            bool is_connected = (strcmp(grid_connected, "on") == 0);
+        // Grid outage status (inverted logic: on = outage active, off = grid connected)
+        esp_err_t grid_status_err = ha_fetch_entity(ha_url, ha_token, "input_boolean.grid_outage_active",
+                                                   grid_connected, sizeof(grid_connected));
+        if (grid_status_err == ESP_OK) {
+            // Inverted logic: "on" = outage active (disconnected), "off" = grid connected
+            bool outage_active = (strcmp(grid_connected, "on") == 0);
+            bool is_connected = !outage_active;  // Invert: outage active means NOT connected
             eez_update_grid_icon(is_connected);
-            ESP_LOGI(TAG, "Grid connected: %s", is_connected ? "YES" : "NO");
+            ESP_LOGI(TAG, "Grid status: %s (outage_active=%s)", 
+                     is_connected ? "CONNECTED" : "DISCONNECTED",
+                     outage_active ? "true" : "false");
         }
         
         // ============================================
         // Fetch Daily Energy Data (kWh)
         // ============================================
         
-        char house_energy[20], pv_energy[20], battery_energy[20], grid_energy[20];
+        char house_energy[20], pv_energy[20], grid_energy[20];
         
         // House daily consumption
         esp_err_t house_energy_err = ha_fetch_entity(ha_url, ha_token, "sensor.load_energy_daily",
@@ -711,8 +715,8 @@ void ha_client_task(void *pvParameters)
             ESP_LOGI(TAG, "PV energy today: %s", pv_energy_formatted);
         }
         
-        // Battery SOC is displayed instead of daily energy (see above where SOC is fetched)
-        // The ha_battery_power_day variable now shows "65%" instead of "5.2 kWh"
+        // Battery SOC percentage is displayed instead of daily energy
+        // (Already set above when SOC was fetched: ha_battery_power_day = "65%")
         
         // Grid daily energy (using import for display)
         esp_err_t grid_energy_err = ha_fetch_entity(ha_url, ha_token, "sensor.grid_energy_daily",

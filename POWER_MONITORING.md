@@ -25,8 +25,10 @@ The dashboard now displays real-time power usage, solar generation, battery stat
 - **Entity Source**:
   - Power: `sensor.deye_sunsynk_sol_ark_x_2_inverter_2_grid_power_2`
   - Daily: `sensor.grid_energy_daily`
-  - Status: `binary_sensor.grid_connected`
-- **Logic**: Icon switches automatically based on grid connection status
+  - Status: `input_boolean.grid_outage_active` (inverted logic)
+- **Logic**: Icon switches automatically based on grid outage status
+  - `input_boolean.grid_outage_active` = `on` → Grid DOWN (show grid_off icon)
+  - `input_boolean.grid_outage_active` = `off` → Grid UP (show grid_on icon)
 
 ### 3. **Battery Power** (Dynamic Icon - 10 Levels)
 - **Icons**: `img_battery_power_10` through `img_battery_power_100`
@@ -159,7 +161,7 @@ Every 60 seconds:
 - `sensor.grid_energy_daily` - Daily grid import
 
 ### Status Sensors
-- `binary_sensor.grid_connected` - Grid connection status
+- `input_boolean.grid_outage_active` - Grid outage status (inverted: on = outage, off = connected)
 
 ## Implementation Notes
 
@@ -194,7 +196,7 @@ I (xxx) ha_client_task: Battery SOC: 85%
 I (xxx) eez_vars: Battery icon updated: SOC=85%
 I (xxx) eez_vars: HA variable updated: battery_power_day = '85%'
 I (xxx) ha_client_task: Grid power: -1500 W
-I (xxx) ha_client_task: Grid connected: YES
+I (xxx) ha_client_task: Grid status: CONNECTED (outage_active=false)
 I (xxx) eez_vars: Grid icon: ON (connected)
 I (xxx) ha_client_task: House energy today: 12.5 kWh
 I (xxx) ha_client_task: PV energy today: 28.3 kWh
