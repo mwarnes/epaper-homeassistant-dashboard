@@ -9,6 +9,11 @@ void eez_update_ha_icon(bool connected);    // Update HA icon image
 void eez_update_weather_icon(void);         // Update current weather icon (large 128x128)
 void eez_update_forecast_icons(void);       // Update 5-day forecast icons (small 48x48)
 
+// Power & Energy icon update functions
+void eez_update_grid_icon(bool grid_connected);     // Update grid icon (on/off)
+void eez_update_battery_icon(int soc);              // Update battery icon (10-100%)
+void eez_update_pv_icon(float pv_power_w);          // Update PV icon (day/night based on power)
+
 // Helper functions (call with LVGL lock after ui_tick())
 void eez_center_date_label(void);           // Center date label after text update
 
@@ -28,6 +33,26 @@ const char *get_var_ha_forecast_day4_name(void);
 const char *get_var_ha_forecast_day5_temp(void);
 const char *get_var_ha_forecast_day5_condition(void);
 const char *get_var_ha_forecast_day5_name(void);
+
+// Power & Energy Getters (read access)
+const char *get_var_ha_house_power(void);
+const char *get_var_ha_house_power_day(void);
+const char *get_var_ha_pv_power(void);
+const char *get_var_ha_pv_power_day(void);
+const char *get_var_ha_battery_power(void);
+const char *get_var_ha_battery_power_day(void);
+const char *get_var_ha_grid_power(void);
+const char *get_var_ha_grid_power_day(void);
+
+// Power & Energy Setters (write access from HA client task)
+void set_var_ha_house_power(const char *value);
+void set_var_ha_house_power_day(const char *value);
+void set_var_ha_pv_power(const char *value);
+void set_var_ha_pv_power_day(const char *value);
+void set_var_ha_battery_power(const char *value);
+void set_var_ha_battery_power_day(const char *value);
+void set_var_ha_grid_power(const char *value);
+void set_var_ha_grid_power_day(const char *value);
 
 // 5-Day Forecast Setters (write access from HA client task)
 void set_var_ha_forecast_day1_temp(const char *value);

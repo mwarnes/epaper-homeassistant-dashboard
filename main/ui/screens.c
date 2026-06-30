@@ -253,7 +253,7 @@ void create_screen_main() {
         }
         {
             lv_obj_t *obj = lv_label_create(parent_obj);
-            objects.obj0 = obj;
+            objects.obj1 = obj;
             lv_obj_set_pos(obj, 180, 107);
             lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
             lv_obj_set_style_text_font(obj, &ui_font_roboto_med_16, LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -261,7 +261,7 @@ void create_screen_main() {
         }
         {
             lv_obj_t *obj = lv_label_create(parent_obj);
-            objects.obj1 = obj;
+            objects.obj2 = obj;
             lv_obj_set_pos(obj, 180, 131);
             lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
             lv_obj_set_style_text_font(obj, &ui_font_roboto_med_16, LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -269,17 +269,157 @@ void create_screen_main() {
         }
         {
             lv_obj_t *obj = lv_label_create(parent_obj);
-            objects.obj2 = obj;
+            objects.obj3 = obj;
             lv_obj_set_pos(obj, 183, 155);
             lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
             lv_obj_set_style_text_font(obj, &ui_font_roboto_med_16, LV_PART_MAIN | LV_STATE_DEFAULT);
             lv_label_set_text(obj, "");
         }
         {
+            // img_grid_power
             lv_obj_t *obj = lv_image_create(parent_obj);
-            lv_obj_set_pos(obj, 368, 77);
+            objects.img_grid_power = obj;
+            lv_obj_set_pos(obj, 601, 93);
             lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
             lv_image_set_src(obj, &img_grid_on);
+        }
+        {
+            // img_house_power
+            lv_obj_t *obj = lv_image_create(parent_obj);
+            objects.img_house_power = obj;
+            lv_obj_set_pos(obj, 362, 96);
+            lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
+            lv_image_set_src(obj, &img_house_power);
+        }
+        {
+            // img_pv_power
+            lv_obj_t *obj = lv_image_create(parent_obj);
+            objects.img_pv_power = obj;
+            lv_obj_set_pos(obj, 440, 93);
+            lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
+            lv_image_set_src(obj, &img_solar_power_day);
+        }
+        {
+            // img_battery_power
+            lv_obj_t *obj = lv_image_create(parent_obj);
+            objects.img_battery_power = obj;
+            lv_obj_set_pos(obj, 521, 93);
+            lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
+            lv_image_set_src(obj, &img_battery_power_30);
+        }
+        {
+            // ha_lbl_house_power_day
+            lv_obj_t *obj = lv_label_create(parent_obj);
+            objects.ha_lbl_house_power_day = obj;
+            lv_obj_set_pos(obj, 367, 164);
+            lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
+            lv_obj_set_style_text_font(obj, &ui_font_roboto_med_16, LV_PART_MAIN | LV_STATE_DEFAULT);
+            lv_label_set_text(obj, "");
+        }
+        {
+            // ha_lbl_pv_power_day
+            lv_obj_t *obj = lv_label_create(parent_obj);
+            objects.ha_lbl_pv_power_day = obj;
+            lv_obj_set_pos(obj, 446, 164);
+            lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
+            lv_obj_set_style_text_font(obj, &ui_font_roboto_med_16, LV_PART_MAIN | LV_STATE_DEFAULT);
+            lv_label_set_text(obj, "");
+        }
+        {
+            // ha_lbl_battery_power_day
+            lv_obj_t *obj = lv_label_create(parent_obj);
+            objects.ha_lbl_battery_power_day = obj;
+            lv_obj_set_pos(obj, 527, 164);
+            lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
+            lv_obj_set_style_text_font(obj, &ui_font_roboto_med_16, LV_PART_MAIN | LV_STATE_DEFAULT);
+            lv_label_set_text(obj, "");
+        }
+        {
+            // ha_lbl_grid_power_day
+            lv_obj_t *obj = lv_label_create(parent_obj);
+            objects.ha_lbl_grid_power_day = obj;
+            lv_obj_set_pos(obj, 607, 164);
+            lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
+            lv_obj_set_style_text_font(obj, &ui_font_roboto_med_16, LV_PART_MAIN | LV_STATE_DEFAULT);
+            lv_label_set_text(obj, "");
+        }
+        {
+            // ha_lbl_house_power
+            lv_obj_t *obj = lv_label_create(parent_obj);
+            objects.ha_lbl_house_power = obj;
+            lv_obj_set_pos(obj, 367, 187);
+            lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
+            lv_obj_set_style_text_font(obj, &ui_font_roboto_med_14, LV_PART_MAIN | LV_STATE_DEFAULT);
+            lv_label_set_text(obj, "");
+        }
+        {
+            // ha_lbl_pv_power
+            lv_obj_t *obj = lv_label_create(parent_obj);
+            objects.ha_lbl_pv_power = obj;
+            lv_obj_set_pos(obj, 446, 187);
+            lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
+            lv_obj_set_style_text_font(obj, &ui_font_roboto_med_14, LV_PART_MAIN | LV_STATE_DEFAULT);
+            lv_label_set_text(obj, "");
+        }
+        {
+            // ha_lbl_battery_power
+            lv_obj_t *obj = lv_label_create(parent_obj);
+            objects.ha_lbl_battery_power = obj;
+            lv_obj_set_pos(obj, 527, 187);
+            lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
+            lv_obj_set_style_text_font(obj, &ui_font_roboto_med_14, LV_PART_MAIN | LV_STATE_DEFAULT);
+            lv_label_set_text(obj, "");
+        }
+        {
+            // ha_lbl_grid_power
+            lv_obj_t *obj = lv_label_create(parent_obj);
+            objects.ha_lbl_grid_power = obj;
+            lv_obj_set_pos(obj, 607, 187);
+            lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
+            lv_obj_set_style_text_font(obj, &ui_font_roboto_med_14, LV_PART_MAIN | LV_STATE_DEFAULT);
+            lv_label_set_text(obj, "");
+        }
+        {
+            lv_obj_t *obj = lv_obj_create(parent_obj);
+            objects.obj0 = obj;
+            lv_obj_set_pos(obj, 360, 320);
+            lv_obj_set_size(obj, 80, 128);
+            lv_obj_set_style_pad_left(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
+            lv_obj_set_style_pad_top(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
+            lv_obj_set_style_pad_right(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
+            lv_obj_set_style_pad_bottom(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
+            lv_obj_set_style_bg_opa(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
+            lv_obj_set_style_radius(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
+            lv_obj_set_style_border_color(obj, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
+            lv_obj_set_style_border_width(obj, 6, LV_PART_MAIN | LV_STATE_DEFAULT);
+            {
+                lv_obj_t *parent_obj = obj;
+                {
+                    lv_obj_t *obj = lv_image_create(parent_obj);
+                    lv_obj_set_pos(obj, 3, 3);
+                    lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
+                    lv_image_set_src(obj, &img_house_power);
+                }
+                {
+                    // ha_lbl_house_power_1
+                    lv_obj_t *obj = lv_label_create(parent_obj);
+                    objects.ha_lbl_house_power_1 = obj;
+                    lv_obj_set_pos(obj, 13, 94);
+                    lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
+                    lv_obj_set_style_text_font(obj, &ui_font_roboto_med_14, LV_PART_MAIN | LV_STATE_DEFAULT);
+                    lv_label_set_text(obj, "");
+                }
+            }
+        }
+        {
+            // ha_lbl_house_power_day_1
+            lv_obj_t *obj = lv_label_create(parent_obj);
+            objects.ha_lbl_house_power_day_1 = obj;
+            lv_obj_set_pos(obj, 374, 393);
+            lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
+            lv_obj_set_style_text_font(obj, &ui_font_roboto_med_16, LV_PART_MAIN | LV_STATE_DEFAULT);
+            lv_obj_set_style_layout(obj, LV_LAYOUT_FLEX, LV_PART_MAIN | LV_STATE_DEFAULT);
+            lv_label_set_text(obj, "");
         }
     }
     
@@ -415,15 +555,6 @@ void tick_screen_main() {
     }
     {
         const char *new_val = get_var_ha_wind();
-        const char *cur_val = lv_label_get_text(objects.obj0);
-        if (strcmp(new_val, cur_val) != 0) {
-            tick_value_change_obj = objects.obj0;
-            lv_label_set_text(objects.obj0, new_val);
-            tick_value_change_obj = NULL;
-        }
-    }
-    {
-        const char *new_val = get_var_ha_humidity();
         const char *cur_val = lv_label_get_text(objects.obj1);
         if (strcmp(new_val, cur_val) != 0) {
             tick_value_change_obj = objects.obj1;
@@ -432,11 +563,110 @@ void tick_screen_main() {
         }
     }
     {
-        const char *new_val = get_var_ha_air_quality_pm25();
+        const char *new_val = get_var_ha_humidity();
         const char *cur_val = lv_label_get_text(objects.obj2);
         if (strcmp(new_val, cur_val) != 0) {
             tick_value_change_obj = objects.obj2;
             lv_label_set_text(objects.obj2, new_val);
+            tick_value_change_obj = NULL;
+        }
+    }
+    {
+        const char *new_val = get_var_ha_air_quality_pm25();
+        const char *cur_val = lv_label_get_text(objects.obj3);
+        if (strcmp(new_val, cur_val) != 0) {
+            tick_value_change_obj = objects.obj3;
+            lv_label_set_text(objects.obj3, new_val);
+            tick_value_change_obj = NULL;
+        }
+    }
+    {
+        const char *new_val = get_var_ha_house_power_day();
+        const char *cur_val = lv_label_get_text(objects.ha_lbl_house_power_day);
+        if (strcmp(new_val, cur_val) != 0) {
+            tick_value_change_obj = objects.ha_lbl_house_power_day;
+            lv_label_set_text(objects.ha_lbl_house_power_day, new_val);
+            tick_value_change_obj = NULL;
+        }
+    }
+    {
+        const char *new_val = get_var_ha_pv_power_day();
+        const char *cur_val = lv_label_get_text(objects.ha_lbl_pv_power_day);
+        if (strcmp(new_val, cur_val) != 0) {
+            tick_value_change_obj = objects.ha_lbl_pv_power_day;
+            lv_label_set_text(objects.ha_lbl_pv_power_day, new_val);
+            tick_value_change_obj = NULL;
+        }
+    }
+    {
+        const char *new_val = get_var_ha_battery_power_day();
+        const char *cur_val = lv_label_get_text(objects.ha_lbl_battery_power_day);
+        if (strcmp(new_val, cur_val) != 0) {
+            tick_value_change_obj = objects.ha_lbl_battery_power_day;
+            lv_label_set_text(objects.ha_lbl_battery_power_day, new_val);
+            tick_value_change_obj = NULL;
+        }
+    }
+    {
+        const char *new_val = get_var_ha_grid_power_day();
+        const char *cur_val = lv_label_get_text(objects.ha_lbl_grid_power_day);
+        if (strcmp(new_val, cur_val) != 0) {
+            tick_value_change_obj = objects.ha_lbl_grid_power_day;
+            lv_label_set_text(objects.ha_lbl_grid_power_day, new_val);
+            tick_value_change_obj = NULL;
+        }
+    }
+    {
+        const char *new_val = get_var_ha_house_power();
+        const char *cur_val = lv_label_get_text(objects.ha_lbl_house_power);
+        if (strcmp(new_val, cur_val) != 0) {
+            tick_value_change_obj = objects.ha_lbl_house_power;
+            lv_label_set_text(objects.ha_lbl_house_power, new_val);
+            tick_value_change_obj = NULL;
+        }
+    }
+    {
+        const char *new_val = get_var_ha_pv_power();
+        const char *cur_val = lv_label_get_text(objects.ha_lbl_pv_power);
+        if (strcmp(new_val, cur_val) != 0) {
+            tick_value_change_obj = objects.ha_lbl_pv_power;
+            lv_label_set_text(objects.ha_lbl_pv_power, new_val);
+            tick_value_change_obj = NULL;
+        }
+    }
+    {
+        const char *new_val = get_var_ha_battery_power();
+        const char *cur_val = lv_label_get_text(objects.ha_lbl_battery_power);
+        if (strcmp(new_val, cur_val) != 0) {
+            tick_value_change_obj = objects.ha_lbl_battery_power;
+            lv_label_set_text(objects.ha_lbl_battery_power, new_val);
+            tick_value_change_obj = NULL;
+        }
+    }
+    {
+        const char *new_val = get_var_ha_grid_power();
+        const char *cur_val = lv_label_get_text(objects.ha_lbl_grid_power);
+        if (strcmp(new_val, cur_val) != 0) {
+            tick_value_change_obj = objects.ha_lbl_grid_power;
+            lv_label_set_text(objects.ha_lbl_grid_power, new_val);
+            tick_value_change_obj = NULL;
+        }
+    }
+    {
+        const char *new_val = get_var_ha_house_power();
+        const char *cur_val = lv_label_get_text(objects.ha_lbl_house_power_1);
+        if (strcmp(new_val, cur_val) != 0) {
+            tick_value_change_obj = objects.ha_lbl_house_power_1;
+            lv_label_set_text(objects.ha_lbl_house_power_1, new_val);
+            tick_value_change_obj = NULL;
+        }
+    }
+    {
+        const char *new_val = get_var_ha_house_power_day();
+        const char *cur_val = lv_label_get_text(objects.ha_lbl_house_power_day_1);
+        if (strcmp(new_val, cur_val) != 0) {
+            tick_value_change_obj = objects.ha_lbl_house_power_day_1;
+            lv_label_set_text(objects.ha_lbl_house_power_day_1, new_val);
             tick_value_change_obj = NULL;
         }
     }

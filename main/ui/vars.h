@@ -34,7 +34,15 @@ enum FlowGlobalVariables {
     FLOW_GLOBAL_VARIABLE_HA_FORECAST_DAY5_NAME = 18,
     FLOW_GLOBAL_VARIABLE_HA_WIND = 19,
     FLOW_GLOBAL_VARIABLE_HA_HUMIDITY = 20,
-    FLOW_GLOBAL_VARIABLE_HA_AIR_QUALITY_PM25 = 21
+    FLOW_GLOBAL_VARIABLE_HA_AIR_QUALITY_PM25 = 21,
+    FLOW_GLOBAL_VARIABLE_HA_HOUSE_POWER_DAY = 22,
+    FLOW_GLOBAL_VARIABLE_HA_PV_POWER_DAY = 23,
+    FLOW_GLOBAL_VARIABLE_HA_HOUSE_POWER = 24,
+    FLOW_GLOBAL_VARIABLE_HA_PV_POWER = 25,
+    FLOW_GLOBAL_VARIABLE_HA_BATTERY_POWER_DAY = 26,
+    FLOW_GLOBAL_VARIABLE_HA_BATTERY_POWER = 27,
+    FLOW_GLOBAL_VARIABLE_HA_GRID_POWER_DAY = 28,
+    FLOW_GLOBAL_VARIABLE_HA_GRID_POWER = 29
 };
 
 // Native global variables
@@ -83,6 +91,22 @@ extern const char *get_var_ha_humidity();
 extern void set_var_ha_humidity(const char *value);
 extern const char *get_var_ha_air_quality_pm25();
 extern void set_var_ha_air_quality_pm25(const char *value);
+extern const char *get_var_ha_house_power_day();
+extern void set_var_ha_house_power_day(const char *value);
+extern const char *get_var_ha_pv_power_day();
+extern void set_var_ha_pv_power_day(const char *value);
+extern const char *get_var_ha_house_power();
+extern void set_var_ha_house_power(const char *value);
+extern const char *get_var_ha_pv_power();
+extern void set_var_ha_pv_power(const char *value);
+extern const char *get_var_ha_battery_power_day();
+extern void set_var_ha_battery_power_day(const char *value);
+extern const char *get_var_ha_battery_power();
+extern void set_var_ha_battery_power(const char *value);
+extern const char *get_var_ha_grid_power_day();
+extern void set_var_ha_grid_power_day(const char *value);
+extern const char *get_var_ha_grid_power();
+extern void set_var_ha_grid_power(const char *value);
 
 #ifdef __cplusplus
 }

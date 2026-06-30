@@ -48,6 +48,16 @@ char ha_forecast_day5_temp[50] = { 0 };
 char ha_forecast_day5_condition[50] = { 0 };
 char ha_forecast_day5_name[10] = { 0 };
 
+// Power & Energy Variables
+char ha_house_power[50] = { 0 };          // Current house load in W
+char ha_house_power_day[50] = { 0 };      // Daily house consumption in kWh
+char ha_pv_power[50] = { 0 };             // Current PV generation in W
+char ha_pv_power_day[50] = { 0 };         // Daily PV generation in kWh
+char ha_battery_power[50] = { 0 };        // Current battery power in W (+ charging / - discharging)
+char ha_battery_power_day[50] = { 0 };    // Daily battery energy in kWh
+char ha_grid_power[50] = { 0 };           // Current grid power in W (+ import / - export)
+char ha_grid_power_day[50] = { 0 };       // Daily grid energy in kWh
+
 //
 // HA Variable Getters (read-only access)
 //
@@ -95,6 +105,46 @@ const char *get_var_ha_humidity()
 const char *get_var_ha_air_quality_pm25()
 {
     return ha_air_quality_pm25;
+}
+
+const char *get_var_ha_house_power()
+{
+    return ha_house_power;
+}
+
+const char *get_var_ha_house_power_day()
+{
+    return ha_house_power_day;
+}
+
+const char *get_var_ha_pv_power()
+{
+    return ha_pv_power;
+}
+
+const char *get_var_ha_pv_power_day()
+{
+    return ha_pv_power_day;
+}
+
+const char *get_var_ha_battery_power()
+{
+    return ha_battery_power;
+}
+
+const char *get_var_ha_battery_power_day()
+{
+    return ha_battery_power_day;
+}
+
+const char *get_var_ha_grid_power()
+{
+    return ha_grid_power;
+}
+
+const char *get_var_ha_grid_power_day()
+{
+    return ha_grid_power_day;
 }
 
 //
@@ -188,6 +238,78 @@ void set_var_ha_air_quality_pm25(const char *value)
         strncpy(ha_air_quality_pm25, value, sizeof(ha_air_quality_pm25));
         ha_air_quality_pm25[sizeof(ha_air_quality_pm25) - 1] = 0;
         ESP_LOGD(TAG, "HA variable updated: air_quality_pm25 = '%s'", ha_air_quality_pm25);
+    }
+}
+
+void set_var_ha_house_power(const char *value)
+{
+    if (value) {
+        strncpy(ha_house_power, value, sizeof(ha_house_power));
+        ha_house_power[sizeof(ha_house_power) - 1] = 0;
+        ESP_LOGD(TAG, "HA variable updated: house_power = '%s'", ha_house_power);
+    }
+}
+
+void set_var_ha_house_power_day(const char *value)
+{
+    if (value) {
+        strncpy(ha_house_power_day, value, sizeof(ha_house_power_day));
+        ha_house_power_day[sizeof(ha_house_power_day) - 1] = 0;
+        ESP_LOGD(TAG, "HA variable updated: house_power_day = '%s'", ha_house_power_day);
+    }
+}
+
+void set_var_ha_pv_power(const char *value)
+{
+    if (value) {
+        strncpy(ha_pv_power, value, sizeof(ha_pv_power));
+        ha_pv_power[sizeof(ha_pv_power) - 1] = 0;
+        ESP_LOGD(TAG, "HA variable updated: pv_power = '%s'", ha_pv_power);
+    }
+}
+
+void set_var_ha_pv_power_day(const char *value)
+{
+    if (value) {
+        strncpy(ha_pv_power_day, value, sizeof(ha_pv_power_day));
+        ha_pv_power_day[sizeof(ha_pv_power_day) - 1] = 0;
+        ESP_LOGD(TAG, "HA variable updated: pv_power_day = '%s'", ha_pv_power_day);
+    }
+}
+
+void set_var_ha_battery_power(const char *value)
+{
+    if (value) {
+        strncpy(ha_battery_power, value, sizeof(ha_battery_power));
+        ha_battery_power[sizeof(ha_battery_power) - 1] = 0;
+        ESP_LOGD(TAG, "HA variable updated: battery_power = '%s'", ha_battery_power);
+    }
+}
+
+void set_var_ha_battery_power_day(const char *value)
+{
+    if (value) {
+        strncpy(ha_battery_power_day, value, sizeof(ha_battery_power_day));
+        ha_battery_power_day[sizeof(ha_battery_power_day) - 1] = 0;
+        ESP_LOGD(TAG, "HA variable updated: battery_power_day = '%s'", ha_battery_power_day);
+    }
+}
+
+void set_var_ha_grid_power(const char *value)
+{
+    if (value) {
+        strncpy(ha_grid_power, value, sizeof(ha_grid_power));
+        ha_grid_power[sizeof(ha_grid_power) - 1] = 0;
+        ESP_LOGD(TAG, "HA variable updated: grid_power = '%s'", ha_grid_power);
+    }
+}
+
+void set_var_ha_grid_power_day(const char *value)
+{
+    if (value) {
+        strncpy(ha_grid_power_day, value, sizeof(ha_grid_power_day));
+        ha_grid_power_day[sizeof(ha_grid_power_day) - 1] = 0;
+        ESP_LOGD(TAG, "HA variable updated: grid_power_day = '%s'", ha_grid_power_day);
     }
 }
 
@@ -582,3 +704,72 @@ void eez_center_date_label(void)
 
 // Color cycling removed - caused LVGL deadlocks and memory corruption
 // Dashboard now focuses on displaying HA data reliably
+
+//
+// Power & Energy Icon Update Functions
+// These update dynamic icons based on sensor states
+//
+
+// Update grid icon based on grid connection status
+void eez_update_grid_icon(bool grid_connected)
+{
+    if (objects.img_grid_power) {
+        if (grid_connected) {
+            lv_image_set_src(objects.img_grid_power, &img_grid_on);
+            ESP_LOGD(TAG, "Grid icon: ON (connected)");
+        } else {
+            lv_image_set_src(objects.img_grid_power, &img_grid_off);
+            ESP_LOGD(TAG, "Grid icon: OFF (disconnected)");
+        }
+    }
+}
+
+// Update battery icon based on state of charge (0-100%)
+void eez_update_battery_icon(int soc)
+{
+    if (objects.img_battery_power) {
+        const lv_img_dsc_t *battery_img = &img_battery_power_10;  // Default fallback
+        
+        // Select icon based on SOC (rounded to nearest 10%)
+        if (soc >= 95) {
+            battery_img = &img_battery_power_100;
+        } else if (soc >= 85) {
+            battery_img = &img_battery_power_90;
+        } else if (soc >= 75) {
+            battery_img = &img_battery_power_80;
+        } else if (soc >= 65) {
+            battery_img = &img_battery_power_70;
+        } else if (soc >= 55) {
+            battery_img = &img_battery_power_60;
+        } else if (soc >= 45) {
+            battery_img = &img_battery_power_50;
+        } else if (soc >= 35) {
+            battery_img = &img_battery_power_40;
+        } else if (soc >= 25) {
+            battery_img = &img_battery_power_30;
+        } else if (soc >= 15) {
+            battery_img = &img_battery_power_20;
+        } else {
+            battery_img = &img_battery_power_10;
+        }
+        
+        lv_image_set_src(objects.img_battery_power, battery_img);
+        ESP_LOGD(TAG, "Battery icon updated: SOC=%d%%", soc);
+    }
+}
+
+// Update solar PV icon based on power production
+void eez_update_pv_icon(float pv_power_w)
+{
+    if (objects.img_pv_power) {
+        if (pv_power_w > 0.0f) {
+            // PV producing power - show day icon
+            lv_image_set_src(objects.img_pv_power, &img_solar_power_day);
+            ESP_LOGD(TAG, "PV icon: DAY (%.1fW)", pv_power_w);
+        } else {
+            // No PV power - show night icon
+            lv_image_set_src(objects.img_pv_power, &img_solar_power_night);
+            ESP_LOGD(TAG, "PV icon: NIGHT (0W)");
+        }
+    }
+}

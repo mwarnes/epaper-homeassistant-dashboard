@@ -600,6 +600,124 @@ void ha_client_task(void *pvParameters)
             ESP_LOGW(TAG, "Failed to fetch PM2.5 sensor");
         }
         
+        // ============================================
+        // Fetch Power & Energy Data
+        // ============================================
+        
+        // Fetch current power values (W)
+        char house_power[20], pv_power[20], battery_power[20], grid_power[20];
+        char battery_soc[10], grid_connected[10];
+        
+        // House load power
+        esp_err_t house_power_err = ha_fetch_entity(ha_url, ha_token, "sensor.deye_sunsynk_sol_ark_x_2_load_power_2",
+                                                    house_power, sizeof(house_power));
+        if (house_power_err == ESP_OK) {
+            char house_power_formatted[30];
+            snprintf(house_power_formatted, sizeof(house_power_formatted), "%s W", house_power);
+            set_var_ha_house_power(house_power_formatted);
+            ESP_LOGI(TAG, "House power: %s", house_power_formatted);
+        }
+        
+        // PV generation power
+        esp_err_t pv_power_err = ha_fetch_entity(ha_url, ha_token, "sensor.deye_sunsynk_sol_ark_x_2_pv_power_2",
+                                                pv_power, sizeof(pv_power));
+        if (pv_power_err == ESP_OK) {
+            char pv_power_formatted[30];
+            snprintf(pv_power_formatted, sizeof(pv_power_formatted), "%s W", pv_power);
+            set_var_ha_pv_power(pv_power_formatted);
+            ESP_LOGI(TAG, "PV power: %s", pv_power_formatted);
+            
+            // Update PV icon based on power (day/night)
+            float pv_power_val = atof(pv_power);
+            eez_update_pv_icon(pv_power_val);
+        }
+        
+        // Battery power
+        esp_err_t battery_power_err = ha_fetch_entity(ha_url, ha_token, "sensor.deye_sunsynk_sol_ark_x_2_battery_power_2",
+                                                     battery_power, sizeof(battery_power));
+        if (battery_power_err == ESP_OK) {
+            char battery_power_formatted[30];
+            snprintf(battery_power_formatted, sizeof(battery_power_formatted), "%s W", battery_power);
+            set_var_ha_battery_power(battery_power_formatted);
+            ESP_LOGI(TAG, "Battery power: %s", battery_power_formatted);
+        }
+        
+        // Battery state of charge (for icon selection)
+        esp_err_t battery_soc_err = ha_fetch_entity(ha_url, ha_token, "sensor.deye_sunsynk_sol_ark_x_2_battery_state_of_charge_2",
+                                                   battery_soc, sizeof(battery_soc));
+        if (battery_soc_err == ESP_OK) {
+            int soc = atoi(battery_soc);
+            eez_update_battery_icon(soc);
+            ESP_LOGI(TAG, "Battery SOC: %d%%", soc);
+        }
+        
+        // Grid power
+        esp_err_t grid_power_err = ha_fetch_entity(ha_url, ha_token, "sensor.deye_sunsynk_sol_ark_x_2_inverter_2_grid_power_2",
+                                                  grid_power, sizeof(grid_power));
+        if (grid_power_err == ESP_OK) {
+            char grid_power_formatted[30];
+            snprintf(grid_power_formatted, sizeof(grid_power_formatted), "%s W", grid_power);
+            set_var_ha_grid_power(grid_power_formatted);
+            ESP_LOGI(TAG, "Grid power: %s", grid_power_formatted);
+        }
+        
+        // Grid connected status
+        esp_err_t grid_connected_err = ha_fetch_entity(ha_url, ha_token, "binary_sensor.grid_connected",
+                                                      grid_connected, sizeof(grid_connected));
+        if (grid_connected_err == ESP_OK) {
+            bool is_connected = (strcmp(grid_connected, "on") == 0);
+            eez_update_grid_icon(is_connected);
+            ESP_LOGI(TAG, "Grid connected: %s", is_connected ? "YES" : "NO");
+        }
+        
+        // ============================================
+        // Fetch Daily Energy Data (kWh)
+        // ============================================
+        
+        char house_energy[20], pv_energy[20], battery_energy[20], grid_energy[20];
+        
+        // House daily consumption
+        esp_err_t house_energy_err = ha_fetch_entity(ha_url, ha_token, "sensor.load_energy_daily",
+                                                     house_energy, sizeof(house_energy));
+        if (house_energy_err == ESP_OK) {
+            char house_energy_formatted[30];
+            snprintf(house_energy_formatted, sizeof(house_energy_formatted), "%s kWh", house_energy);
+            set_var_ha_house_power_day(house_energy_formatted);
+            ESP_LOGI(TAG, "House energy today: %s", house_energy_formatted);
+        }
+        
+        // PV daily generation
+        esp_err_t pv_energy_err = ha_fetch_entity(ha_url, ha_token, "sensor.pv_energy_daily",
+                                                 pv_energy, sizeof(pv_energy));
+        if (pv_energy_err == ESP_OK) {
+            char pv_energy_formatted[30];
+            snprintf(pv_energy_formatted, sizeof(pv_energy_formatted), "%s kWh", pv_energy);
+            set_var_ha_pv_power_day(pv_energy_formatted);
+            ESP_LOGI(TAG, "PV energy today: %s", pv_energy_formatted);
+        }
+        
+        // Battery daily energy (using discharge for display)
+        esp_err_t battery_energy_err = ha_fetch_entity(ha_url, ha_token, "sensor.battery_energy_out_daily",
+                                                       battery_energy, sizeof(battery_energy));
+        if (battery_energy_err == ESP_OK) {
+            char battery_energy_formatted[30];
+            snprintf(battery_energy_formatted, sizeof(battery_energy_formatted), "%s kWh", battery_energy);
+            set_var_ha_battery_power_day(battery_energy_formatted);
+            ESP_LOGI(TAG, "Battery energy today: %s", battery_energy_formatted);
+        }
+        
+        // Grid daily energy (using import for display)
+        esp_err_t grid_energy_err = ha_fetch_entity(ha_url, ha_token, "sensor.grid_energy_daily",
+                                                   grid_energy, sizeof(grid_energy));
+        if (grid_energy_err == ESP_OK) {
+            char grid_energy_formatted[30];
+            snprintf(grid_energy_formatted, sizeof(grid_energy_formatted), "%s kWh", grid_energy);
+            set_var_ha_grid_power_day(grid_energy_formatted);
+            ESP_LOGI(TAG, "Grid energy today: %s", grid_energy_formatted);
+        }
+        
+        ESP_LOGI(TAG, "Power & energy data updated");
+        
         // Update shared state
         if (xSemaphoreTake(dashboard_state_mutex, portMAX_DELAY) == pdTRUE) {
             if (datetime_err == ESP_OK && strlen(date_str) > 0 && strlen(time_str) > 0) {

@@ -307,6 +307,78 @@
         "defaultValue": "\"\"",
         "persistent": false,
         "native": false
+      },
+      {
+        "objID": "0a7a822e-4455-4dc1-f9d6-f2a041565317",
+        "name": "ha_house_power_day",
+        "type": "string",
+        "size": null,
+        "defaultValue": "\"\"",
+        "persistent": false,
+        "native": false
+      },
+      {
+        "objID": "8097d5de-f82d-48ed-eaa5-2f5b64d70dee",
+        "name": "ha_pv_power_day",
+        "type": "string",
+        "size": null,
+        "defaultValue": "\"\"",
+        "persistent": false,
+        "native": false
+      },
+      {
+        "objID": "0f22197a-d07e-488b-b642-699de59b1a08",
+        "name": "ha_house_power",
+        "type": "string",
+        "size": null,
+        "defaultValue": "\"\"",
+        "persistent": false,
+        "native": false
+      },
+      {
+        "objID": "4479da89-5f97-478d-c483-63169bea59a4",
+        "name": "ha_pv_power",
+        "type": "string",
+        "size": null,
+        "defaultValue": "\"\"",
+        "persistent": false,
+        "native": false
+      },
+      {
+        "objID": "2f9b37c6-28df-46ec-f15f-4bcf708b0b27",
+        "name": "ha_battery_power_day",
+        "type": "string",
+        "size": null,
+        "defaultValue": "\"\"",
+        "persistent": false,
+        "native": false
+      },
+      {
+        "objID": "924b48c6-76a4-4a0b-d21e-30e44b342c56",
+        "name": "ha_battery_power",
+        "type": "string",
+        "size": null,
+        "defaultValue": "\"\"",
+        "persistent": false,
+        "native": false
+      },
+      {
+        "objID": "37630d8f-1b3f-4e59-f733-767c4102ef5c",
+        "name": "ha_grid_power_day",
+        "type": "string",
+        "size": null,
+        "defaultValue": "\"\"",
+        "persistent": false,
+        "native": false
+      },
+      {
+        "objID": "4bb7ec65-ecec-4601-f405-b5e7c12007e7",
+        "name": "ha_grid_power",
+        "type": "string",
+        "size": null,
+        "defaultValue": "\"\"",
+        "persistent": false,
+        "native": false
       }
     ],
     "structures": [],
@@ -1859,10 +1931,10 @@
             {
               "objID": "48990e33-9562-4e33-83b6-63e76f39dd1d",
               "type": "LVGLImageWidget",
-              "left": 368,
-              "top": 77,
-              "width": 96,
-              "height": 96,
+              "left": 601,
+              "top": 93,
+              "width": 64,
+              "height": 64,
               "customInputs": [],
               "customOutputs": [],
               "style": {
@@ -1873,6 +1945,7 @@
               },
               "timeline": [],
               "eventHandlers": [],
+              "identifier": "img_grid_power",
               "leftUnit": "px",
               "topUnit": "px",
               "widthUnit": "content",
@@ -1904,6 +1977,764 @@
               "value": 0,
               "valueType": "literal",
               "previewValue": 0
+            },
+            {
+              "objID": "7a137058-6766-418d-fdba-3963cafeedc1",
+              "type": "LVGLImageWidget",
+              "left": 362,
+              "top": 96,
+              "width": 64,
+              "height": 64,
+              "customInputs": [],
+              "customOutputs": [],
+              "style": {
+                "objID": "33ae1af6-0a8c-4e50-9a31-d15b7aa15eb2",
+                "useStyle": "default",
+                "conditionalStyles": [],
+                "childStyles": []
+              },
+              "timeline": [],
+              "eventHandlers": [],
+              "identifier": "img_house_power",
+              "leftUnit": "px",
+              "topUnit": "px",
+              "widthUnit": "content",
+              "heightUnit": "content",
+              "children": [],
+              "widgetFlags": "ADV_HITTEST|CLICK_FOCUSABLE|GESTURE_BUBBLE|PRESS_LOCK|SCROLLABLE|SCROLL_CHAIN_HOR|SCROLL_CHAIN_VER|SCROLL_ELASTIC|SCROLL_MOMENTUM|SCROLL_WITH_ARROW|SNAPPABLE",
+              "hiddenFlagType": "literal",
+              "clickableFlagType": "literal",
+              "flagScrollbarMode": "",
+              "flagScrollDirection": "",
+              "scrollSnapX": "",
+              "scrollSnapY": "",
+              "checkedStateType": "literal",
+              "disabledStateType": "literal",
+              "states": "",
+              "localStyles": {
+                "objID": "d33c6e8d-842f-47d5-ead1-8675b65e6ff2"
+              },
+              "group": "",
+              "groupIndex": 0,
+              "image": "house_power",
+              "setPivot": false,
+              "pivotX": 0,
+              "pivotY": 0,
+              "zoom": 256,
+              "angle": 0,
+              "innerAlign": "CENTER",
+              "sizeMode": "VIRTUAL",
+              "value": 0,
+              "valueType": "literal",
+              "previewValue": 0
+            },
+            {
+              "objID": "e16ccac3-b8f8-4d2c-ce22-0c2f5d4bd1b1",
+              "type": "LVGLImageWidget",
+              "left": 440,
+              "top": 93,
+              "width": 64,
+              "height": 64,
+              "customInputs": [],
+              "customOutputs": [],
+              "style": {
+                "objID": "1e493c8e-ae2b-4727-aa18-fb51ddaeeede",
+                "useStyle": "default",
+                "conditionalStyles": [],
+                "childStyles": []
+              },
+              "timeline": [],
+              "eventHandlers": [],
+              "identifier": "img_pv_power",
+              "leftUnit": "px",
+              "topUnit": "px",
+              "widthUnit": "content",
+              "heightUnit": "content",
+              "children": [],
+              "widgetFlags": "ADV_HITTEST|CLICK_FOCUSABLE|GESTURE_BUBBLE|PRESS_LOCK|SCROLLABLE|SCROLL_CHAIN_HOR|SCROLL_CHAIN_VER|SCROLL_ELASTIC|SCROLL_MOMENTUM|SCROLL_WITH_ARROW|SNAPPABLE",
+              "hiddenFlagType": "literal",
+              "clickableFlagType": "literal",
+              "flagScrollbarMode": "",
+              "flagScrollDirection": "",
+              "scrollSnapX": "",
+              "scrollSnapY": "",
+              "checkedStateType": "literal",
+              "disabledStateType": "literal",
+              "states": "",
+              "localStyles": {
+                "objID": "20f0c7f8-01e8-4041-f52c-e400b614614d"
+              },
+              "group": "",
+              "groupIndex": 0,
+              "image": "solar_power_day",
+              "setPivot": false,
+              "pivotX": 0,
+              "pivotY": 0,
+              "zoom": 256,
+              "angle": 0,
+              "innerAlign": "CENTER",
+              "sizeMode": "VIRTUAL",
+              "value": 0,
+              "valueType": "literal",
+              "previewValue": 0
+            },
+            {
+              "objID": "8f7a2420-3b4d-4ff1-8e54-0dcaa5bf2447",
+              "type": "LVGLImageWidget",
+              "left": 521,
+              "top": 93,
+              "width": 64,
+              "height": 64,
+              "customInputs": [],
+              "customOutputs": [],
+              "style": {
+                "objID": "e346394e-1a2a-4f9b-fa13-fee7b2cc5aac",
+                "useStyle": "default",
+                "conditionalStyles": [],
+                "childStyles": []
+              },
+              "timeline": [],
+              "eventHandlers": [],
+              "identifier": "img_battery_power",
+              "leftUnit": "px",
+              "topUnit": "px",
+              "widthUnit": "content",
+              "heightUnit": "content",
+              "children": [],
+              "widgetFlags": "ADV_HITTEST|CLICK_FOCUSABLE|GESTURE_BUBBLE|PRESS_LOCK|SCROLLABLE|SCROLL_CHAIN_HOR|SCROLL_CHAIN_VER|SCROLL_ELASTIC|SCROLL_MOMENTUM|SCROLL_WITH_ARROW|SNAPPABLE",
+              "hiddenFlagType": "literal",
+              "clickableFlagType": "literal",
+              "flagScrollbarMode": "",
+              "flagScrollDirection": "",
+              "scrollSnapX": "",
+              "scrollSnapY": "",
+              "checkedStateType": "literal",
+              "disabledStateType": "literal",
+              "states": "",
+              "localStyles": {
+                "objID": "1ac04dc3-beed-47ef-9cfc-41666eccf6bf"
+              },
+              "group": "",
+              "groupIndex": 0,
+              "image": "battery_power_30",
+              "setPivot": false,
+              "pivotX": 0,
+              "pivotY": 0,
+              "zoom": 256,
+              "angle": 0,
+              "innerAlign": "CENTER",
+              "sizeMode": "VIRTUAL",
+              "value": 0,
+              "valueType": "literal",
+              "previewValue": 0
+            },
+            {
+              "objID": "9b520ea4-586a-4b9c-cb95-0d62cb6c9127",
+              "type": "LVGLLabelWidget",
+              "left": 367,
+              "top": 164,
+              "width": 53,
+              "height": 18,
+              "customInputs": [],
+              "customOutputs": [],
+              "style": {
+                "objID": "067c5959-6775-4fc4-f2e9-056f0874f24b",
+                "useStyle": "default",
+                "conditionalStyles": [],
+                "childStyles": []
+              },
+              "timeline": [],
+              "eventHandlers": [],
+              "identifier": "ha_lbl_house_power_day",
+              "leftUnit": "px",
+              "topUnit": "px",
+              "widthUnit": "content",
+              "heightUnit": "content",
+              "children": [],
+              "widgetFlags": "CLICK_FOCUSABLE|GESTURE_BUBBLE|PRESS_LOCK|SCROLLABLE|SCROLL_CHAIN_HOR|SCROLL_CHAIN_VER|SCROLL_ELASTIC|SCROLL_MOMENTUM|SCROLL_WITH_ARROW|SNAPPABLE",
+              "hiddenFlagType": "literal",
+              "clickableFlagType": "literal",
+              "flagScrollbarMode": "",
+              "flagScrollDirection": "",
+              "scrollSnapX": "",
+              "scrollSnapY": "",
+              "checkedStateType": "literal",
+              "disabledStateType": "literal",
+              "states": "",
+              "localStyles": {
+                "objID": "c6229c25-bde2-44e7-b61e-64f1ad7c3027",
+                "definition": {
+                  "MAIN": {
+                    "DEFAULT": {
+                      "text_font": "ROBOTO_MED_16"
+                    }
+                  }
+                }
+              },
+              "group": "",
+              "groupIndex": 0,
+              "text": "ha_house_power_day",
+              "textType": "expression",
+              "longMode": "WRAP",
+              "recolor": false,
+              "previewValue": "1.2kWh"
+            },
+            {
+              "objID": "050381b8-16f9-4f9c-885c-92ad4c28b712",
+              "type": "LVGLLabelWidget",
+              "left": 446,
+              "top": 164,
+              "width": 53,
+              "height": 18,
+              "customInputs": [],
+              "customOutputs": [],
+              "style": {
+                "objID": "72a7425f-21f2-4caf-810a-548aae3516e1",
+                "useStyle": "default",
+                "conditionalStyles": [],
+                "childStyles": []
+              },
+              "timeline": [],
+              "eventHandlers": [],
+              "identifier": "ha_lbl_pv_power_day",
+              "leftUnit": "px",
+              "topUnit": "px",
+              "widthUnit": "content",
+              "heightUnit": "content",
+              "children": [],
+              "widgetFlags": "CLICK_FOCUSABLE|GESTURE_BUBBLE|PRESS_LOCK|SCROLLABLE|SCROLL_CHAIN_HOR|SCROLL_CHAIN_VER|SCROLL_ELASTIC|SCROLL_MOMENTUM|SCROLL_WITH_ARROW|SNAPPABLE",
+              "hiddenFlagType": "literal",
+              "clickableFlagType": "literal",
+              "flagScrollbarMode": "",
+              "flagScrollDirection": "",
+              "scrollSnapX": "",
+              "scrollSnapY": "",
+              "checkedStateType": "literal",
+              "disabledStateType": "literal",
+              "states": "",
+              "localStyles": {
+                "objID": "d2fd79cb-b22e-428b-ebda-91ed0684338f",
+                "definition": {
+                  "MAIN": {
+                    "DEFAULT": {
+                      "text_font": "ROBOTO_MED_16"
+                    }
+                  }
+                }
+              },
+              "group": "",
+              "groupIndex": 0,
+              "text": "ha_pv_power_day",
+              "textType": "expression",
+              "longMode": "WRAP",
+              "recolor": false,
+              "previewValue": "3.6kWh"
+            },
+            {
+              "objID": "c5d31595-4a62-4b45-81c9-cdad01af1a1d",
+              "type": "LVGLLabelWidget",
+              "left": 527,
+              "top": 164,
+              "width": 53,
+              "height": 18,
+              "customInputs": [],
+              "customOutputs": [],
+              "style": {
+                "objID": "3cc3b39c-5da2-4326-d178-2c1112839677",
+                "useStyle": "default",
+                "conditionalStyles": [],
+                "childStyles": []
+              },
+              "timeline": [],
+              "eventHandlers": [],
+              "identifier": "ha_lbl_battery_power_day",
+              "leftUnit": "px",
+              "topUnit": "px",
+              "widthUnit": "content",
+              "heightUnit": "content",
+              "children": [],
+              "widgetFlags": "CLICK_FOCUSABLE|GESTURE_BUBBLE|PRESS_LOCK|SCROLLABLE|SCROLL_CHAIN_HOR|SCROLL_CHAIN_VER|SCROLL_ELASTIC|SCROLL_MOMENTUM|SCROLL_WITH_ARROW|SNAPPABLE",
+              "hiddenFlagType": "literal",
+              "clickableFlagType": "literal",
+              "flagScrollbarMode": "",
+              "flagScrollDirection": "",
+              "scrollSnapX": "",
+              "scrollSnapY": "",
+              "checkedStateType": "literal",
+              "disabledStateType": "literal",
+              "states": "",
+              "localStyles": {
+                "objID": "723a0239-3ddf-4746-f912-2a496a8fd7d9",
+                "definition": {
+                  "MAIN": {
+                    "DEFAULT": {
+                      "text_font": "ROBOTO_MED_16"
+                    }
+                  }
+                }
+              },
+              "group": "",
+              "groupIndex": 0,
+              "text": "ha_battery_power_day",
+              "textType": "expression",
+              "longMode": "WRAP",
+              "recolor": false,
+              "previewValue": "2.2kWh"
+            },
+            {
+              "objID": "850644fb-416e-4561-8b85-6e1e44ac9a0b",
+              "type": "LVGLLabelWidget",
+              "left": 607,
+              "top": 164,
+              "width": 53,
+              "height": 18,
+              "customInputs": [],
+              "customOutputs": [],
+              "style": {
+                "objID": "2747823c-bb35-43e7-8cf4-df105c5a1f29",
+                "useStyle": "default",
+                "conditionalStyles": [],
+                "childStyles": []
+              },
+              "timeline": [],
+              "eventHandlers": [],
+              "identifier": "ha_lbl_grid_power_day",
+              "leftUnit": "px",
+              "topUnit": "px",
+              "widthUnit": "content",
+              "heightUnit": "content",
+              "children": [],
+              "widgetFlags": "CLICK_FOCUSABLE|GESTURE_BUBBLE|PRESS_LOCK|SCROLLABLE|SCROLL_CHAIN_HOR|SCROLL_CHAIN_VER|SCROLL_ELASTIC|SCROLL_MOMENTUM|SCROLL_WITH_ARROW|SNAPPABLE",
+              "hiddenFlagType": "literal",
+              "clickableFlagType": "literal",
+              "flagScrollbarMode": "",
+              "flagScrollDirection": "",
+              "scrollSnapX": "",
+              "scrollSnapY": "",
+              "checkedStateType": "literal",
+              "disabledStateType": "literal",
+              "states": "",
+              "localStyles": {
+                "objID": "c5a3a9c1-0d58-46fa-cc59-15cdd75ef1a2",
+                "definition": {
+                  "MAIN": {
+                    "DEFAULT": {
+                      "text_font": "ROBOTO_MED_16"
+                    }
+                  }
+                }
+              },
+              "group": "",
+              "groupIndex": 0,
+              "text": "ha_grid_power_day",
+              "textType": "expression",
+              "longMode": "WRAP",
+              "recolor": false,
+              "previewValue": "0.5kWh"
+            },
+            {
+              "objID": "5b235038-0f17-4e30-a2b8-b4d21041b756",
+              "type": "LVGLLabelWidget",
+              "left": 367,
+              "top": 187,
+              "width": 44,
+              "height": 17,
+              "customInputs": [],
+              "customOutputs": [],
+              "style": {
+                "objID": "c7b023db-fe05-45f5-dafe-ed1bff0dffd1",
+                "useStyle": "default",
+                "conditionalStyles": [],
+                "childStyles": []
+              },
+              "timeline": [],
+              "eventHandlers": [],
+              "identifier": "ha_lbl_house_power",
+              "leftUnit": "px",
+              "topUnit": "px",
+              "widthUnit": "content",
+              "heightUnit": "content",
+              "children": [],
+              "widgetFlags": "CLICK_FOCUSABLE|GESTURE_BUBBLE|PRESS_LOCK|SCROLLABLE|SCROLL_CHAIN_HOR|SCROLL_CHAIN_VER|SCROLL_ELASTIC|SCROLL_MOMENTUM|SCROLL_WITH_ARROW|SNAPPABLE",
+              "hiddenFlagType": "literal",
+              "clickableFlagType": "literal",
+              "flagScrollbarMode": "",
+              "flagScrollDirection": "",
+              "scrollSnapX": "",
+              "scrollSnapY": "",
+              "checkedStateType": "literal",
+              "disabledStateType": "literal",
+              "states": "",
+              "localStyles": {
+                "objID": "9d256cb5-e942-494a-92f4-f5e41414dbae",
+                "definition": {
+                  "MAIN": {
+                    "DEFAULT": {
+                      "text_font": "ROBOTO_MED_14"
+                    }
+                  }
+                }
+              },
+              "group": "",
+              "groupIndex": 0,
+              "text": "ha_house_power",
+              "textType": "expression",
+              "longMode": "WRAP",
+              "recolor": false,
+              "previewValue": "1200W"
+            },
+            {
+              "objID": "84bc3aef-7cef-425f-e0c4-63ff51f5b3f6",
+              "type": "LVGLLabelWidget",
+              "left": 446,
+              "top": 187,
+              "width": 44,
+              "height": 17,
+              "customInputs": [],
+              "customOutputs": [],
+              "style": {
+                "objID": "0d80ec0b-b868-468d-f329-85d64dc1d847",
+                "useStyle": "default",
+                "conditionalStyles": [],
+                "childStyles": []
+              },
+              "timeline": [],
+              "eventHandlers": [],
+              "identifier": "ha_lbl_pv_power",
+              "leftUnit": "px",
+              "topUnit": "px",
+              "widthUnit": "content",
+              "heightUnit": "content",
+              "children": [],
+              "widgetFlags": "CLICK_FOCUSABLE|GESTURE_BUBBLE|PRESS_LOCK|SCROLLABLE|SCROLL_CHAIN_HOR|SCROLL_CHAIN_VER|SCROLL_ELASTIC|SCROLL_MOMENTUM|SCROLL_WITH_ARROW|SNAPPABLE",
+              "hiddenFlagType": "literal",
+              "clickableFlagType": "literal",
+              "flagScrollbarMode": "",
+              "flagScrollDirection": "",
+              "scrollSnapX": "",
+              "scrollSnapY": "",
+              "checkedStateType": "literal",
+              "disabledStateType": "literal",
+              "states": "",
+              "localStyles": {
+                "objID": "1b24dff7-d774-4e5a-b2b9-1c26b7b84789",
+                "definition": {
+                  "MAIN": {
+                    "DEFAULT": {
+                      "text_font": "ROBOTO_MED_14"
+                    }
+                  }
+                }
+              },
+              "group": "",
+              "groupIndex": 0,
+              "text": "ha_pv_power",
+              "textType": "expression",
+              "longMode": "WRAP",
+              "recolor": false,
+              "previewValue": "3400W"
+            },
+            {
+              "objID": "dbde28d8-d4d2-4ce3-876e-18053e2ba40f",
+              "type": "LVGLLabelWidget",
+              "left": 527,
+              "top": 187,
+              "width": 49,
+              "height": 17,
+              "customInputs": [],
+              "customOutputs": [],
+              "style": {
+                "objID": "eec9afd8-5c0e-41ec-c8e4-dc0bf461815d",
+                "useStyle": "default",
+                "conditionalStyles": [],
+                "childStyles": []
+              },
+              "timeline": [],
+              "eventHandlers": [],
+              "identifier": "ha_lbl_battery_power",
+              "leftUnit": "px",
+              "topUnit": "px",
+              "widthUnit": "content",
+              "heightUnit": "content",
+              "children": [],
+              "widgetFlags": "CLICK_FOCUSABLE|GESTURE_BUBBLE|PRESS_LOCK|SCROLLABLE|SCROLL_CHAIN_HOR|SCROLL_CHAIN_VER|SCROLL_ELASTIC|SCROLL_MOMENTUM|SCROLL_WITH_ARROW|SNAPPABLE",
+              "hiddenFlagType": "literal",
+              "clickableFlagType": "literal",
+              "flagScrollbarMode": "",
+              "flagScrollDirection": "",
+              "scrollSnapX": "",
+              "scrollSnapY": "",
+              "checkedStateType": "literal",
+              "disabledStateType": "literal",
+              "states": "",
+              "localStyles": {
+                "objID": "3edcbd8a-8eea-472b-fe63-7d32d1643184",
+                "definition": {
+                  "MAIN": {
+                    "DEFAULT": {
+                      "text_font": "ROBOTO_MED_14"
+                    }
+                  }
+                }
+              },
+              "group": "",
+              "groupIndex": 0,
+              "text": "ha_battery_power",
+              "textType": "expression",
+              "longMode": "WRAP",
+              "recolor": false,
+              "previewValue": "-2400W"
+            },
+            {
+              "objID": "6c8da3a8-4dc8-4057-d9f7-e13f0fc821a8",
+              "type": "LVGLLabelWidget",
+              "left": 607,
+              "top": 187,
+              "width": 28,
+              "height": 17,
+              "customInputs": [],
+              "customOutputs": [],
+              "style": {
+                "objID": "a0a92277-3392-4c34-9c6e-4d9dc031ac57",
+                "useStyle": "default",
+                "conditionalStyles": [],
+                "childStyles": []
+              },
+              "timeline": [],
+              "eventHandlers": [],
+              "identifier": "ha_lbl_grid_power",
+              "leftUnit": "px",
+              "topUnit": "px",
+              "widthUnit": "content",
+              "heightUnit": "content",
+              "children": [],
+              "widgetFlags": "CLICK_FOCUSABLE|GESTURE_BUBBLE|PRESS_LOCK|SCROLLABLE|SCROLL_CHAIN_HOR|SCROLL_CHAIN_VER|SCROLL_ELASTIC|SCROLL_MOMENTUM|SCROLL_WITH_ARROW|SNAPPABLE",
+              "hiddenFlagType": "literal",
+              "clickableFlagType": "literal",
+              "flagScrollbarMode": "",
+              "flagScrollDirection": "",
+              "scrollSnapX": "",
+              "scrollSnapY": "",
+              "checkedStateType": "literal",
+              "disabledStateType": "literal",
+              "states": "",
+              "localStyles": {
+                "objID": "b83a7030-e718-4319-9373-309dad189eed",
+                "definition": {
+                  "MAIN": {
+                    "DEFAULT": {
+                      "text_font": "ROBOTO_MED_14"
+                    }
+                  }
+                }
+              },
+              "group": "",
+              "groupIndex": 0,
+              "text": "ha_grid_power",
+              "textType": "expression",
+              "longMode": "WRAP",
+              "recolor": false,
+              "previewValue": "20W"
+            },
+            {
+              "objID": "5661e0b1-84de-4604-92d7-005de4df38c5",
+              "type": "LVGLContainerWidget",
+              "left": 360,
+              "top": 320,
+              "width": 80,
+              "height": 128,
+              "customInputs": [],
+              "customOutputs": [],
+              "style": {
+                "objID": "53072de2-ca2d-4b56-9680-48d26582e648",
+                "useStyle": "default",
+                "conditionalStyles": [],
+                "childStyles": []
+              },
+              "timeline": [],
+              "eventHandlers": [],
+              "leftUnit": "px",
+              "topUnit": "px",
+              "widthUnit": "px",
+              "heightUnit": "px",
+              "children": [
+                {
+                  "objID": "346a60ca-aa26-40c9-d99f-fe4c0cecaafe",
+                  "type": "LVGLImageWidget",
+                  "left": 3,
+                  "top": 3,
+                  "width": 64,
+                  "height": 64,
+                  "customInputs": [],
+                  "customOutputs": [],
+                  "style": {
+                    "objID": "ad3645bd-fd80-43f6-9f08-db8c80f057aa",
+                    "useStyle": "default",
+                    "conditionalStyles": [],
+                    "childStyles": []
+                  },
+                  "timeline": [],
+                  "eventHandlers": [],
+                  "leftUnit": "px",
+                  "topUnit": "px",
+                  "widthUnit": "content",
+                  "heightUnit": "content",
+                  "children": [],
+                  "widgetFlags": "ADV_HITTEST|CLICK_FOCUSABLE|GESTURE_BUBBLE|PRESS_LOCK|SCROLLABLE|SCROLL_CHAIN_HOR|SCROLL_CHAIN_VER|SCROLL_ELASTIC|SCROLL_MOMENTUM|SCROLL_WITH_ARROW|SNAPPABLE",
+                  "hiddenFlagType": "literal",
+                  "clickableFlagType": "literal",
+                  "flagScrollbarMode": "",
+                  "flagScrollDirection": "",
+                  "scrollSnapX": "",
+                  "scrollSnapY": "",
+                  "checkedStateType": "literal",
+                  "disabledStateType": "literal",
+                  "states": "",
+                  "localStyles": {
+                    "objID": "86b0bfa4-9dae-4995-f47b-926885a39b3b"
+                  },
+                  "group": "",
+                  "groupIndex": 0,
+                  "image": "house_power",
+                  "setPivot": false,
+                  "pivotX": 0,
+                  "pivotY": 0,
+                  "zoom": 256,
+                  "angle": 0,
+                  "innerAlign": "CENTER",
+                  "sizeMode": "VIRTUAL",
+                  "value": 0,
+                  "valueType": "literal",
+                  "previewValue": 0
+                },
+                {
+                  "objID": "55ee069c-93cd-41a8-d67e-87800ccf07b0",
+                  "type": "LVGLLabelWidget",
+                  "left": 13,
+                  "top": 94,
+                  "width": 44,
+                  "height": 17,
+                  "customInputs": [],
+                  "customOutputs": [],
+                  "style": {
+                    "objID": "e919c045-a355-4ef3-c930-f6e695e4c7f3",
+                    "useStyle": "default",
+                    "conditionalStyles": [],
+                    "childStyles": []
+                  },
+                  "timeline": [],
+                  "eventHandlers": [],
+                  "identifier": "ha_lbl_house_power_1",
+                  "leftUnit": "px",
+                  "topUnit": "px",
+                  "widthUnit": "content",
+                  "heightUnit": "content",
+                  "children": [],
+                  "widgetFlags": "CLICK_FOCUSABLE|GESTURE_BUBBLE|PRESS_LOCK|SCROLLABLE|SCROLL_CHAIN_HOR|SCROLL_CHAIN_VER|SCROLL_ELASTIC|SCROLL_MOMENTUM|SCROLL_WITH_ARROW|SNAPPABLE",
+                  "hiddenFlagType": "literal",
+                  "clickableFlagType": "literal",
+                  "flagScrollbarMode": "",
+                  "flagScrollDirection": "",
+                  "scrollSnapX": "",
+                  "scrollSnapY": "",
+                  "checkedStateType": "literal",
+                  "disabledStateType": "literal",
+                  "states": "",
+                  "localStyles": {
+                    "objID": "2b45ef65-f078-4a18-afb3-7ebfea26af2a",
+                    "definition": {
+                      "MAIN": {
+                        "DEFAULT": {
+                          "text_font": "ROBOTO_MED_14"
+                        }
+                      }
+                    }
+                  },
+                  "group": "",
+                  "groupIndex": 0,
+                  "text": "ha_house_power",
+                  "textType": "expression",
+                  "longMode": "WRAP",
+                  "recolor": false,
+                  "previewValue": "1200W"
+                }
+              ],
+              "widgetFlags": "CLICK_FOCUSABLE|GESTURE_BUBBLE|PRESS_LOCK|SCROLLABLE|SCROLL_CHAIN_HOR|SCROLL_CHAIN_VER|SCROLL_ELASTIC|SCROLL_MOMENTUM|SCROLL_WITH_ARROW|SNAPPABLE",
+              "hiddenFlagType": "literal",
+              "clickableFlag": true,
+              "clickableFlagType": "literal",
+              "flagScrollbarMode": "",
+              "flagScrollDirection": "",
+              "scrollSnapX": "",
+              "scrollSnapY": "",
+              "checkedStateType": "literal",
+              "disabledStateType": "literal",
+              "states": "",
+              "localStyles": {
+                "objID": "719c82f0-d93c-4043-8c35-bec756978bc1",
+                "definition": {
+                  "MAIN": {
+                    "DEFAULT": {
+                      "border_color": "#000000",
+                      "border_width": 6
+                    }
+                  }
+                }
+              },
+              "group": "",
+              "groupIndex": 0
+            },
+            {
+              "objID": "82bf4591-1fd5-4f8f-8272-97c0235bb414",
+              "type": "LVGLLabelWidget",
+              "left": 374,
+              "top": 393,
+              "width": 53,
+              "height": 18,
+              "customInputs": [],
+              "customOutputs": [],
+              "style": {
+                "objID": "bf247286-626d-4dcc-fc42-169e49149689",
+                "useStyle": "default",
+                "conditionalStyles": [],
+                "childStyles": []
+              },
+              "timeline": [],
+              "eventHandlers": [],
+              "identifier": "ha_lbl_house_power_day_1",
+              "leftUnit": "px",
+              "topUnit": "px",
+              "widthUnit": "content",
+              "heightUnit": "content",
+              "children": [],
+              "widgetFlags": "CLICK_FOCUSABLE|GESTURE_BUBBLE|PRESS_LOCK|SCROLLABLE|SCROLL_CHAIN_HOR|SCROLL_CHAIN_VER|SCROLL_ELASTIC|SCROLL_MOMENTUM|SCROLL_WITH_ARROW|SNAPPABLE",
+              "hiddenFlagType": "literal",
+              "clickableFlagType": "literal",
+              "flagScrollbarMode": "",
+              "flagScrollDirection": "",
+              "scrollSnapX": "",
+              "scrollSnapY": "",
+              "checkedStateType": "literal",
+              "disabledStateType": "literal",
+              "states": "",
+              "localStyles": {
+                "objID": "a2396396-890c-489c-8cb9-7fd6d95c05d4",
+                "definition": {
+                  "MAIN": {
+                    "DEFAULT": {
+                      "text_font": "ROBOTO_MED_16",
+                      "layout": "FLEX"
+                    }
+                  }
+                }
+              },
+              "group": "",
+              "groupIndex": 0,
+              "text": "ha_house_power_day",
+              "textType": "expression",
+              "longMode": "WRAP",
+              "recolor": false,
+              "previewValue": "1.2kWh"
             }
           ],
           "widgetFlags": "CLICKABLE|PRESS_LOCK|CLICK_FOCUSABLE|GESTURE_BUBBLE|SNAPPABLE|SCROLLABLE|SCROLL_ELASTIC|SCROLL_MOMENTUM|SCROLL_CHAIN_HOR|SCROLL_CHAIN_VER",
@@ -2437,7 +3268,133 @@
     {
       "objID": "f5dfda65-674b-45eb-8e56-74976c5a1b0b",
       "name": "grid_on",
-      "image": "data:image/png;base64,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",
+      "image": "data:image/png;base64,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",
+      "bpp": 15,
+      "alwaysBuild": false,
+      "lvglBinaryOutputFormat": 3,
+      "lvglDither": false
+    },
+    {
+      "objID": "d6197f61-bed3-41ee-be54-f0df3af846ee",
+      "name": "grid_off",
+      "image": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAHWElEQVR4Xu2bd4gUWRDGvzVgRFTMEc98imIWI4YTlTPnnHPELAYURMyKGE7FnPN5Z8AcUMyKOYtZ1D/MAdMe3z66nO7t7unu6Z47vP3941QNzm5/U69evaq3MbGxsbH4HxOTIEBCBCQsAfMccPAgUK2amD8r5jmgVy/gjz+AhQuBbt3E7Yjt24Fp08T0lRo1gDFjxPSD+AJoD6+xeDHQubOYtnz7BuTLB9y7Jy5fSZRIfXbOnOKKFL0AxofXcCoCI6ZHDzEDoVMnYMkSMSNFL0DfvsDcuWLqCCfCp09A7tzA8+fiCoSYGOD2beCXX8QVCfGXwKBBwMyZYuqwE4HCUcBo0Lo1sHq1Lz8pvgBk8GBgxgwxdSxbBnToIKbw+rVKUmfPiiuOqlXlpScOH5aXOq5cAX79VUyvmAtArJYDQ3DlSqBNG3EJFIFb5/nzymY+MMspbujXD5gzR0yhcWNg82YxvWItAIlEhKtXgfv3gcyZ5S1PvHypcsvbt+JCxYrArFlA6dLi8oq9AGTYMGDqVDF1LF8OtG8vpkARtm0zf2/+fGD9ejF1NGsG9OkjpjB7NjBgAFCmDDBxIlCzprwVKeEFICNHApMmiamDkdC2rZhhqVQJOHZMTB18wFOnxNTx119A/fpi+oUzAciQIcD06WIKdsvBCLfK1KlVwWQFQz5tWjGDxrkAJFIRDhxQO4UdGzcCTZuKGTTuBCB2ImzYYP/LjxsHjB8vpil+7BwucC8A4YFkwgQxdaxdC7RsKaaOevXUYckOniVu3RIzaLwJQPhN8hs1wgMLs7xZJLCEZRJ89kxcpnD7zJVLzCDxLgDhsXfoUDGFSEVYtAjo2lXMIPEuAE+O164BJ0+q7G4GRWjeXEzh5k2gShVrEXLkAPLmFTMsLInnzRPTDd4EOHLEWY0faSS44dw5oEQJMZ3iTYCyZYHTp8W0JVoi1KkD7NwpP9Yp7gXYuxeoVUtMR0RLBA9R4F4AN99+KBRh61bzctav5cBtliWzC9wJsGMH8PvvYgrs0YV2aFjOXrwopg4eYXmUNcK9n4n161dx2XL3LvDwoZiCyyhwJ0Dx4uYPduIEUK6cmOBHdukCLF0qLiFxYmDLFvNIcMOhQ+Zt+4YNVaQ5xJ0ArOJ4Mrx8WVxx+WD3bjF12B2lKUKjRmJ6wrgckycH+vcHJk8WVzjcCaDBrW3sWLWfHz8OlC8vb8WjUCHgxg0xdbBnYBUJfJCPH1VRZMWff/4QsXdvYPRoIGtWZTvEmwAa3Hbq1hUzHq9eAenSiWmKlQgvXgDVqwOXLonLlOHD1cOza+SByAQIB9eiWcIzYiXC48fqlJktm7j8JlgB+M2wBRYOJkbml9q1xRUtghWgYEGVJ5yQNKnaw6MsQnACsKjJkkVMR/wLIgQnADvGHTuK6ZgoixCcAJwerVghZhwZMqiqURuc2MGq026H8YngBGD4G2t79gbYSSpWDPjyRdymRCkSghHg+nWgcGExhQULgO7dgSlT1P4djiiIEIwA7M6YTXh4uUErWEqW/LEUsmdX0x7mDTN27QpsdwhGAJanLFND4Wnxzh31mk1PRghLXcJCh+Vyz57WY+/9+1Vl6DP+C8CP4/TnwwdxxcHQ5xIglSsDR4+q1xq8d8C6v107YM0acQvJkqnS22cR/BfgzBk14zOyaRPQpImqDFkhkkyZ1L/arRI+IFtbLVqoIYsZ7EhFfTjqBg5ReWQ2wiYJp8ZFiwLv3imfdm7XTnQZM6oE+uiR6j2Y4XMk+B8Bv/0G7NsnZhylSqnICJ0Mc464apV6zbDXXrdqpZYAE+OTJ8pnxEcR/BeApzcjjIg8eVQeIDyz85tOk0bZb94A+fP/WAqMDD6gXS/AJxH8FcCqTcWKkOteC32zjM6tTqv80qdXXZ1wlzTZAWLFaPwsF/grgNXQlKGvZf3Q3cAI39O+dQ5erC5IhUIRmBj5MzzgrwAVKqgWmRUsgni7K1UqcelghBQpAjx4IC5HpEyploOTaZUB/wR4/17t/3YwCnjByQ4mSS/fZooUwJ49rv+vfwL8/bd5W0tj4EDrC5hGeCGKF6OsYBOWrXgjjATmEg5eHeKfAHa/NMtghj7XqxM4bWa9oJXORngpiw+p7SqhuIwE/wTgL8yHNMJtkSN0s+rQDvb72fc3g0ftp0/V7mJ2a9WFCP4IYNf+Yg3Au31eGDHCesjBeSLvEEQogj8CsHIzuyHGoQj7+kmSiMsVnz+rkphFk5HQWyTr1qkK0ogDEfwRgHNA4x1+trp5cdqqpnfKhQuqlDbeLQwtpQlFoO/7d3HFQRH45z+hs8sQ/BGAfT4eYEJhQ9RsOOoFfpaxWcJy2nhW4AmSJ0kj3J45v2SdYiByATimNrvP4+dFJ36WWcbnSJ3X6kLhsZt3jo1Y/KVJ5AJwjZklOf75TIECYkYEL2Px7oCRUaPU6dMIJ8/sPWjwuE2fCZEL8F+Fh6QGDVTzhGM3i0T88wpAWFaHKb1/bgEckCDAT5sDHPIP3lFZbms8ZEQAAAAQZGVCR0NFOEVFNjY0MTJERDczQkNoFb/eAAAAAElFTkSuQmCC",
+      "bpp": 15,
+      "alwaysBuild": false,
+      "lvglBinaryOutputFormat": 3,
+      "lvglDither": false
+    },
+    {
+      "objID": "41f7879b-50a7-436c-84e5-c8120e20c049",
+      "name": "house_power",
+      "image": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAElElEQVR4Xu2ZOSwuURTHD2IXQkIUEoVCQkOhsO9EY1+iUQgJiUaikthCR6LTSHSILbbY9yg0Cg2JQiEUQiIRiVDwvfxvfDfz5t1h5pvN+8yv8e7x5tx7/nPuuecOH5fL5aJfjI8jgJMBzhZwasAvroFOEXROATtPgc7OTrb7RkdHbduFtgjw/v5OjY2NNDc3xwKvq6ujyclJ8vf3t1wIywV4eXmhiooK2t3d/SvY3NxcWl9fp5CQEG6zAksFeHx8pMLCQjo7OxPGlpKSQtvb2xQdHc1tZmOZANfX1yz4q6srPrmI+Ph4Ojo6Yj+twBIBzs/PKT8/nx4eHlTFhAxAJiAjzMZ0AU5OTqi0tJSen5/5pGpALUBNQG0wE1MFWFhYoNraWj6WU1lZyX4uLS19Wv5lamqKnRhmYZoAExMT1NLSQkrum5ubaXx8nP27tbWV/X8lxsbGqL29nY+NxBQBenp6aGhoiI/l9Pf3U19fHx8D2AYGBvhYTldXFw0PD/OxURgqwMfHBzU1NbGmRoSvry9763j7IpAFyAb4EYGGaXp6mvz8/LhNL4YJ8Pb2RlVVVbSxscFtUgIDA2lxcZHKysq4TQSehx/4E1FUVETLy8uGNUyGCPD09MQCQ8UXERERwQJLT0/ntq+AH/iDXxFGNky6Bbi7u6O8vDy6vLzkNilxcXGs7U1MTOQ2NcAf/MK/CKMaJl0CYJFIydvbW26TgqAPDw8pNjaW27QAv/CvJK4RDZPHApyenrLFKaUp0h1pj/TXA/xjHswnQm/D5JEACKy6uppeX1+5TQr2LwoeCp+IkZERamtro7CwMG77CsyD+ZQKLK7ROHlwSmhFswCYCEed0lHlbnBw5CmBhd7c3LDaoFYEzGdGw6RJABQdeQMjpaSkhLq7u/lYiYaGBpqdnaXMzEza2tqi0NBQ/rvv6O3tpcHBQT6Wo7Vh0iSAUbgFANnZ2bS5uanpXC8vL6fV1VU+loO7A+4QarBFAGyB+fl5voisrCyWCWpFkD8vQm3D9CMEABBhZ2eHgoKCPpemjBoBAI7Hvb09ioqK4jY5P0YAUFBQQGtra9+KoFYAkJCQwERQaph+lABAjQhaBABomA4ODig5OZnb3AgFkBYpOyguLqaVlRVFEUTrq6+vp5mZGT5Wi1AArQqbATIBjU9AQAC3uRGtD1+e3H9n0IJQAJHCdlBTU/NPoEC0Pq/LALTR6A9wI5RjegaIJrCS4OBgdsERBQ9E6zN0C1xcXND9/T0fGw2+/eGaLAKFD01RTk4Ot8kxfQuYjegNAlyMEHxGRga3iRA9b2gGmI0oAAS/v79PaWlp3KaE6Pn/WoDw8HB2NVYTPPAqARA8rtlaPmvZLoCoSMbExFBSUhIff4W7iEVGRrI+PTU1lf9ODbYXQb1vAM8j8OPjY2F//h1655fiURHUuwB8turo6PAoeKB3fikeCaA3BfGRU+miowa980vxSAAj34AnGDm/I4BRGWA3tmeA3TgC2F0D7MYRwMoMELXCdqOlFZfi0SngTTgCOBngbAGnBjhF0JuqulacIugUwV9eBP8AMz0/bnWx4+UAAAAQZGVCRzgyMDdFOTVFMjRGQzA3MjaBKp6EAAAAAElFTkSuQmCC",
+      "bpp": 15,
+      "alwaysBuild": false,
+      "lvglBinaryOutputFormat": 3,
+      "lvglDither": false
+    },
+    {
+      "objID": "2c19d420-c2a5-4e3c-ba27-2cbf04531ca5",
+      "name": "solar_power_day",
+      "image": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAFCklEQVR4Xu2bR4gtRRSGvxEVFREUA4oIuhDMETMGMAuioOhCTIhidqcbEUEEFy7MCUwgiLpSMYs557hQDCCCCUQxK4z89Olze/pWdVf17eubdvqDx/Sp+97c6r+r/j5Vp97C4uLiIiuYhVGAcQSMU2D0gGYPPNCvwjxrP18FLrHrKuXnXQl9/1XAnnYd+rxK8/cnmOCCX4Up//kbwB52XeVzYEuP8vgU2NqjCW8Cu9l1av/C9CjAV8AWdl3lduA0j/K4GTjbowlfA5vZdWr/wvQogNgU+MajgoOBJz3KY2+bWlU2N7FLcvo3Tc8CnAnc5tGEl4B9PErjCeAwjyacB1znUV7/pkkQIMdkngIO8WjCVsA7wHre0swPwM421Ou8COzrUV7/pkkQIJf97InX2RV4BNjEW8J8adPmM2+ZoBHxmEd9MAcBXq+8ouqsA5wInAAc6q0FDwL3Afd4yzTvAzt41AdzEEDoPR3KCepomP8FfOwtcW4AzvGoL+YkgDip5WnmoBuXAP3TkwC/AR8Ehv4VwKUedeMa4AKPCpR0bQOs6y1d6UGAX4AjgLfN5A7wTwpesWTmPW9JQ79HN7+TtxQ8DxxpXvB4xpslzIwC/GzOXCYra5lL10UQmg532/s9xtr2BjgdOMZbJzwHHA78YbHSYSVZ61uczwwC/Gid1ZOvIqd/FNjfW5byK/AC8Jb9WdNekbtEcoiSZ4CjgN+9pUBG+jSwgbfk0FEAJSq6+diw1mvuXo/6Qb9Tr8kQ25tAG3pLKh0E+Nae7ifespSDbBroyfaJXpdH27wPoVWj/KEt0VpKBwG02FFe/4W3TNCoeMi8oInL7YlVkXCXeRRHHhASQStRZaBaLKXTQQChNf5ewPfeUuTnWgu03bw4HnjAo4LjgPs9iiMD1FugKqCGvjLQ/H2HjgKIj+ymf7KfcncZYAqzCCAkgkabnrheg3oLKS/IZwYBhBKSi4GHM25ezCqAUPJ1LHBlZXconxkF6EofAvTDKMA4AsYpsCo8QOv/73weFmwMbOvRf8UqmgLLh1GAdA+4FrjQo+VNaBMlTIYAp9h6fgicDNyV1NEMAbTkVPo7BLYDPkzqaKIASju1/5bwV5cFqhZpq649PU8UQIsOFTyGRFo5LlGA64HzPZpQX9Onov2AeslKJa6U/YAQ2kuoo/qh6ojNJAoQMsDdbTXYhb4XQ+qL9herqM93ehQjUYCQAaoSfItHefQtQKgqrT6rVtFMggAxA9TN64u70LcANwXKZjLCP4E1vCVEggAv18rRJRr+Gnpd6FuA12yLro76rkMWcRIEiBmgtsCa1Y3Ttwlqi0zVqTrq+7kehUgQIGSAQ+FU4I7GziYIEDLAoaD6oc4UxGkRIGaAQ6HdCFsEiBngkFB1OmSQBS0CKJtKW1YuX5qNsEUAmUh9WalKbj3ryqXv12CJ+qbTaFV0SFOHNcO0CCATqS8rZ8kAS+YlQCgj3LGhit0oQMwA9QVneNSNeQlwK3CWRwXNRtggQMwA3w0cW8llXgLosEaoTKbaYf38UkGDACEDXN3UXM1bujEvAf62TZB/vKUgfsSuQQCZR305qTM8oSPxuaguUC2ti416qgtoXVCeISrRlK17Q0GDACEDHCqaspq600QEiBngUIkbYUQAZU/t+2nDQlNjevpGBIgtgYfMjcH/fRIR4Go77PR/QgcvL5q6oYgAK4dRgHEEjFNgZXvAv+RT8FAJReCkAAAAEGRlQkc4MDI3Njc0MkI1Q0NEQjI2Xu3AfwAAAABJRU5ErkJggg==",
+      "bpp": 15,
+      "alwaysBuild": false,
+      "lvglBinaryOutputFormat": 3,
+      "lvglDither": false
+    },
+    {
+      "objID": "6892786b-f78d-4457-99aa-ac773677394f",
+      "name": "battery_power_10",
+      "image": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAFgElEQVR4Xu2bR4gUQRiF35rFnHMW8SBezBkxYhYDYgBBUFFUzAkxIGYxouhBD6JiwCxGxJwvHgS9mLOYRYys/NW7j7anurdqpnZXZuc7zWus6a2vumv+qm7T0tPT05GHSUsJSF0BqVsgNQdYz4FbtwK7djFaM3YsMGQIY24S3yQ4cyawYgWjNcuWed/xH5ASkLoCUrdAFnPAvXvAq1eMCpkEd+9mtGbMmNhJsGpVoEEDxpwi/Ba4fh0YNgx48ICHsp2GDYF9+4BGjRI71Y4dwIgRjFHoBXz9CtSvD7x+zUM5Rp06wP37QMGC8Z1y0ybgyxfjXxm9gG3bgFGjGHOcEyeA7t3tT/vzJ1CzJjB5coICZs/2fqtzi1WrgKlT7c++cSMwYYJXo0yfzsNR6AUkWugkSjyFUuboy21r0d5cQJMmwO3bjM6oWxd4+JBRYdEBsn49MGmS99mivbmApk2BW7cYnSGT3qNHjAqLDij8oy9YtDcX0KwZcPMmozNq1wYeP2ZUWHRAsXatN/FlYtHeXEDz5sCNG4zOqFULePKEUWHRAXz/DlSrBrx/z0M27c0FtGwJXLvG6IwaNYBnzxgVFh3AmjXAlCmMCov25gJatQKuXmV0RvXqwPPnjArTDuhGXzBtbyWgdWvgyhVGZ0gHXrxgVJh2YPVqYNo0RmLa3kpAmzbA5cuMzpBF0MuXjAqTDoSNvmDSPgNzAW3bApcuMTqjSpXY1aZJB1auBGbMYPwHk/YZmAto1w64eJHRGZUrxy66supA1OgLWbX3YS6gfXvgwgVGZ1SqBLx5w6jIqgPLlwOzZjHGkFV7H+YCOnQAzp9ndEbFisDbt4yKqA7IUl1qh7DRF6LaBzAX0LEjcO4cozPKlwfevWNURHVg6VJgzhxGLVHtA+gFyOUll5mfTp2As2cZnaETIPJ1y1kZfSmdg/8+iCywpMAKQwRJYRcqQHcFZJeAsmWBDx8YFWEjuGQJMHcuY1zIz66sPQoUUNFcQOfOwJkzjM4oUwb4+JFRoRMgoy8z/+fPPBQXUjz5SmdzAV26AKdPMzqjdGng0ydGhU7A4sXAvHmMcVG8uFd1lijBQ+YCunYFTp1idEapUrGjGhTgavRlXgn0y1xAt27AyZOMzihZ0tvF9RMUsGgRMH8+Y1zkz+/d+yLSh7kA2aWV3VrXyOUoI+zHL8DV6A8f7j0vCGAuoEcP4PhxRmcUKwZ8+8ao8AtYsABYuND7nAh37gCNGzNmohegqwN69gSOHWN0hk6AyM+sA2QjNniF+Bk6NHY1GSRiAtcL0F0BvXoBR48yOqNoUW9x4yc4B0Sh21UOInOXzGEazAX07g0cOcLojCJFgB8/GBUuBcgDV3nUFoK5gD59gMOHGZ1RuLC3re3HpYDt24GRIxmDmAvo2xc4dIjRGYUKAb9+MSpcCahQwSt8MspeHeYC+vUDDh5kdIY8Bf79m1HhSoCsHKP2DawE9O8PHDjA6AwZnT9/GBUuBMjcIhstvrJXh7mAAQOA/fsZnZEvHxD8E1wImDgRWLeOMQxzAQMHem9vuCYtjR9JogLkO58+jSl7dZgLGDQI2LuX0RnZIWDwYGDPHsYozAVYfKkxcmq5BYIkKiCk7NVhLiAnSUSA5e518gmQYk2KNkOSS4BsmMprfbp5JYTkErBlCzB6NDtnQvIIkL1FecQmpbUFySNANk7i2DZLDgHyhomMvmyxW6IXsGGDV0rmFjt3ejs9JsjPoGx2bN7MQzboBcjuqcyouYFskcn5y5UzO7u80yzb9fXq8ZANegGCvHQ8fjxjjiHVplSdpsgrtfK0J07CBQh373r/N0BKy+ymRQtg3Djv0bcN8oqdvCQZJ9EC8gApAakrIHUL5O054C9Ngi1uVef1sgAAABBkZUJHQkYwMzkyNjdDOTYwQ0VBNdb89loAAAAASUVORK5CYII=",
+      "bpp": 15,
+      "alwaysBuild": false,
+      "lvglBinaryOutputFormat": 3,
+      "lvglDither": false
+    },
+    {
+      "objID": "358abad6-309f-4be8-ae90-1c7924e218d8",
+      "name": "battery_power_20",
+      "image": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAADx0lEQVR4Xu2bSywkURSG/84gEiQmYkOMZyYWYsFirOyElaUIJpFMghDE24zIDBGvIZ4hM4uxmCBiZeWxsyNhYSFhQ4h4JSyYhdj05HRx0rpvdVdVt+52q75Vn0pa1fnurdvnnio2u91uh4mxWQKsGWDdAtYaoHsN/P0bWFjgUDc1NUBpKYfBxNgi2NEBDA9zqJvBQeVvhACWAGsGWLeAlzXg4AC4vOTQAS2Ci4sc6qa62n0RTEgAPn7kMFCo3wJbW0B5OXB0xIdencxMYHkZyMry7VR//wKfP3PoCbGAf/+AjAzg6ooPBYzUVODwEAgPN3bKmRng/l7zr4xYwJ8/wJcvHAac1VWgqEj/aR8fgQ8fgKYmHwV8/ar8VgeLkRGgpUX/2aengfp6pUZpa+PDnhAL8LXQ8RUjhdLz6NNtq+P72gXk5AC7uxz6jbQ04PiYQwc6EmAmJ4HGRuWzju/LIcB59AnTCRgfVxa+Z0wl4OEBSEwEbm85f3MJGBsDmps5dwemmQGi0SdMI2B0FGht5bwZUwhQG33CFAJ+/gTa2znnF0gvwNPoE9ILGBoCOjs5XzekFkBb9eRk9dEnpBYwMAB8+8a5CvFZAE0vmmbO5OYCOzsc+o30dPeuk9p2lkY/JQW4ueFDQmiDlZTEoRskKC/P8VEsIFR3g/39QFcXX6YhqPd4cgKEhTnCtyOARp9W/ru7p0wMQsWTU+n8dgT09QHd3XzhhoiOBs7PgZgYPvQ2BPhr9GldcWn0vA0Bvb3A9+980YZ4906590mkE6EvwF+jX1GhPC9wIfQF/PgB9PTwBRtmbw/IzubwGbGAUKoDqPagWaBGWRlwccGhkIICYGODQ2fEAkK1DhAh6iq7srYGFBZy6Iz8AuiBKz1qU0F+AXNzQGUlJ+yK3ALi45XC56nsFSG3ANo5euobSC0gMhK4vn5R9oqQdwY0NAATE5yoGmIBojqANhLUE/A329tw9PicUesHiBD1Ewgqe+l5oRfEAkR1QCDR0dER1gElJcDSEoeekFOAStkrQj4B+fnA5iYn6A35BKysAMXFnKA35BJADVNaEG02TtAbcgn49QuoquLktCCPgNhY5RWZiAhOTgvyCKDGiYG2mRwCzs6U0X//nhPTiljA1BQcpWSwmJ9XOj1aoEKImh2zs3xID2IBVEbSihoMoqKU88fFaTs7vdO8vq6UxAYQCyDopeO6Og4DBpWwVMpqhV6ppac9BlEXQOzvK/8bQKXla/PpE1Bbqzz61sPpqaZNjxqeBZgAS4A1A6xbwNxrwH8sxClukOCbgAAAABBkZUJHQjMzQkE5QjhFMzA3RTgxNP5EDKEAAAAASUVORK5CYII=",
+      "bpp": 15,
+      "alwaysBuild": false,
+      "lvglBinaryOutputFormat": 3,
+      "lvglDither": false
+    },
+    {
+      "objID": "efbf4bef-6df4-449b-eb19-7df2867e0025",
+      "name": "battery_power_30",
+      "image": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAADtElEQVR4Xu2aS0gVURiAPzMFwVAXuUh8hEQStC4JE01woyDSw41hkj0QH2GBiEgtRAiMRLGyRKpVZkS1EUKsCKxV0KpNZRaRSQuXGXTj3MEfvZ6ZZu7V6/XMfKv7H5g783/ncf9z5iaFQqEQPiYpEBCMgGAKBGuA5zXwyhWYnpbQM+r60lIJN5PoFsFjx2BiQkLPjI9b35EABAKCERBMgf+sAe/eweKihGHUIvbihYSeuXx59SKYlAQFBZCfL03xwn4KPHsGp07Br1/StOEUF8ODB5CbG/2tFhbg7VuoqpImJ/QCPn+GoiJYWpKmuFFeDlNT0d/u4kU4cMD1r4xeQHc39PZKGHc+fIC9e73fVo3WnBy4fz9GAXV11lDcLB49gtpa73fv6IBr1+DhQzh6VJqd0AuItdCJlWgKpeXe//3b0/XuBSijyux6o34BIvGQgNDeDgMD1mcP15sh4McPyMuDP3+srHwnoLUVBget5BW+EhDZ+wpfCWhpgaEhyT2MbwToel/hGwHNzTA8LHkLvhBg1/sKXwg4fx5u3pScV2G8gK9fobBQ3/sK4wWcPQsjI5LvGowWoHpfHZ78/Sv5rsFoAU1NcOeO5KolZgEnTlhfspLjxzdmi6zbDNltZ2dnYfduCW3Ztw927pRwDffuWb8gtgISdTd4+jSMjspjRsWhQ/D6tYRbR4Cbue+Gx4+hpkbCrSOgsRHGxuTBo0IJ/PRp1bTbGgLWq/dv3IBz5yRUbA0BDQ1w9648dFRkZsL8PKSmSpMi8QV8/Ah79oBmrfZET4/1QieCxBdw8qR1zB0LKSlW72dlSdMyegGJVAe8euU898vK5KMtZ87ArVsSrkQvIFHrAB26QioStfLbFFDmC6iuhqdPJeFI3AuIJx5q+f+OgJcv4fBhCSMxW8D+/fD+vSSrw2wBavOmNnEOmCtg1y7CFeS2bZKsDnMFXL8ObW2SqB1mCkhPh58/IS1NErXDTAGdndDXJ0k6YZ6A5GT4/h2ysyVJJ8wToHaOHs4NzBPg8f9FZgmorITJSUnODWYJeP4cKiokOTeYI8BF2avDHAHqrL++XhJzixkCVNn75Qts3y6JuUUv4MIFwqXkZjEzAwcPuru72g5fvQqXLkmTF/QC1JuTkhIJ44o6uVEnOG7ZsQO+fYOMDGnygl6AoqvLdTm5bqij6ydPHA8w1qD+HtvfL6FX7AUo3ryB27cJH01vJGoYHzlC+L2/00tNHXNz8qIzGpwF+IBAQDACging7zXgH0+Tu1+ZJTekAAAAEGRlQkdCMkEwNjM2NzI1QTAyRkZGxZk+OwAAAABJRU5ErkJggg==",
+      "bpp": 15,
+      "alwaysBuild": false,
+      "lvglBinaryOutputFormat": 3,
+      "lvglDither": false
+    },
+    {
+      "objID": "f56b9e4d-f356-4b53-ee79-69dfac8328ac",
+      "name": "battery_power_40",
+      "image": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAADF0lEQVR4Xu2aWahNURiAv2sqhXggUYZMpZQHSilDKQ9SlOmFJGPCzVBeTKWUEiJThvBkiPKkKOODB09ekCFTMuTJk5Sj/1r+M611ztp7n7vv3Wvv7+Wcf9U+e//f2mudf+292kqlUokc01YIKO6AYggUc0D0OXAfcE+j6MjxMzXqSmJOgouB6xpF56r5ja6nEFDcAcUQaDQHvAY+aVRGJrH7GkVnr2US7AFMBgZoSxo4hsBPYB7wSFvS4wCwM8HpvgNPgPna0giHgF3Afo3S5xUwNuZptwPTgEXa0giHgGXAFY3S5wawMMZpvwEjgctJBST9n09K3DphK3A40vEBCfgBDAd+dZYAuaWuadQ62vRbGf8EyrQDR813/+MDEfAFGAH8NmnlTsBm4JhJXsiVgNreF3IlYBNwXFP/R24E2HpfyI2AjcAJTbtMLgS4el/IhYANwClNuZrgBXwExjh6XwhewDrgjKZbT9ACpPdHAX803XqCFrAGOKup2kksYKn5kUqWdNIzAttiSBZdtvX8O2C0Rm4mAoM1queS+QdxCuiuq8HVwDm9ynhMBx5rlCEBPmPfh5vAAo0yJGAVcEEvPB4i8G3VsMuIgFb1/klgvUZCRgSsBC7qRcdjIPAV6KMtQgYEvAHGAZa5OhK7zQudajIgYIV5zJ2E3qb3B2nLfxwCulMd8LDJ2J+t39ysBU5rVEkEAbOAPRq1DlsCrkLIhq2QquUlMF6jShwCbIVQmviXss0FyDvCWxrVkgMBD4AZmnAtgQuYBDzTZG0ELkAWb7KIcxOwgGHQUUHKxgs3AQs4AmzRRF0EKqCf2SvQVxN1EagA2WIjW22aE6CAnsBnYIgm2YgABcjK0f+5QYACXgATNMFmBCZgLnBbk/MhMAF3gDmanA8BCWhe9toISIA861+uifkSiAApe98DvTQxXwIRcBDYoUlFwSHAtu8mTeTNjbzB8aG/KXzkMzoOAU+BqRqlizwBfg4dFZ0P24BDGkXFIUC4C5w3dtNAlq1TzH7foRFO+EFfdMahgYB8UAgo7oBiCOR7DvgLBa/bUK7B+08AAAAQZGVCR0RFNTU3OEUxQ0JGNzU5NUWKKH5GAAAAAElFTkSuQmCC",
+      "bpp": 15,
+      "alwaysBuild": false,
+      "lvglBinaryOutputFormat": 3,
+      "lvglDither": false
+    },
+    {
+      "objID": "4c15f224-477f-446a-df87-afb15c56b68c",
+      "name": "battery_power_50",
+      "image": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAADNklEQVR4Xu2aSehNURjAf3/DQhEWLMiURMoayaxsKMm0IWRMplCSDAspRURmCStTwkZJhhRWysrGPGTIwhLl6Xv/6/u/d98595177xv+79z7W73v1Hv3fr9zvnPPOfe1FQqFAhmmLReQj4C8BPI5IP4cuBe4r1F85PuTNWomCSfB+cA1jeJzJfiN5pMLyEdAXgLV5oDnwE+N2pFJ7IFG8dkTmgTbgKHAEG1pFBElcBtYBvzQlvozHrgMDEpxqe/AM2CWtkRhEfAGGAX81pbGMQ24l+JyW4Gxzk8Zi4CdwD6NGs9LYGSCy8poHQhcSitgUTAUm8V1YG6Ci28BDgFXgXnaGoVFQNqFTlqSLJT+9/6vWN+PIUCMitlaI0+AMO4JdLAJOBJ8dv++JwK+AIOBP0FamROwATgaJC9kSkC494VMCVgPHNPU28mMAFPvC5kRsA44rml3kAkBtt4XMiFgLXBSUy7HewEfgOGW3he8F7AaOK3pVuK1AOl9OTz5q+lW4rWAlcBZTdVMagELgx8pZUGdtsimzZBtO/sWGKaRndFAP40quRg8QawCOutucAVwTu8yGROAxxq1kACX2nfhBjBHoxYSsBw4rzeeDBH4uqzsWkRArXr/BLBGI8EiwDQJTgF2a1Q7puqnDsKT4FLggkbJ6At8Anpoi2ARYJoEG0npY+wVMAIw3GYsdgUvdMppAQFLgmPuNHQHvgajoByLAFMJNJLSEnhUpfZNJRRmFXBKo1IsAjpTCVTDtJAKIzO/eQGVAQGzgVuacJgMCHgITNKEw3guYAzwQpM14bkA2bzJJs6OxwIGQHEF2UWTNeGxgMPARk3UhqcCegLfKpa9JjwVsB3Yr0lG4aGArsBnoL8mGYWHAmTn6H5u4KGAeP8v8kzATOCOJueCZwLuAjM0ORc8ElB92WvCIwFy1r9YE3PFEwGy7H0HdNPEXLEI2AzFpWSzeAKMc7y4HIgcALZpSxwsAuTNyUSNGouc3MgJjiu9gI9Ab22Jg0WAsMN5OVk7+gA3Iw8wKpG/xx7UKC4RAoSnwJngaLqeyDCeDsX3/lEvNU281xedSagiwH9yAfkIyEsg23PAP1PF2FA5re/0AAAAEGRlQkc0MTc5MjVCQjM1RjJEQkYxT13+pQAAAABJRU5ErkJggg==",
+      "bpp": 15,
+      "alwaysBuild": false,
+      "lvglBinaryOutputFormat": 3,
+      "lvglDither": false
+    },
+    {
+      "objID": "81d582aa-d633-4ba1-9ee2-8dafd8b617c1",
+      "name": "battery_power_60",
+      "image": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAEGElEQVR4Xu2aSyg9URjAvyspC2HBxrtELGyRkCgbSvLaEPJMXqEkiYWUIiJvCSuvhI2iPFJYyc7GI48iWdihuP++6X+/runM/OfMvf/rOjO/1XznNnfm+53HnDlnLFar1QoGxmIKMFuA2QXMMYB3DOzp6YG9vT2KecHzU1NTKf5JdA2C+fn5sLq6SjEvy8vL0n+4A6YAswWYXUB9DDg7O4PX11eKERzE9vf3Kealu7v72yBosVggPDwcwsLCqMxVKHaBra0tKCsrg5eXFyr73yQmJsLS0hKEhIRQGS/Pz89wenoKWVlZVKYGU8D19TXExMTA+/s7lbmK9PR02N3d1X251tZWiI+P1/yUYQro7OyE3t5eil3NxcUFREdHc18WW2twcDAsLCw4JqCoqEhqij/F2toa5Obmcl++paUFBgcHYWVlBfLy8qhcDaYARyc6jqJnomSr/be3N67zNQtAo2jW2eATQA5PAjaamppgeHhYOuY5XwgBj4+P0iP04+NDSspwAhoaGmBkZORvnRpMgLz2DSegvr4eRkdHKXnEMF2AVfuIYQTU1dXB2NgYJW7DEAKUah8xhIDa2lqYmJigpO0RXsDd3R1ERkYyax8RXkB1dTVMTU1RwnKEFoC1HxERAZ+fn5SwHKEFVFZWwszMDCXLwmEBhYWF0p/YExAQALGxsRQ7i4ODAzq2ofQ6e3NzI9X+v8D7xPtVAtcLQkNDpWOmANbboCtRqsGKigqYnZ2lWA9JSUlwdHRE8a8RoKXva2F9fR1ycnIo/jUCysvLYW5ujm5cDyjw8vLy2xrErxDgrNofHx+HmpoaipFfIaC0tBTm5+fppvXg7+8vTZ+9vLyoDHF7Adhko6Ki4Ovri25aD11dXdKGjhy3F1BSUgKLi4t0w3rAWsfax1YghymANQ9wJfbzgMPDQ9XaT0tLo2MlqqqqYHJykmJ7mALcdR7AgrWqbA/+jt1IaQIlvIDs7GzY3NykhOUILwCn2ikpKZSwHKEFxMXFwfn5OSXLQmgBuL9ZUFBAybIQVkBQUBDc3t6Ch4cHJctCWAFDQ0PQ2NhIiSohpAAfHx94enoCb29vSlQJIQW0t7dDX18fJamGcAI8PT3h4eEBAgMDKUk1hBOAb4486wbCCeD9vkgoAZmZmbC9vU3JaUEoATs7O5CRkUHJaUEYAVqmvSyEEYBr/cXFxZSYVoQQgNNe3DTBRyAvTAHNzc3SVPKnOD4+hoSEBE2XxwWP/v5+aGtrozIemAJw5yQ5OZliV4IrN1dXV5ovidPe+/t78PX1pTIemAKQjo4OzdNJZ+Hn5wcbGxuqCxhy8PPYgYEBinlRFICcnJzA9PS0tKb2P8FmjF+J476/2qYmC3zltW106kFVgBEwBZgtwOwCxh4D/gBJ43tuc/MM/wAAABBkZUJHNTdDMDMyMDIzRjgyRkM4Q0/MAj8AAAAASUVORK5CYII=",
+      "bpp": 15,
+      "alwaysBuild": false,
+      "lvglBinaryOutputFormat": 3,
+      "lvglDither": false
+    },
+    {
+      "objID": "5f2fc80a-94a8-4dc2-ff8b-a98a53ebfbde",
+      "name": "battery_power_70",
+      "image": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAEJElEQVR4Xu2aSyg9URjAvyspC2HBxrtELGyRvKJsKMlrQ8gzeYWS5LGQUkTkERJWXgkbRXmksJKdjUceRbKwQ3H/fdP/fl3TuWPOXK57z8xvdc+5zZ35ft85Z757Zkxms9kMOsZkCDBGgDEFjDWAdw3s6emB3d1davOCxycnJ1P7L9G0CObl5cHKygq1eVlaWpJ+wxkwBBgjwJgCymvA6ekpvLy8UBvBRWxvb4/avHR3d39ZBE0mE4SGhkJISAj1OQqbU2BzcxNKS0vh+fmZ+n6b+Ph4WFxchKCgIOrj5enpCU5OTiAzM5P6lGAKuLq6gqioKHh7e6M+R5GWlgY7OzuaT9fS0gKxsbGq7zJMAR0dHdDb20ttR3N+fg6RkZHcp8XRGhgYCPPz8/YJKCwslIbiX7G6ugo5OTncp29ubobBwUFYXl6G3Nxc6leCKcDeQsdetBRKluy/vr5yHa9aABpFsz8N3gHk8ARgobGxEYaHh6XPPMcLIeDh4UG6hb6/v0tB6U5AfX09jIyM/M+pzgTIs687AXV1dTA6OkrBI7qZAqzsI7oRUFtbC2NjYxS4BV0IsJV9RBcCampqYGJigoK2RngBt7e3EB4ezsw+YreAgoIC6UesSUlJga6uLmr/FKmpqfTZwne1fHV1NUxOTlJbznfHW8MUwCqFHYlSBjH7YWFh8PHxQX1ylI6X43ICKioqYHp6mgJgYbcA1hRwJLaG8PX1tZT974iOjgY/Pz9qy8H9guDgYOkzU4CzToHy8nKYmZmh69RCQkICHB4eUttlBKiZ+2pYW1uD7OxsaruMgLKyMpidnaUL1wIKvLi4+LIH4RICfir74+Pj0i3UGpcQUFJSAnNzc3TRWvD19ZXKZw8PD+pDnF4ADtmIiAj4/Pyki9ZCZ2en9EBHjtMLKC4uhoWFBbpgLWDWMfs4CuQwBThTHXBwcKCYfVYpLaeystJm6cwU4Kx1AAvWrrI1+D1OI1sFlPACsrKyYGNjgwKWI7yA/f19SEpKooDlCC0gJiYGzs7OKFgWQgvA55v5+fkULAthBQQEBMDNzQ24ublRsCyEFTA0NAQNDQ0UqC2EFODl5QWPj4/g6elJgdpCSAFtbW3Q19dHQSohnAB3d3e4v78Hf39/ClIJ4QTgP0eefQPhBPC+XySUgIyMDNja2qLg1CCUgO3tbUhPT6fg1CCMADVlLwthBOBef1FREQWmFiEEYNmLD03wFsgLU0BTU5NUSv4VR0dHEBcXp+r0uOHR398Pra2t1McDUwA+OUlMTKS2I8Gdm8vLS9WnxLL37u4OvL29qY8HpgCkvb1ddTn5U/j4+MD6+rriBoYcfD12YGCA2rzYFIAcHx/D1NSUtKf2m+AwxrfEq6qqFB9qssC/vJYHnVpQFKAHDAHGCDCmgL7XgH8IWnJu+vKQlgAAABBkZUJHOTcwMDY1QTBGNUUxNTQzRoqDjrQAAAAASUVORK5CYII=",
+      "bpp": 15,
+      "alwaysBuild": false,
+      "lvglBinaryOutputFormat": 3,
+      "lvglDither": false
+    },
+    {
+      "objID": "033ef88f-1137-425a-b610-8912c5473784",
+      "name": "battery_power_80",
+      "image": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAADIklEQVR4Xu2aS+gNURjAf38KOwuJ8shjYycrlDyKskHyWiF5i4hSsiBJCnklzxAbr6TYKBISthZEynvDAlkoCX33P/dzH3PmnjlzH/85Z36r+c5t7sz3+87MnDlnugicrsDzLwQUPaC4BNzYAUzTKD2y/32NOohrD7gKzNcoPQuj/+g4hQDHEhQ9IKRLYBzQX2vfjdzEpmqUnp01N8G/wFvgnba0iaRLYBZwDhigLa3nMbAI+JDhUAOB8cAtbUnAJGAk8ALoqy3t4y4wPcPh9gNPbZ8yJgG7ge0atZ8xwEuHw0pv/QgsySrgUtQVO8U84LrDwQ8Am4EFwDVtTcAkIOtdPisuA6Vy9ful2T+NADEqZpuNPAFqsU6ggkPAxmjben9fBAyOHqF9oryCE3AE2BAlLwQloLb6QlACjgLrNfVughEQV30hGAHHgHWa9n+CEGCqvtASAe3EJoHjwBqNqrHZv0ReBQwDXhuqL3gv4CSwStOtx2sBUv03QG9Ntx6vBZwGVmiq8WQWcDn6k05hep0dEVW/Ec+BLxrVI/MF72XDJKCnPgXOAMv1LN14BEwqB3kSYHPt2zAXuFEO8iTgLLCsfOKOiMDRlXMQeRHQrOqvBU5olCMB54GletZufIXS8PmXtuREgHTZV0AvPWs3dkULOlXk4RK4ACzWM3ZDqi7Vl15QhUlATxoHTG5Q/Xu6ZeYUsFqjCkwCeuo4II64WeVK5He5jGIHUCEIuAnM1oxrCEHAFOCBZlyD7wKeAWM12xh8FyDrm1c02xh8FvAJGA780Wxj8FnAJuCwZmrAVwE/gEHAT83UgK8C9gLbNMsEfBTwGxgCfNYsE/BRgLw5Ws8b+Cgg1fdFvgm4DczU7CzwTcAM4I5mZ4FPAhoOe+PwSYDM9V/UzCzxRYAMe2XRRB6BqTAJOAiloWSnmAg8sTy4THhsBfZpSwpMAmTl5KFG7UVmbkalOKQMe4cC37UlBSYBwh7b4WQT+QbMSZrAiEE+j92iUUqSBAgTgJXRnForkW4sX4nLun/SomYc8spbWuh0oZEA7ykEeF/iBhQCVEWg/AOQyupBHvk6wAAAABBkZUJHQzJERTMxRTE3QzRFNjMwNFGRbKQAAAAASUVORK5CYII=",
+      "bpp": 15,
+      "alwaysBuild": false,
+      "lvglBinaryOutputFormat": 3,
+      "lvglDither": false
+    },
+    {
+      "objID": "8f684f01-a7f7-4a2a-fcb3-a06ae4664080",
+      "name": "battery_power_90",
+      "image": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAELElEQVR4Xu2aSyh8URjAv5GUhbBg410iFrZISJQNJXltCHkmr1CSxEJKEZG3hJVXwkZRHimsZGfjkVckCzsU8++7/edr3M69/3vuzH/MnLm/1f3OdOfe73fOueebc8dkNpvN4MaYDAHGCDCmgPEM4H0G9vT0wN7eHsW84PmpqakU/ya6HoL5+fmwurpKMS/Ly8vSdzgDhgBjBBhTQP0ZcHZ2Bm9vbxQj+BDb39+nmJfu7u4fD0GTyQTh4eEQFhZGbY5CcQpsbW1BWVkZvL6+Utv/JjExEZaWliAkJITaeHl5eYHT01PIysqiNjWYAq6vryEmJgY+Pj6ozVGkp6fD7u6u7su1trZCfHy85lWGKaCzsxN6e3spdjQXFxcQHR3NfVkcrcHBwbCwsGCbgKKiImko/hZra2uQm5vLffmWlhYYHByElZUVyMvLo3Y1mAJsLXRsRU+hZOn99/d3rvM1C0CjaNbe4AoghycBC01NTTA8PCwd85wvhICnpydpCf38/JSScjsBDQ0NMDIy8rdP3UyAvPfdTkB9fT2Mjo5S8ojNU6CwsFD6EmsCAgIgNjaWYntxcHBAxxa0LmOPj48QFBREsQWt5yNMAaxVwJFo7cG6ujoYGxuj2ILW8xGXFcCa+xbcQkBtbS1MTExQ0tYIL+Du7g4iIyOZvY8IL6C6uhqmpqYoYTlCC8Dej4iIgK+vL0pYjtACKisrYWZmhpJlYbMAVh3gSJTW8ZubG6n3/wXWK1i3KIH7BaGhodIxU4Cz1gEVFRUwOztL96mHpKQkODo6othlBGiZ+1pYX1+HnJwcil1GQHl5OczNzdGN6wEFXl5e/tiDcAkB9ur98fFxqKmpoRhxCQGlpaUwPz9PN60Hf39/qXz28vKiNsTpBeCQjYqKgu/vb7ppPXR1dUkvdOQ4vYCSkhJYXFykG9YD9jr2Po4COUwBzlQHHB4eqvZ+WloaHStRVVUFk5OTFFvDFOCsdQAL1q6yNfg5TiOlAkp4AdnZ2bC5uUkJyxFeAG65paSkUMJyhBYQFxcH5+fnlCwLoQXg+82CggJKloWwAnC3+Pb2Fjw8PChZFsIKGBoagsbGRkpUCSEF+Pj4wPPzM3h7e1OiSggpoL29Hfr6+ihJNYQT4OnpCQ8PDxAYGEhJqiGcAPzlyLNvIJwA3v8XCSUgMzMTtre3KTktCCVgZ2cHMjIyKDktCCNAS9nLQhgBuNdfXFxMiWlFCAFY9uJLE1wCeWEKaG5ulkrJ3+L4+BgSEhI0XR43PPr7+6GtrY3aeGAKwDcnycnJFDsS3Lm5urrSfEkse+/v78HX15faeGAKQDo6OjSXk/bCz88PNjY2VDcw5ODfYwcGBijmRVEAcnJyAtPT09Ke2v8EhzH+Sxzf+6u91GSBP3ktLzr1oCrAHTAEGCPAmALu/Qz4A3l+YG7YvdVwAAAAEGRlQkc0OTEzQzNENDYwMTgyNjRDY1XiwQAAAABJRU5ErkJggg==",
+      "bpp": 15,
+      "alwaysBuild": false,
+      "lvglBinaryOutputFormat": 3,
+      "lvglDither": false
+    },
+    {
+      "objID": "b9eb43de-bfb3-4b71-b331-f60026944e11",
+      "name": "battery_power_100",
+      "image": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAD+ElEQVR4Xu2aSyg9URjAvyspC2HBxrtELGyRkCgbSvLaEPJMXqEkiYWUIiJvCSuvhI2iPFJYyc7GI48iWdihuP+++Xe//Kcz858zl/s4M7/V/c7t3jPf7zzmzDljsVqtVjAwFlOA2QPMIWDOAbxzYE9PD+zt7VHMC/4+NTWVYmeiaxLMz8+H1dVVinlZXl6W/sMVMAWYPcAcAupzwNnZGby+vlKM4CS2v79PMS/d3d3/TIIWiwXCw8MhLCyMyhyF4hDY2tqCsrIyeHl5obLfJjExEZaWliAkJITKeHl+fobT01PIysqiMjWYAq6vryEmJgbe39+pzFGkp6fD7u6u7upaW1shPj5e812GKaCzsxN6e3spdjQXFxcQHR3NXS321uDgYFhYWLBPQFFRkdQVncXa2hrk5uZyV9/S0gKDg4OwsrICeXl5VK4GU4C9Cx170bNQsrX+29sb1++FEdDU1ATDw8NSUoYT8Pj4KN1CPz4+jCmgoaEBRkZG/vZpo/UAeesbTkB9fT2Mjo5S8ohh5gBW6yOGEVBXVwdjY2OUuA1DCFBqfcQQAmpra2FiYoKS/o7wAu7u7iAyMpLZ+ojwAqqrq2FqaooSliO0AGz9iIgI+Pz8pITlCC2gsrISZmZmKFkWdgsoLCyU/sRZKD3O3tzcSK3/P2JjYyEgIIBiObhfEBoaKn1mCnDVx+GKigqYnZ2l69RDUlISHB0dUew2ArSMfS2sr69DTk4OxW4joLy8HObm5ujC9YACLy8vpV1oG24h4Kdaf3x8HGpqaihG3EJAaWkpzM/P00Xrwd/fX1o+e3l5URni8gKwy0ZFRcHX1xddtB66urqkAx05Li+gpKQEFhcX6YL1gK2OrY+9QA5TgCutAw4PD1VbPy0tjT4rUVVVBZOTkxR/hynAVdcBLL7P6CzwexxGSgso4QVkZ2fD5uYmJSxHeAEHBweQkpJCCcsRWkBcXBycn59TsiyEFoDnmwUFBZQsC2EFBAUFwe3tLXh4eFCyLIQVMDQ0BI2NjZSoEkIK8PHxgaenJ/D29qZElRBSQHt7O/T19VGSaggnwNPTEx4eHiAwMJCSVEM4AfjkyLNvIJwA3veLhBKQmZkJ29vblJwWhBKws7MDGRkZlJwWhBGgZdnLQhgBuNdfXFxMiWlFCAG47MVDE7wF8sIU0NzcLC0lncXx8TEkJCRoqh43PPr7+6GtrY3KeGAKwJOT5ORkih0J7txcXV1prhKXvff39+Dr60tlPDAFIB0dHZqXkz+Fn58fbGxsqG5gyMHXYwcGBijmRVEAcnJyAtPT09Ke2m+C3RjfEsdzf7VDTRb4yGs76NSDqgAjYAowe4A5BIw9B/wBN21Rbnc7aVEAAAAQZGVCRzBCNjBDRUM5OEJCNjE4RTAJN4hvAAAAAElFTkSuQmCC",
+      "bpp": 15,
+      "alwaysBuild": false,
+      "lvglBinaryOutputFormat": 3,
+      "lvglDither": false
+    },
+    {
+      "objID": "e3138b86-8634-40a2-d5ed-456ec84f5f1c",
+      "name": "solar_power_night",
+      "image": "data:image/png;base64,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",
       "bpp": 15,
       "alwaysBuild": false,
       "lvglBinaryOutputFormat": 3,
