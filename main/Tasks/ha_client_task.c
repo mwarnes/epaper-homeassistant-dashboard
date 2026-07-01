@@ -596,9 +596,44 @@ void ha_client_task(void *pvParameters)
             char pm25_formatted[30];
             snprintf(pm25_formatted, sizeof(pm25_formatted), "%s µg/m³", pm25);
             set_var_ha_air_quality_pm25(pm25_formatted);
-            ESP_LOGI(TAG, "PM2.5: %s", pm25_formatted);
+            
+            // Update AQI icon based on PM2.5 value - with LVGL lock
+            float aqi_val = atof(pm25);
+            if (lvgl_port_lock(0)) {
+                eez_update_aqi_icon(aqi_val);
+                lvgl_port_unlock();
+            }
+            
+            ESP_LOGI(TAG, "PM2.5: %s (AQI icon updated)", pm25_formatted);
         } else {
             ESP_LOGW(TAG, "Failed to fetch PM2.5 sensor");
+        }
+        
+        // Fetch UV Index (try weather entity attribute first, then separate sensor)
+        char uv_index[20];
+        esp_err_t uv_err = ha_fetch_entity_attribute(ha_url, ha_token, "weather.forecast_langebaan",
+                                                     "uv_index", uv_index, sizeof(uv_index));
+        if (uv_err != ESP_OK) {
+            // Try separate UV sensor if weather entity doesn't have it
+            // TODO: Update entity_id if you have a dedicated UV sensor
+            uv_err = ha_fetch_entity(ha_url, ha_token, "sensor.uv_index",
+                                    uv_index, sizeof(uv_index));
+        }
+        
+        if (uv_err == ESP_OK) {
+            // Store UV index value (just numeric, no unit)
+            set_var_ha_uv_index(uv_index);
+            
+            // Update UV icon based on value - with LVGL lock
+            float uv_val = atof(uv_index);
+            if (lvgl_port_lock(0)) {
+                eez_update_uv_icon(uv_val);
+                lvgl_port_unlock();
+            }
+            
+            ESP_LOGI(TAG, "UV Index: %s (icon updated)", uv_index);
+        } else {
+            ESP_LOGD(TAG, "UV index not available (check if weather entity or sensor.uv_index exists)");
         }
         
         // ============================================

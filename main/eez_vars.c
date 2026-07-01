@@ -26,6 +26,7 @@ char ha_home_condition_today[100] = { 0 };
 char ha_wind[50] = { 0 };                  // e.g., "15 km/h NE" or "15 NE"
 char ha_humidity[50] = { 0 };              // e.g., "65%" or "65"
 char ha_air_quality_pm25[50] = { 0 };      // e.g., "12 µg/m³" or "12"
+char ha_uv_index[50] = { 0 };              // e.g., "3" or "7"
 
 // 5-Day Forecast Variables (15 total: 5 days × 3 variables)
 char ha_forecast_day1_temp[50] = { 0 };
@@ -105,6 +106,11 @@ const char *get_var_ha_humidity()
 const char *get_var_ha_air_quality_pm25()
 {
     return ha_air_quality_pm25;
+}
+
+const char *get_var_ha_uv_index()
+{
+    return ha_uv_index;
 }
 
 const char *get_var_ha_house_power()
@@ -238,6 +244,15 @@ void set_var_ha_air_quality_pm25(const char *value)
         strncpy(ha_air_quality_pm25, value, sizeof(ha_air_quality_pm25));
         ha_air_quality_pm25[sizeof(ha_air_quality_pm25) - 1] = 0;
         ESP_LOGD(TAG, "HA variable updated: air_quality_pm25 = '%s'", ha_air_quality_pm25);
+    }
+}
+
+void set_var_ha_uv_index(const char *value)
+{
+    if (value) {
+        strncpy(ha_uv_index, value, sizeof(ha_uv_index));
+        ha_uv_index[sizeof(ha_uv_index) - 1] = 0;
+        ESP_LOGD(TAG, "HA variable updated: uv_index = '%s'", ha_uv_index);
     }
 }
 
@@ -771,5 +786,45 @@ void eez_update_pv_icon(float pv_power_w)
             lv_image_set_src(objects.img_pv_power, &img_solar_power_night);
             ESP_LOGD(TAG, "PV icon: NIGHT (0W)");
         }
+    }
+}
+
+// Update air quality icon based on AQI value (PM2.5)
+void eez_update_aqi_icon(float aqi)
+{
+    if (objects.ha_img_weather_air_quality) {
+        const lv_img_dsc_t *aqi_img = &img_weather_air_quality;  // Default
+        
+        // Select icon based on AQI thresholds
+        if (aqi > 150.0f) {
+            aqi_img = &img_weather_air_quality_high;  // Unhealthy
+        } else if (aqi > 50.0f) {
+            aqi_img = &img_weather_air_quality_med;   // Moderate
+        } else if (aqi > 0.0f) {
+            aqi_img = &img_weather_air_quality;       // Good
+        }
+        
+        lv_image_set_src(objects.ha_img_weather_air_quality, aqi_img);
+        ESP_LOGD(TAG, "AQI icon updated: %.1f µg/m³", aqi);
+    }
+}
+
+// Update UV index icon based on UV value
+void eez_update_uv_icon(float uv)
+{
+    if (objects.ha_img_weather_uv_index) {
+        const lv_img_dsc_t *uv_img = &img_weather_uv_index;  // Default
+        
+        // Select icon based on UV thresholds
+        if (uv > 6.0f) {
+            uv_img = &img_weather_uv_index_high;  // High (6-7), Very High (8-10), Extreme (11+)
+        } else if (uv > 3.0f) {
+            uv_img = &img_weather_uv_index_med;   // Moderate (3-5)
+        } else if (uv > 0.0f) {
+            uv_img = &img_weather_uv_index;       // Low (0-2)
+        }
+        
+        lv_image_set_src(objects.ha_img_weather_uv_index, uv_img);
+        ESP_LOGD(TAG, "UV icon updated: %.1f", uv);
     }
 }

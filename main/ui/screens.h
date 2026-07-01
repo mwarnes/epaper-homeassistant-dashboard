@@ -39,6 +39,7 @@ typedef struct _objects_t {
     lv_obj_t *lbl_forecast_day5_name;
     lv_obj_t *lbl_forecast_day1_temp5;
     lv_obj_t *img_forecast_day5;
+    lv_obj_t *ha_img_weather_air_quality;
     lv_obj_t *img_grid_power;
     lv_obj_t *img_house_power;
     lv_obj_t *img_pv_power;
@@ -51,9 +52,11 @@ typedef struct _objects_t {
     lv_obj_t *ha_lbl_pv_power;
     lv_obj_t *ha_lbl_battery_power;
     lv_obj_t *ha_lbl_grid_power;
+    lv_obj_t *ha_img_weather_uv_index;
     lv_obj_t *obj0;
     lv_obj_t *obj1;
     lv_obj_t *obj2;
+    lv_obj_t *obj3;
 } objects_t;
 
 extern objects_t objects;

@@ -14,6 +14,10 @@ void eez_update_grid_icon(bool grid_connected);     // Update grid icon (on/off)
 void eez_update_battery_icon(int soc);              // Update battery icon (10-100%)
 void eez_update_pv_icon(float pv_power_w);          // Update PV icon (day/night based on power)
 
+// Environment icon update functions
+void eez_update_aqi_icon(float aqi);                // Update air quality icon (PM2.5 based)
+void eez_update_uv_icon(float uv);                  // Update UV index icon (0-11+ scale)
+
 // Helper functions (call with LVGL lock after ui_tick())
 void eez_center_date_label(void);           // Center date label after text update
 

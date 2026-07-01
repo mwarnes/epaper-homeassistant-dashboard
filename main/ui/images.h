@@ -57,6 +57,11 @@ extern const lv_img_dsc_t img_battery_power_80;
 extern const lv_img_dsc_t img_battery_power_90;
 extern const lv_img_dsc_t img_battery_power_100;
 extern const lv_img_dsc_t img_solar_power_night;
+extern const lv_img_dsc_t img_weather_uv_index;
+extern const lv_img_dsc_t img_weather_uv_index_med;
+extern const lv_img_dsc_t img_weather_uv_index_high;
+extern const lv_img_dsc_t img_weather_air_quality_med;
+extern const lv_img_dsc_t img_weather_air_quality_high;
 
 #ifndef EXT_IMG_DESC_T
 #define EXT_IMG_DESC_T
@@ -66,7 +71,7 @@ typedef struct _ext_img_desc_t {
 } ext_img_desc_t;
 #endif
 
-extern const ext_img_desc_t images[50];
+extern const ext_img_desc_t images[55];
 
 #ifdef __cplusplus
 }
