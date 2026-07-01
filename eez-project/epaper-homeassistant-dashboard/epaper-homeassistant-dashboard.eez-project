@@ -397,6 +397,15 @@
         "defaultValue": "\"\"",
         "persistent": false,
         "native": false
+      },
+      {
+        "objID": "451056fd-2b27-48cf-974b-5f37a8caa748",
+        "name": "ha_uv_index_description",
+        "type": "string",
+        "size": null,
+        "defaultValue": "\"\"",
+        "persistent": false,
+        "native": false
       }
     ],
     "structures": [],
@@ -1651,8 +1660,8 @@
             {
               "objID": "b40c347b-c7d9-4e49-ec1f-70290c629522",
               "type": "LVGLImageWidget",
-              "left": 672,
-              "top": 48,
+              "left": 680,
+              "top": 46,
               "width": 48,
               "height": 48,
               "customInputs": [],
@@ -1899,8 +1908,8 @@
             {
               "objID": "7f08a50d-5ddc-4ab1-97ba-11ef7acd32b7",
               "type": "LVGLLabelWidget",
-              "left": 730,
-              "top": 60,
+              "left": 737,
+              "top": 58,
               "width": 42,
               "height": 32,
               "customInputs": [],
@@ -2557,8 +2566,8 @@
             {
               "objID": "b2762b31-30bb-4fce-eeb9-a598d6b86d8d",
               "type": "LVGLImageWidget",
-              "left": 672,
-              "top": 101,
+              "left": 679,
+              "top": 99,
               "width": 48,
               "height": 48,
               "customInputs": [],
@@ -2607,8 +2616,8 @@
             {
               "objID": "cb783b68-03cd-4b23-f009-98acab9accc7",
               "type": "LVGLLabelWidget",
-              "left": 730,
-              "top": 109,
+              "left": 737,
+              "top": 107,
               "width": 17,
               "height": 32,
               "customInputs": [],
@@ -2657,8 +2666,8 @@
             {
               "objID": "33d0389f-8299-4f10-cef6-f4cbb0e7da58",
               "type": "LVGLLabelWidget",
-              "left": 774,
-              "top": 108,
+              "left": 782,
+              "top": 107,
               "width": 128,
               "height": 32,
               "customInputs": [],
@@ -2704,6 +2713,56 @@
               "longMode": "WRAP",
               "recolor": false,
               "previewValue": "Moderate"
+            },
+            {
+              "objID": "e5a2b8a1-d58c-420b-fc59-734bfd654682",
+              "type": "LVGLLabelWidget",
+              "left": 680,
+              "top": 157,
+              "width": 230,
+              "height": 21,
+              "customInputs": [],
+              "customOutputs": [],
+              "style": {
+                "objID": "cb950b7f-51b9-4689-b18e-63014ee76001",
+                "useStyle": "default",
+                "conditionalStyles": [],
+                "childStyles": []
+              },
+              "timeline": [],
+              "eventHandlers": [],
+              "leftUnit": "px",
+              "topUnit": "px",
+              "widthUnit": "content",
+              "heightUnit": "content",
+              "children": [],
+              "widgetFlags": "CLICK_FOCUSABLE|GESTURE_BUBBLE|PRESS_LOCK|SCROLLABLE|SCROLL_CHAIN_HOR|SCROLL_CHAIN_VER|SCROLL_ELASTIC|SCROLL_MOMENTUM|SCROLL_WITH_ARROW|SNAPPABLE",
+              "hiddenFlagType": "literal",
+              "clickableFlagType": "literal",
+              "flagScrollbarMode": "",
+              "flagScrollDirection": "",
+              "scrollSnapX": "",
+              "scrollSnapY": "",
+              "checkedStateType": "literal",
+              "disabledStateType": "literal",
+              "states": "",
+              "localStyles": {
+                "objID": "0755de66-29ba-4cb5-c16e-daa7dc113c62",
+                "definition": {
+                  "MAIN": {
+                    "DEFAULT": {
+                      "text_font": "ROBOTO_MED_18"
+                    }
+                  }
+                }
+              },
+              "group": "",
+              "groupIndex": 0,
+              "text": "ha_uv_index_description",
+              "textType": "expression",
+              "longMode": "WRAP",
+              "recolor": false,
+              "previewValue": "Avoid sun during peak hours"
             }
           ],
           "widgetFlags": "CLICKABLE|PRESS_LOCK|CLICK_FOCUSABLE|GESTURE_BUBBLE|SNAPPABLE|SCROLLABLE|SCROLL_ELASTIC|SCROLL_MOMENTUM|SCROLL_CHAIN_HOR|SCROLL_CHAIN_VER",

@@ -28,6 +28,7 @@ char ha_humidity[50] = { 0 };              // e.g., "65%" or "65"
 char ha_air_quality_pm25[50] = { 0 };      // e.g., "12 µg/m³" or "12"
 char ha_uv_index[50] = { 0 };              // e.g., "3" or "7"
 char ha_uv_index_warning[50] = { 0 };      // e.g., "Low", "Moderate", "High", etc.
+char ha_uv_index_description[100] = { 0 }; // e.g., "Avoid sun during peak hours"
 
 // 5-Day Forecast Variables (15 total: 5 days × 3 variables)
 char ha_forecast_day1_temp[50] = { 0 };
@@ -117,6 +118,11 @@ const char *get_var_ha_uv_index()
 const char *get_var_ha_uv_index_warning()
 {
     return ha_uv_index_warning;
+}
+
+const char *get_var_ha_uv_index_description()
+{
+    return ha_uv_index_description;
 }
 
 const char *get_var_ha_house_power()
@@ -268,6 +274,15 @@ void set_var_ha_uv_index_warning(const char *value)
         strncpy(ha_uv_index_warning, value, sizeof(ha_uv_index_warning));
         ha_uv_index_warning[sizeof(ha_uv_index_warning) - 1] = 0;
         ESP_LOGD(TAG, "HA variable updated: uv_index_warning = '%s'", ha_uv_index_warning);
+    }
+}
+
+void set_var_ha_uv_index_description(const char *value)
+{
+    if (value) {
+        strncpy(ha_uv_index_description, value, sizeof(ha_uv_index_description));
+        ha_uv_index_description[sizeof(ha_uv_index_description) - 1] = 0;
+        ESP_LOGD(TAG, "HA variable updated: uv_index_description = '%s'", ha_uv_index_description);
     }
 }
 

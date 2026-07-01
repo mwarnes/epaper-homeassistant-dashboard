@@ -80,6 +80,16 @@ static const char* uv_index_to_warning(float uv)
     return "Low";  // 0-2
 }
 
+// Convert UV index to detailed description
+static const char* uv_index_to_description(float uv)
+{
+    if (uv >= 11.0f) return "Take all precautions";
+    if (uv >= 8.0f) return "Avoid sun during peak hours";
+    if (uv >= 6.0f) return "Extra protection required";
+    if (uv >= 3.0f) return "Protection recommended";
+    return "Minimal protection needed";  // 0-2
+}
+
 static esp_err_t http_event_handler(esp_http_client_event_t *evt)
 {
     switch (evt->event_id) {
@@ -634,10 +644,12 @@ void ha_client_task(void *pvParameters)
             // Store UV index value (just numeric, no unit)
             set_var_ha_uv_index(uv_index);
             
-            // Convert UV value to warning text and store
+            // Convert UV value to warning text and description
             float uv_val = atof(uv_index);
             const char *warning_text = uv_index_to_warning(uv_val);
+            const char *description_text = uv_index_to_description(uv_val);
             set_var_ha_uv_index_warning(warning_text);
+            set_var_ha_uv_index_description(description_text);
             
             // Update UV icon based on value - with LVGL lock
             if (lvgl_port_lock(0)) {
@@ -645,7 +657,7 @@ void ha_client_task(void *pvParameters)
                 lvgl_port_unlock();
             }
             
-            ESP_LOGI(TAG, "UV Index: %s (%s) - icon updated", uv_index, warning_text);
+            ESP_LOGI(TAG, "UV Index: %s (%s: %s) - icon updated", uv_index, warning_text, description_text);
         } else {
             ESP_LOGD(TAG, "UV index not available (check if weather entity or sensor.uv_index exists)");
         }
