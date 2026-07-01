@@ -17,6 +17,13 @@
 
 static const char *TAG = "display_task";
 
+// ========================================
+// SKIP E-PAPER REFRESH (for broken display)
+// Uncomment to skip physical e-paper refresh while keeping all logic working
+// Use this to continue testing/development with damaged display hardware
+// ========================================
+//#define SKIP_EPAPER_REFRESH
+
 // E-paper refresh policy: minimum 10 minutes between refreshes (for longevity)
 // Exception: immediate refresh for WiFi/HA status changes or error screen
 #define MIN_EPAPER_REFRESH_INTERVAL_MS (10 * 60 * 1000)  // 10 minutes
@@ -103,6 +110,11 @@ void display_task(void *pvParameters)
     vTaskDelay(pdMS_TO_TICKS(500));
     
     // Step 6: Refresh e-paper display
+#ifdef SKIP_EPAPER_REFRESH
+    ESP_LOGW(TAG, "E-paper refresh SKIPPED (SKIP_EPAPER_REFRESH defined)");
+    ESP_LOGW(TAG, "All data fetching and updates working normally - display hardware disabled");
+    esp_err_t refresh_err = ESP_OK;  // Fake success
+#else
     ESP_LOGI(TAG, "Refreshing e-paper display (~25 seconds)...");
     esp_err_t refresh_err = lvgl_epaper_port_refresh();
     if (refresh_err == ESP_OK) {
@@ -110,6 +122,7 @@ void display_task(void *pvParameters)
     } else {
         ESP_LOGE(TAG, "Initial display refresh failed: %s", esp_err_to_name(refresh_err));
     }
+#endif
     
     ESP_LOGI(TAG, "Display task monitoring state changes...");
     
@@ -259,6 +272,10 @@ void display_task(void *pvParameters)
             vTaskDelay(pdMS_TO_TICKS(500));
             
             // Step 6: Refresh e-paper display
+#ifdef SKIP_EPAPER_REFRESH
+            ESP_LOGW(TAG, "E-paper refresh SKIPPED (display hardware disabled)");
+            esp_err_t refresh_err = ESP_OK;  // Fake success
+#else
             ESP_LOGI(TAG, "Refreshing e-paper display (~25 seconds)...");
             esp_err_t refresh_err = lvgl_epaper_port_refresh();
             if (refresh_err == ESP_OK) {
@@ -266,6 +283,7 @@ void display_task(void *pvParameters)
             } else {
                 ESP_LOGE(TAG, "E-paper refresh failed: %s", esp_err_to_name(refresh_err));
             }
+#endif
             
             // Update cache
             strncpy(s_last_displayed.date_str, current_date, sizeof(s_last_displayed.date_str) - 1);
