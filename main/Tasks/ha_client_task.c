@@ -70,6 +70,16 @@ static const char* bearing_to_direction(int bearing)
     return "N";  // Fallback
 }
 
+// Convert UV index to warning text
+static const char* uv_index_to_warning(float uv)
+{
+    if (uv >= 11.0f) return "Extreme";
+    if (uv >= 8.0f) return "Very High";
+    if (uv >= 6.0f) return "High";
+    if (uv >= 3.0f) return "Moderate";
+    return "Low";  // 0-2
+}
+
 static esp_err_t http_event_handler(esp_http_client_event_t *evt)
 {
     switch (evt->event_id) {
@@ -624,14 +634,18 @@ void ha_client_task(void *pvParameters)
             // Store UV index value (just numeric, no unit)
             set_var_ha_uv_index(uv_index);
             
-            // Update UV icon based on value - with LVGL lock
+            // Convert UV value to warning text and store
             float uv_val = atof(uv_index);
+            const char *warning_text = uv_index_to_warning(uv_val);
+            set_var_ha_uv_index_warning(warning_text);
+            
+            // Update UV icon based on value - with LVGL lock
             if (lvgl_port_lock(0)) {
                 eez_update_uv_icon(uv_val);
                 lvgl_port_unlock();
             }
             
-            ESP_LOGI(TAG, "UV Index: %s (icon updated)", uv_index);
+            ESP_LOGI(TAG, "UV Index: %s (%s) - icon updated", uv_index, warning_text);
         } else {
             ESP_LOGD(TAG, "UV index not available (check if weather entity or sensor.uv_index exists)");
         }

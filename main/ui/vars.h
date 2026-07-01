@@ -43,7 +43,8 @@ enum FlowGlobalVariables {
     FLOW_GLOBAL_VARIABLE_HA_BATTERY_POWER = 27,
     FLOW_GLOBAL_VARIABLE_HA_GRID_POWER_DAY = 28,
     FLOW_GLOBAL_VARIABLE_HA_GRID_POWER = 29,
-    FLOW_GLOBAL_VARIABLE_HA_UV_INDEX = 30
+    FLOW_GLOBAL_VARIABLE_HA_UV_INDEX = 30,
+    FLOW_GLOBAL_VARIABLE_HA_UV_INDEX_WARNING = 31
 };
 
 // Native global variables
@@ -110,6 +111,8 @@ extern const char *get_var_ha_grid_power();
 extern void set_var_ha_grid_power(const char *value);
 extern const char *get_var_ha_uv_index();
 extern void set_var_ha_uv_index(const char *value);
+extern const char *get_var_ha_uv_index_warning();
+extern void set_var_ha_uv_index_warning(const char *value);
 
 #ifdef __cplusplus
 }

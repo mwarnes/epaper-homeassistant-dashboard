@@ -27,6 +27,7 @@ char ha_wind[50] = { 0 };                  // e.g., "15 km/h NE" or "15 NE"
 char ha_humidity[50] = { 0 };              // e.g., "65%" or "65"
 char ha_air_quality_pm25[50] = { 0 };      // e.g., "12 µg/m³" or "12"
 char ha_uv_index[50] = { 0 };              // e.g., "3" or "7"
+char ha_uv_index_warning[50] = { 0 };      // e.g., "Low", "Moderate", "High", etc.
 
 // 5-Day Forecast Variables (15 total: 5 days × 3 variables)
 char ha_forecast_day1_temp[50] = { 0 };
@@ -111,6 +112,11 @@ const char *get_var_ha_air_quality_pm25()
 const char *get_var_ha_uv_index()
 {
     return ha_uv_index;
+}
+
+const char *get_var_ha_uv_index_warning()
+{
+    return ha_uv_index_warning;
 }
 
 const char *get_var_ha_house_power()
@@ -253,6 +259,15 @@ void set_var_ha_uv_index(const char *value)
         strncpy(ha_uv_index, value, sizeof(ha_uv_index));
         ha_uv_index[sizeof(ha_uv_index) - 1] = 0;
         ESP_LOGD(TAG, "HA variable updated: uv_index = '%s'", ha_uv_index);
+    }
+}
+
+void set_var_ha_uv_index_warning(const char *value)
+{
+    if (value) {
+        strncpy(ha_uv_index_warning, value, sizeof(ha_uv_index_warning));
+        ha_uv_index_warning[sizeof(ha_uv_index_warning) - 1] = 0;
+        ESP_LOGD(TAG, "HA variable updated: uv_index_warning = '%s'", ha_uv_index_warning);
     }
 }
 
