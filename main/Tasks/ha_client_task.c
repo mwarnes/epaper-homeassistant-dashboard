@@ -6,6 +6,7 @@
 #include "esp_http_client.h"
 #include "esp_log.h"
 #include "esp_heap_caps.h"
+#include "esp_lvgl_port.h"  // For lvgl_port_lock/unlock
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 #include <string.h>
@@ -627,9 +628,12 @@ void ha_client_task(void *pvParameters)
             set_var_ha_pv_power(pv_power_formatted);
             ESP_LOGI(TAG, "PV power: %s", pv_power_formatted);
             
-            // Update PV icon based on power (day/night)
+            // Update PV icon based on power (day/night) - with LVGL lock
             float pv_power_val = atof(pv_power);
-            eez_update_pv_icon(pv_power_val);
+            if (lvgl_port_lock(0)) {
+                eez_update_pv_icon(pv_power_val);
+                lvgl_port_unlock();
+            }
         }
         
         // Battery power (with sign: - = charging, + = discharging)
@@ -656,7 +660,12 @@ void ha_client_task(void *pvParameters)
                                                    battery_soc, sizeof(battery_soc));
         if (battery_soc_err == ESP_OK) {
             int soc = atoi(battery_soc);
-            eez_update_battery_icon(soc);
+            
+            // Update battery icon based on SOC - with LVGL lock
+            if (lvgl_port_lock(0)) {
+                eez_update_battery_icon(soc);
+                lvgl_port_unlock();
+            }
             
             // Display SOC percentage in the "day" label position
             char battery_soc_formatted[20];
@@ -683,7 +692,12 @@ void ha_client_task(void *pvParameters)
             // Inverted logic: "on" = outage active (disconnected), "off" = grid connected
             bool outage_active = (strcmp(grid_connected, "on") == 0);
             bool is_connected = !outage_active;  // Invert: outage active means NOT connected
-            eez_update_grid_icon(is_connected);
+            
+            // Update grid icon - with LVGL lock
+            if (lvgl_port_lock(0)) {
+                eez_update_grid_icon(is_connected);
+                lvgl_port_unlock();
+            }
             ESP_LOGI(TAG, "Grid status: %s (outage_active=%s)", 
                      is_connected ? "CONNECTED" : "DISCONNECTED",
                      outage_active ? "true" : "false");
