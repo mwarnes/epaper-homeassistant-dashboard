@@ -21,6 +21,7 @@ char ha_wifi_status[100] = { 0 };
 char ha_ha_status[100] = { 0 };
 char ha_home_realfeel_temperature[100] = { 0 };
 char ha_home_condition_today[100] = { 0 };
+char ha_temp_min_max[50] = { 0 };          // e.g., "8C / 20C"
 
 // Additional current weather variables (names match EEZ Studio variables)
 char ha_wind[50] = { 0 };                  // e.g., "15 km/h NE" or "15 NE"
@@ -93,6 +94,11 @@ const char *get_var_ha_home_realfeel_temperature()
 const char *get_var_ha_home_condition_today()
 {
     return ha_home_condition_today;
+}
+
+const char *get_var_ha_temp_min_max()
+{
+    return ha_temp_min_max;
 }
 
 const char *get_var_ha_wind()
@@ -229,6 +235,15 @@ void set_var_ha_home_condition_today(const char *value)
         ESP_LOGI(TAG, "HA variable updated: home_condition_today = '%s' (len=%d)", 
                  ha_home_condition_today, strlen(ha_home_condition_today));
         // Note: EEZ Studio's tick_screen_*() automatically updates label from variable
+    }
+}
+
+void set_var_ha_temp_min_max(const char *value)
+{
+    if (value) {
+        strncpy(ha_temp_min_max, value, sizeof(ha_temp_min_max));
+        ha_temp_min_max[sizeof(ha_temp_min_max) - 1] = 0;
+        ESP_LOGD(TAG, "HA variable updated: temp_min_max = '%s'", ha_temp_min_max);
     }
 }
 

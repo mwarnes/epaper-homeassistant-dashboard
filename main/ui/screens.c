@@ -414,6 +414,15 @@ void create_screen_main() {
             lv_obj_set_style_text_font(obj, &ui_font_roboto_med_18, LV_PART_MAIN | LV_STATE_DEFAULT);
             lv_label_set_text(obj, "");
         }
+        {
+            // ha_lbl_temp_min_max
+            lv_obj_t *obj = lv_label_create(parent_obj);
+            objects.ha_lbl_temp_min_max = obj;
+            lv_obj_set_pos(obj, 176, 112);
+            lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
+            lv_obj_set_style_text_font(obj, &ui_font_roboto_med_18, LV_PART_MAIN | LV_STATE_DEFAULT);
+            lv_label_set_text(obj, "");
+        }
     }
     
     tick_screen_main();
@@ -669,6 +678,15 @@ void tick_screen_main() {
         if (strcmp(new_val, cur_val) != 0) {
             tick_value_change_obj = objects.obj4;
             lv_label_set_text(objects.obj4, new_val);
+            tick_value_change_obj = NULL;
+        }
+    }
+    {
+        const char *new_val = get_var_ha_temp_min_max();
+        const char *cur_val = lv_label_get_text(objects.ha_lbl_temp_min_max);
+        if (strcmp(new_val, cur_val) != 0) {
+            tick_value_change_obj = objects.ha_lbl_temp_min_max;
+            lv_label_set_text(objects.ha_lbl_temp_min_max, new_val);
             tick_value_change_obj = NULL;
         }
     }

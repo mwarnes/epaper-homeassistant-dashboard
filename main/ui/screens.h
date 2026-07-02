@@ -54,6 +54,7 @@ typedef struct _objects_t {
     lv_obj_t *ha_lbl_grid_power;
     lv_obj_t *ha_img_weather_uv_index;
     lv_obj_t *ha_lbl_uv_index_warning;
+    lv_obj_t *ha_lbl_temp_min_max;
     lv_obj_t *obj0;
     lv_obj_t *obj1;
     lv_obj_t *obj2;

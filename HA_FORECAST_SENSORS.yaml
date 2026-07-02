@@ -9,6 +9,33 @@
 template:
   - sensor:
       # ============================================
+      # TODAY MIN/MAX TEMPERATURES
+      # ============================================
+      - name: "Forecast Today Temp High"
+        unique_id: forecast_today_temp_high
+        state: >
+          {% set forecast = state_attr('weather.forecast_langebaan', 'forecast') %}
+          {% if forecast and forecast|length > 0 %}
+            {{ forecast[0].temperature }}
+          {% else %}
+            unavailable
+          {% endif %}
+        unit_of_measurement: "°C"
+        device_class: temperature
+        
+      - name: "Forecast Today Temp Low"
+        unique_id: forecast_today_temp_low
+        state: >
+          {% set forecast = state_attr('weather.forecast_langebaan', 'forecast') %}
+          {% if forecast and forecast|length > 0 %}
+            {{ forecast[0].templow }}
+          {% else %}
+            unavailable
+          {% endif %}
+        unit_of_measurement: "°C"
+        device_class: temperature
+      
+      # ============================================
       # DAY 1 FORECAST (Tomorrow)
       # ============================================
       - name: "Forecast Day 1 Temperature"

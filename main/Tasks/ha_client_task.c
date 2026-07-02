@@ -11,6 +11,7 @@
 #include "freertos/task.h"
 #include <string.h>
 #include <time.h>
+#include <math.h>
 
 static const char *TAG = "ha_client_task";
 
@@ -471,6 +472,28 @@ void ha_client_task(void *pvParameters)
             ESP_LOGI(TAG, "Current condition: %s (raw: %s)", translated_condition, condition_today);
         } else {
             ESP_LOGW(TAG, "Failed to fetch weather condition");
+        }
+        
+        // ============================================
+        // Fetch Today's Min/Max Temperature
+        // ============================================
+        // From HA template sensors: sensor.forecast_today_temp_low and sensor.forecast_today_temp_high
+        char today_temp_low[20], today_temp_high[20];
+        esp_err_t temp_low_err = ha_fetch_entity(ha_url, ha_token, "sensor.forecast_today_temp_low",
+                                                  today_temp_low, sizeof(today_temp_low));
+        esp_err_t temp_high_err = ha_fetch_entity(ha_url, ha_token, "sensor.forecast_today_temp_high",
+                                                   today_temp_high, sizeof(today_temp_high));
+        
+        if (temp_low_err == ESP_OK && temp_high_err == ESP_OK) {
+            // Format as "8C / 20C" (no degree symbol, space around slash)
+            char temp_min_max_str[50];
+            int temp_low_int = (int)roundf(atof(today_temp_low));
+            int temp_high_int = (int)roundf(atof(today_temp_high));
+            snprintf(temp_min_max_str, sizeof(temp_min_max_str), "%dC / %dC", temp_low_int, temp_high_int);
+            set_var_ha_temp_min_max(temp_min_max_str);
+            ESP_LOGI(TAG, "Today Min/Max: %s", temp_min_max_str);
+        } else {
+            ESP_LOGW(TAG, "Failed to fetch today's min/max temps (low: %d, high: %d)", temp_low_err, temp_high_err);
         }
         
         // ============================================
